@@ -1,27 +1,35 @@
 const express = require("express");
 const config = require("config");
+const bodyParser = require("body-parser");
+const { User } = require("./resources/users/user.model");
 
 const { sequelize } = require("../DB/db");
 
 const app = express();
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(express.json({ extended: true }));
 const PORT = config.get("port");
+const { router: userRouter } = require("./resources/users/user.router");
 
-app.use(express.json({ extended: true }));
+app.use("/user", userRouter);
 
-app.use("/", (req, res) => {
-  res.status(200).json({ message: "hello" });
-});
+const f = async () => {
+  await sequelize.sync({ force: true });
+};
 
 const start = async () => {
   try {
-    await sequelize.authenticate();
-    console.log("Connection has been established successfully.");
+    // await sequelize.authenticate();
+    // console.log("Connection has been established successfully.");
     app.listen(PORT, () => {
       console.log(`App has been started on port ${PORT}`);
+
+      f();
     });
   } catch (err) {
     console.error("Unable to connect to the database:", err);
   }
 };
+
 start();

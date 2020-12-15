@@ -6,6 +6,7 @@ const { host, user, password, db, dialect, pool } = config.get("dbConfig");
 const sequelize = new Sequelize(db, user, password, {
   host,
   dialect,
+  operatorsAliases: 0,
   pool: {
     max: pool.max,
     min: pool.min,
