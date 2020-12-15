@@ -1,9 +1,24 @@
+const jwt = require("jsonwebtoken");
+const config = require("config");
+
 const userRepo = require("./user.DB.repository");
 
-const create = async (user) => {
-  return await userRepo.create(user);
+const JWT_SECRET = config.get("secret");
+
+const create = async (user) => userRepo.create(user);
+
+const tokenCreate = async (userData) => {
+  const user = await userRepo.getByLogin(userData.login);
+  if (!user || user.password !== userData.password) {
+    return undefined;
+  }
+
+  const { id, login } = user;
+  const token = jwt.sign({ id, login }, JWT_SECRET);
+
+  return token;
 };
 
-const getByLogin = async (user) => userRepo.getByLogin(user);
+const getByLogin = async (login) => userRepo.getByLogin(login);
 
-module.exports = { create, getByLogin };
+module.exports = { create, tokenCreate, getByLogin };

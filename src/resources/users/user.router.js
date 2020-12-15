@@ -30,4 +30,15 @@ router.post("/create", async (req, res) => {
   }
 });
 
+router.post("/login", async (req, res) => {
+  const userData = req.body;
+  const token = await userService.tokenCreate(userData);
+  if (!token) {
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ message: "пользователь не найден" });
+  }
+  res.status(StatusCodes.OK).json({ token });
+});
+
 module.exports = { router };
