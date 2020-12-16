@@ -13,5 +13,6 @@
       "idle": 10000
     }
   },
-  "secret": "secret"
+  "secret": "secret",
+  "baseUrl": "http://localhost:5000"
 }

@@ -15,6 +15,7 @@ const Link = sequelize.define("Link", {
   },
   clicks: {
     type: DataTypes.INTEGER,
+    defaultValue: 0,
   },
   code: {
     type: DataTypes.STRING,

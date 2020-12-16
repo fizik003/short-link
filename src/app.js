@@ -2,6 +2,7 @@ const express = require("express");
 const config = require("config");
 const bodyParser = require("body-parser");
 const { User } = require("./resources/users/user.model");
+const { Link } = require("./resources/links/link.model");
 
 const { sequelize } = require("../DB/db");
 
@@ -11,11 +12,20 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // app.use(express.json({ extended: true }));
 const PORT = config.get("port");
 const { router: userRouter } = require("./resources/users/user.router");
+const { route: linkRouter } = require("./resources/links/link.router");
 
 app.use("/user", userRouter);
+app.use("/link", linkRouter);
 
 const f = async () => {
   await sequelize.sync({ force: true });
+  await Link.create({
+    originLink: "f",
+    newLink: "fdfd",
+    description: "fdfd",
+    clicks: 5,
+    code: "ffd",
+  });
 };
 
 const start = async () => {
