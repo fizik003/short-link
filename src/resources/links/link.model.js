@@ -1,6 +1,7 @@
 const { DataTypes } = require("sequelize");
 
 const { sequelize } = require("../../../DB/db");
+const { User } = require("../users/user.model");
 
 const Link = sequelize.define("Link", {
   originLink: {
@@ -13,7 +14,7 @@ const Link = sequelize.define("Link", {
     type: DataTypes.STRING,
   },
   clicks: {
-    type: DataTypes.NUMBER,
+    type: DataTypes.INTEGER,
   },
   code: {
     type: DataTypes.STRING,

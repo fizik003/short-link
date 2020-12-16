@@ -1,6 +1,7 @@
 const { Sequelize } = require("sequelize");
 
 const { sequelize } = require("../../../DB/db");
+const { Link } = require("../links/link.model");
 
 const User = sequelize.define("User", {
   id: {
@@ -19,5 +20,7 @@ const User = sequelize.define("User", {
     type: Sequelize.STRING,
   },
 });
+
+User.hasMany(Link, { as: "links" });
 
 module.exports = { User };
