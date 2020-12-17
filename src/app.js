@@ -19,13 +19,6 @@ app.use("/link", linkRouter);
 
 const f = async () => {
   await sequelize.sync({ force: true });
-  await Link.create({
-    originLink: "f",
-    newLink: "fdfd",
-    description: "fdfd",
-    clicks: 5,
-    code: "ffd",
-  });
 };
 
 const start = async () => {
