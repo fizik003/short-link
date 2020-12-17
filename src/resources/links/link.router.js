@@ -7,7 +7,7 @@ const route = Router();
 
 route.get("/", async (req, res) => {
   try {
-    const userId = 1;
+    const userId = req.user.id;
     const links = await linkService.getByUserId(userId);
     if (Object.keys(links).length === 0) {
       return res.status(StatusCodes.OK).json({ message: "ссылок нет" });
@@ -24,7 +24,7 @@ route.get("/", async (req, res) => {
 
 route.post("/create", async (req, res) => {
   const linkData = req.body;
-  const userId = 1;
+  const userId = req.user.id;
   try {
     const checkLink = await linkService.getByOriginLink(linkData.originLink);
     if (checkLink) {

@@ -13,8 +13,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const PORT = config.get("port");
 const { router: userRouter } = require("./resources/users/user.router");
 const { route: linkRouter } = require("./resources/links/link.router");
+const { checkToken } = require("./middlewares/checkToken");
 
 app.use("/user", userRouter);
+app.use(checkToken);
 app.use("/link", linkRouter);
 
 const f = async () => {
