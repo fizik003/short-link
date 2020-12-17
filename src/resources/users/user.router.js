@@ -4,8 +4,24 @@ const { StatusCodes } = require("http-status-codes");
 const userService = require("./user.sevice");
 
 const router = Router();
-router.get("/", (req, res) => {
-  res.status(StatusCodes.OK).json({ message: "user get" });
+const { checkToken } = require("../../middlewares/checkToken");
+
+router.get("/", checkToken, async (req, res) => {
+  try {
+    const user = await userService.getById(req.user.id);
+    if (!user) {
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ message: "user not found" });
+    }
+
+    res.status(StatusCodes.OK).json(user);
+  } catch (err) {
+    console.log(err);
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: "problem on server" });
+  }
 });
 
 router.post("/create", async (req, res) => {
@@ -31,14 +47,21 @@ router.post("/create", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-  const userData = req.body;
-  const token = await userService.tokenCreate(userData);
-  if (!token) {
+  try {
+    const userData = req.body;
+    const token = await userService.tokenCreate(userData);
+    if (!token) {
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ message: "пользователь не найден" });
+    }
+    res.status(StatusCodes.OK).json({ token });
+  } catch (err) {
+    console.log(err);
     return res
-      .status(StatusCodes.BAD_REQUEST)
-      .json({ message: "пользователь не найден" });
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: "problem on server" });
   }
-  res.status(StatusCodes.OK).json({ token });
 });
 
 module.exports = { router };

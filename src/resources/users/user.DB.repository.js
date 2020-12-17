@@ -10,4 +10,8 @@ const create = async (user) => {
   return newUser;
 };
 
-module.exports = { getByLogin, create };
+const getById = async (userId) => {
+  const user = await User.findByPk(userId, { include: "links" });
+  return user;
+};
+module.exports = { getByLogin, create, getById };

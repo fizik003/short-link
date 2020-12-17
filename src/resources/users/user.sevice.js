@@ -21,4 +21,5 @@ const tokenCreate = async (userData) => {
 
 const getByLogin = async (login) => userRepo.getByLogin(login);
 
-module.exports = { create, tokenCreate, getByLogin };
+const getById = async (userId) => userRepo.getById(userId);
+module.exports = { create, tokenCreate, getByLogin, getById };
