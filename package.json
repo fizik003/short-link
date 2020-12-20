@@ -15,6 +15,7 @@
     "shortid": "^2.2.16"
   },
   "devDependencies": {
+    "concurrently": "^5.3.0",
     "eslint": "^7.15.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
@@ -22,7 +23,10 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon src/app.js"
+    "client-install": "npm install --prefix frontend",
+    "server": "nodemon src/app.js",
+    "client": "npm run start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",

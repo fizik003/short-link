@@ -15,9 +15,9 @@ const { router: userRouter } = require("./resources/users/user.router");
 const { route: linkRouter } = require("./resources/links/link.router");
 const { checkToken } = require("./middlewares/checkToken");
 
-app.use("/user", userRouter);
+app.use("/api/user", userRouter);
 app.use(checkToken);
-app.use("/link", linkRouter);
+app.use("/api/link", linkRouter);
 
 const f = async () => {
   await sequelize.sync({ force: true });
