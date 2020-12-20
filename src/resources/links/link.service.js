@@ -16,4 +16,9 @@ const update = async (linkId, linkData) => linkRepo.update(linkId, linkData);
 const getByOriginLink = async (originLink) =>
   linkRepo.getByOriginLink(originLink);
 
-module.exports = { getByUserId, create, update, getByOriginLink };
+module.exports = {
+  getByUserId,
+  create,
+  update,
+  getByOriginLink,
+};
