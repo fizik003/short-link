@@ -1,7 +1,11 @@
 <div class="wrapper">
   <mat-card class="card">
-    <div class="card__title mat-h1">Войти в систему</div>
+    <div class="card__title mat-h1">Создать аккаунт</div>
     <form class="login-form card__form">
+      <mat-form-field class="login-form__input-field">
+        <mat-label>User name</mat-label>
+        <input matInput type="text" />
+      </mat-form-field>
       <mat-form-field class="login-form__input-field">
         <mat-label>Email</mat-label>
         <input matInput type="email" />
@@ -11,7 +15,7 @@
         <input matInput type="password" />
       </mat-form-field>
       <div class="login-from__btn-submit">
-        <button mat-flat-button color="primary">Войти</button>
+        <button mat-flat-button color="primary">Создать</button>
       </div>
     </form>
   </mat-card>

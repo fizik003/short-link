@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginPagesComponent } from './pages/login-pages/login-pages.component';
 import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.component';
 import { SiteLayoutComponent } from './shared/layouts/site-layout/site-layout.component';
+import { RegisterPageComponent } from './pages/register-page/register-page.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { SiteLayoutComponent } from './shared/layouts/site-layout/site-layout.co
     LoginPagesComponent,
     AuthLayoutComponent,
     SiteLayoutComponent,
+    RegisterPageComponent,
   ],
   imports: [
     BrowserModule,
