@@ -1,21 +1,52 @@
 <div class="wrapper">
   <mat-card class="card">
     <div class="card__title mat-h1">Создать аккаунт</div>
-    <form class="login-form card__form">
-      <mat-form-field class="login-form__input-field">
-        <mat-label>User name</mat-label>
-        <input matInput type="text" />
+    <form class="register-form card__form" (ngSubmit)="onSubmit()">
+      <mat-form-field class="register-form__input-field">
+        <mat-label>Ваше имя</mat-label>
+        <input matInput type="text" [formControl]="userNameFormControl" />
+        <mat-error *ngIf="userNameFormControl.hasError('required')">
+          Это <strong>обязательное </strong>поле
+        </mat-error>
       </mat-form-field>
-      <mat-form-field class="login-form__input-field">
+      <mat-form-field class="register-form__input-field">
         <mat-label>Email</mat-label>
-        <input matInput type="email" />
+        <input matInput type="email" [formControl]="emailFormControl" />
+        <mat-error
+          *ngIf="
+            emailFormControl.hasError('email') &&
+            !emailFormControl.hasError('required')
+          "
+        >
+          Введите корректный email адрес
+        </mat-error>
+        <mat-error *ngIf="emailFormControl.hasError('required')">
+          Это <strong>обязательное </strong>поле
+        </mat-error>
       </mat-form-field>
-      <mat-form-field class="login-form__input-field">
+      <mat-form-field class="register-form__input-field">
         <mat-label>Password</mat-label>
-        <input matInput type="password" />
+        <input matInput type="password" [formControl]="passwordFormControl" />
+        <mat-error *ngIf="passwordFormControl.hasError('minlength')">
+          Минимальная длина пароля 6
+        </mat-error>
+        <mat-error *ngIf="passwordFormControl.hasError('required')">
+          Это <strong>обязательное </strong> поле
+        </mat-error>
       </mat-form-field>
-      <div class="login-from__btn-submit">
-        <button mat-flat-button color="primary">Создать</button>
+      <div class="register-from__btn-submit">
+        <button
+          [disabled]="
+            !emailFormControl.valid ||
+            !passwordFormControl.valid ||
+            !userNameFormControl.valid ||
+            isEnabledBtn
+          "
+          mat-flat-button
+          color="primary"
+        >
+          Создать
+        </button>
       </div>
     </form>
   </mat-card>
