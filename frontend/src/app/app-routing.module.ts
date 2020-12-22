@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SiteLayoutComponent } from './shared/layouts/site-layout/site-layout.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
+import { AuthGuard } from './shared/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -15,7 +16,12 @@ const routes: Routes = [
       { path: 'register', component: RegisterPageComponent },
     ],
   },
-  { path: '', component: SiteLayoutComponent, children: [] },
+  {
+    path: '',
+    component: SiteLayoutComponent,
+    canActivate: [AuthGuard],
+    children: [],
+  },
 ];
 
 @NgModule({

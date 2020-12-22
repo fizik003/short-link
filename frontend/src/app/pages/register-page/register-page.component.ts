@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import { Route } from '@angular/compiler/src/core';
+import { AuthService } from './../../shared/services/auth.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -6,9 +10,10 @@ import { FormControl, Validators } from '@angular/forms';
   templateUrl: './register-page.component.html',
   styleUrls: ['./register-page.component.scss'],
 })
-export class RegisterPageComponent implements OnInit {
+export class RegisterPageComponent implements OnInit, OnDestroy {
   isEnabledBtn = false;
-  constructor() {}
+  constructor(private auth: AuthService, private router: Router) {}
+  aSub: Subscription;
 
   ngOnInit(): void {}
 
@@ -22,5 +27,27 @@ export class RegisterPageComponent implements OnInit {
     Validators.minLength(6),
   ]);
 
-  onSubmit() {}
+  ngOnDestroy() {
+    if (this.aSub) this.aSub.unsubscribe();
+  }
+
+  onSubmit() {
+    this.isEnabledBtn = true;
+    const user = {
+      username: this.userNameFormControl.value,
+      email: this.emailFormControl.value,
+      password: this.passwordFormControl.value,
+    };
+    this.aSub = this.auth.register(user).subscribe(
+      () => {
+        this.router.navigate(['/login'], {
+          queryParams: { registered: true },
+        });
+      },
+      (err) => {
+        console.log(err);
+        this.isEnabledBtn = false;
+      }
+    );
+  }
 }

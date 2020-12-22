@@ -1,4 +1,4 @@
-import { User } from './../interfaces';
+import { User, UserReg } from './../interfaces';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -11,7 +11,6 @@ export class AuthService {
   private token = null;
   constructor(private http: HttpClient) {}
 
-  register() {}
   login(user: User): Observable<{ token: string }> {
     return this.http.post<{ token: string }>('/api/user/login', user).pipe(
       tap(({ token }) => {
@@ -19,6 +18,10 @@ export class AuthService {
         this.setToken(token);
       })
     );
+  }
+
+  register(user: UserReg): Observable<any> {
+    return this.http.post('/api/user/create', user);
   }
 
   setToken(token: string) {
