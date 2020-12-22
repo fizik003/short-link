@@ -14,7 +14,7 @@ const tokenCreate = async (userData) => {
   }
 
   const { id, email } = user;
-  const token = jwt.sign({ id, email }, JWT_SECRET);
+  const token = jwt.sign({ id, email }, JWT_SECRET, { expiresIn: "1h" });
 
   return `Bearer ${token}`;
 };

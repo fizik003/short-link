@@ -53,8 +53,12 @@ export class LoginPagesComponent implements OnInit, OnDestroy {
     this.route.queryParams.subscribe((params: Params) => {
       if (params['registered']) {
         // Теперь мы можете зайти
+        console.log('можете зайти');
       } else if (params['accessDenied']) {
         // Для начала нужно авторизироваться
+        console.log('авторизируйтесь');
+      } else if (params['sessionFailed']) {
+        console.log('войдите еще раз');
       }
     });
   }
