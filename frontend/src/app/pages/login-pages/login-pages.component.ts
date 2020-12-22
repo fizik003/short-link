@@ -10,7 +10,7 @@ import {
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Subscription } from 'rxjs';
 import { Route } from '@angular/compiler/src/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-pages',
@@ -35,7 +35,9 @@ export class LoginPagesComponent implements OnInit, OnDestroy {
       password: this.passwordFormControl.value,
     };
     this.aSub = this.auth.login(user).subscribe(
-      () => console.log('login'),
+      () => {
+        this.router.navigate(['/main']);
+      },
       (err) => {
         console.warn(err);
         this.isEnabledBtn = false;
@@ -47,7 +49,15 @@ export class LoginPagesComponent implements OnInit, OnDestroy {
     if (this.aSub) this.aSub.unsubscribe();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.queryParams.subscribe((params: Params) => {
+      if (params['registered']) {
+        // Теперь мы можете зайти
+      } else if (params['accessDenied']) {
+        // Для начала нужно авторизироваться
+      }
+    });
+  }
 
   emailFormControl = new FormControl(null, [
     Validators.email,
