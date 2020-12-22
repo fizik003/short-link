@@ -1,7 +1,8 @@
 const { User } = require("./user.model");
 
-const getByLogin = async (login) => {
-  const user = await User.findOne({ where: { login } });
+const getByEmail = async (email) => {
+  console.log("eeeeeeeeeeeeeeeeeeeeeeeeee", email);
+  const user = await User.findOne({ where: { email } });
   return user;
 };
 
@@ -14,4 +15,4 @@ const getById = async (userId) => {
   const user = await User.findByPk(userId, { include: "links" });
   return user;
 };
-module.exports = { getByLogin, create, getById };
+module.exports = { getByEmail, create, getById };

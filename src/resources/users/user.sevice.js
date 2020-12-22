@@ -8,18 +8,18 @@ const JWT_SECRET = config.get("secret");
 const create = async (user) => userRepo.create(user);
 
 const tokenCreate = async (userData) => {
-  const user = await userRepo.getByLogin(userData.login);
+  const user = await userRepo.getByEmail(userData.email);
   if (!user || user.password !== userData.password) {
     return undefined;
   }
 
-  const { id, login } = user;
-  const token = jwt.sign({ id, login }, JWT_SECRET);
+  const { id, email } = user;
+  const token = jwt.sign({ id, email }, JWT_SECRET);
 
   return token;
 };
 
-const getByLogin = async (login) => userRepo.getByLogin(login);
+const getByEmail = async (email) => userRepo.getByEmail(email);
 
 const getById = async (userId) => userRepo.getById(userId);
-module.exports = { create, tokenCreate, getByLogin, getById };
+module.exports = { create, tokenCreate, getByEmail, getById };
