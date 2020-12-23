@@ -13,6 +13,10 @@ import { LoginPagesComponent } from './pages/login-pages/login-pages.component';
 import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.component';
 import { SiteLayoutComponent } from './shared/layouts/site-layout/site-layout.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
+import { MainPageComponent } from './pages/main-page/main-page.component';
+import { LinkCreatePageComponent } from './pages/link-create-page/link-create-page.component';
+import { MyLinksPageComponent } from './pages/my-links-page/my-links-page.component';
+import { LinkEditPageComponent } from './pages/link-edit-page/link-edit-page.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +25,10 @@ import { RegisterPageComponent } from './pages/register-page/register-page.compo
     AuthLayoutComponent,
     SiteLayoutComponent,
     RegisterPageComponent,
+    MainPageComponent,
+    LinkCreatePageComponent,
+    MyLinksPageComponent,
+    LinkEditPageComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,32 @@
+.header {
+  width: 100%;
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &__logo {
+    &-link {
+      color: white;
+
+      span {
+        font-weight: 700;
+      }
+    }
+  }
+
+  &__nav {
+    a {
+      color: white;
+      &:not(:last-child) {
+        margin-right: 1rem;
+      }
+    }
+  }
+}
+
+.main {
+  &__wrapper {
+  }
+}

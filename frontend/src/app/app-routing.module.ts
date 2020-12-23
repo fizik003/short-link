@@ -1,3 +1,7 @@
+import { MyLinksPageComponent } from './pages/my-links-page/my-links-page.component';
+import { LinkEditPageComponent } from './pages/link-edit-page/link-edit-page.component';
+import { LinkCreatePageComponent } from './pages/link-create-page/link-create-page.component';
+import { MainPageComponent } from './pages/main-page/main-page.component';
 import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.component';
 import { LoginPagesComponent } from './pages/login-pages/login-pages.component';
 import { NgModule } from '@angular/core';
@@ -20,7 +24,12 @@ const routes: Routes = [
     path: '',
     component: SiteLayoutComponent,
     canActivate: [AuthGuard],
-    children: [],
+    children: [
+      { path: 'mylinks', component: MyLinksPageComponent },
+      { path: 'main', component: MainPageComponent },
+      { path: 'link/create', component: LinkCreatePageComponent },
+      { path: 'link/edit/:id', component: LinkEditPageComponent },
+    ],
   },
 ];
 
