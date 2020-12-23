@@ -1,0 +1,24 @@
+.create-link {
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 50px;
+
+  &__wrapper {
+  }
+}
+
+.card {
+  &__title {
+    text-align: center;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.mat-form-field {
+  margin-bottom: 1rem;
+}

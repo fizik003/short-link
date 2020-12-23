@@ -1,1 +1,31 @@
-<p>link-create-page works!</p>
+<div class="create-link">
+  <div class="create-link__wrapper">
+    <mat-card class="card create-link__card">
+      <div class="card__title">
+        <span class="mat-h2">Сокращение ссылки</span>
+      </div>
+      <div class="card__form-wrpper">
+        <form class="card__form from">
+          <mat-form-field class="form__input-field">
+            <mat-label>Ссылка</mat-label>
+            <input matInput type="text" />
+          </mat-form-field>
+          <mat-form-field class="form__input-field">
+            <mat-label>Описание</mat-label>
+            <input matInput type="text" />
+          </mat-form-field>
+          <div class="form__btn-submit">
+            <button
+              type="submit"
+              class="form__btn-submit"
+              mat-raised-button
+              color="primary"
+            >
+              Создать
+            </button>
+          </div>
+        </form>
+      </div>
+    </mat-card>
+  </div>
+</div>
