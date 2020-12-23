@@ -46,7 +46,7 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
         });
       },
       (err) => {
-        MaterializeServices.tooast('Пользователь с таким email уже есть');
+        MaterializeServices.tooast(err.error.message);
         this.isEnabledBtn = false;
       }
     );
