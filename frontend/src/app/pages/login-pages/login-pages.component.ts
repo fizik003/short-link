@@ -1,3 +1,4 @@
+import { MaterializeServices } from './../../shared/materialize/materialize.services';
 import { AuthService } from './../../shared/services/auth.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
@@ -39,7 +40,7 @@ export class LoginPagesComponent implements OnInit, OnDestroy {
         this.router.navigate(['/main']);
       },
       (err) => {
-        console.warn(err);
+        MaterializeServices.tooast(err.error.message);
         this.isEnabledBtn = false;
       }
     );
@@ -52,13 +53,11 @@ export class LoginPagesComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.route.queryParams.subscribe((params: Params) => {
       if (params['registered']) {
-        // Теперь мы можете зайти
-        console.log('можете зайти');
+        MaterializeServices.tooast('Теперь мы можете зайти в свой аккаунт');
       } else if (params['accessDenied']) {
-        // Для начала нужно авторизироваться
-        console.log('авторизируйтесь');
+        MaterializeServices.tooast('Для начала нужно авторизироваться');
       } else if (params['sessionFailed']) {
-        console.log('войдите еще раз');
+        MaterializeServices.tooast('Войдите еще раз');
       }
     });
   }

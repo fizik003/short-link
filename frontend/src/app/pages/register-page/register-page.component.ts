@@ -1,3 +1,4 @@
+import { MaterializeServices } from './../../shared/materialize/materialize.services';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { Route } from '@angular/compiler/src/core';
@@ -45,7 +46,7 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
         });
       },
       (err) => {
-        console.log(err);
+        MaterializeServices.tooast('Пользователь с таким email уже есть');
         this.isEnabledBtn = false;
       }
     );
