@@ -19,8 +19,9 @@ app.use("/api/user", userRouter);
 app.use(checkToken);
 app.use("/api/link", linkRouter);
 
-const f = async () => {
-  await sequelize.sync({ force: true });
+const syncDb = async () => {
+  // await sequelize.sync({ force: true });
+  await sequelize.sync();
 };
 
 const start = async () => {
@@ -30,7 +31,7 @@ const start = async () => {
     app.listen(PORT, () => {
       console.log(`App has been started on port ${PORT}`);
 
-      f();
+      syncDb();
     });
   } catch (err) {
     console.error("Unable to connect to the database:", err);
