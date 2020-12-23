@@ -1,0 +1,28 @@
+.main-page {
+  &__wrapper {
+    padding: 50px 100px;
+  }
+
+  &__main-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    column-gap: 20px;
+  }
+}
+
+.mat-card {
+  background-color: #9c28b1;
+  // height: 100px;
+  flex-direction: column;
+  height: 100%;
+
+  .card {
+    &__title {
+      color: #ffffff;
+    }
+
+    &__discription {
+      color: #ffffff;
+    }
+  }
+}

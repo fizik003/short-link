@@ -1,1 +1,12 @@
-<p>main-page works!</p>
+<div class="main-page__wrapper">
+  <div class="main-page__main-cards">
+    <div class="card" *ngFor="let card of mainCards">
+      <a [routerLink]="card.to"
+        ><mat-card>
+          <p class="card__title mat-h1">{{ card.title }}</p>
+          <span class="card__discription">{{ card.desc }}</span>
+        </mat-card></a
+      >
+    </div>
+  </div>
+</div>

@@ -3,13 +3,37 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
-  styleUrls: ['./main-page.component.scss']
+  styleUrls: ['./main-page.component.scss'],
 })
 export class MainPageComponent implements OnInit {
+  mainCards = [
+    {
+      title: 'Создать',
+      desc:
+        'Здесь вы можете сократить вашу ссылку, добавить к ней описаие, а затем поделиться ей с друзьями',
+      to: '/link/create',
+    },
+    {
+      title: 'Мои ссылки',
+      desc:
+        'Здесь вы можете просмотреть все ваши ссылки, а так же удалить те, которые вам уже не нужны',
+      to: '/mylinks',
+    },
+    {
+      title: 'Моя статистика',
+      desc:
+        'Здесь вы найдете информацию о вашей статиске. Общее количетсво ваших ссылок, сколько раз по ним переходили, самые популярные ваши ссылки',
+      to: '/my-stat',
+    },
+    {
+      title: 'Наша статистика',
+      desc:
+        'Здесь вы найдете статистику по нашему сервису: количетсво ссылок, самые популярные и т.д.',
+      to: '/our-stat',
+    },
+  ];
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
