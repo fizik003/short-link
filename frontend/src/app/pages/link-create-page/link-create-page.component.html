@@ -5,17 +5,34 @@
         <span class="mat-h2">Сокращение ссылки</span>
       </div>
       <div class="card__form-wrpper">
-        <form class="card__form from">
+        <form
+          class="card__form from"
+          [formGroup]="form"
+          (ngSubmit)="onSubmit()"
+        >
           <mat-form-field class="form__input-field">
             <mat-label>Ссылка</mat-label>
-            <input matInput type="text" />
+            <input matInput type="text" formControlName="originLink" />
+            <mat-error
+              *ngIf="
+                form.get('originLink').hasError('pattern') &&
+                !form.get('originLink').hasError('required')
+              "
+            >
+              Введите правильную ссылку
+            </mat-error>
+            <mat-error *ngIf="form.get('originLink').hasError('required')">
+              Это <strong>обязательное </strong>поле
+            </mat-error>
           </mat-form-field>
           <mat-form-field class="form__input-field">
             <mat-label>Описание</mat-label>
-            <input matInput type="text" />
+            <input matInput type="text" formControlName="describe" />
+            <mat-error> Это <strong>обязательное </strong>поле </mat-error>
           </mat-form-field>
           <div class="form__btn-submit">
             <button
+              [disabled]="form.invalid"
               type="submit"
               class="form__btn-submit"
               mat-raised-button
