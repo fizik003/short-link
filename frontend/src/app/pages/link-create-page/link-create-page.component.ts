@@ -28,7 +28,9 @@ export class LinkCreatePageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.lSub.unsubscribe();
+    if (this.lSub) {
+      this.lSub.unsubscribe();
+    }
   }
 
   onSubmit() {

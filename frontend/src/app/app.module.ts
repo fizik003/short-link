@@ -17,6 +17,7 @@ import { MainPageComponent } from './pages/main-page/main-page.component';
 import { LinkCreatePageComponent } from './pages/link-create-page/link-create-page.component';
 import { MyLinksPageComponent } from './pages/my-links-page/my-links-page.component';
 import { LinkEditPageComponent } from './pages/link-edit-page/link-edit-page.component';
+import { LinkDetailsPageComponent } from './pages/link-details-page/link-details-page.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { LinkEditPageComponent } from './pages/link-edit-page/link-edit-page.com
     LinkCreatePageComponent,
     MyLinksPageComponent,
     LinkEditPageComponent,
+    LinkDetailsPageComponent,
   ],
   imports: [
     BrowserModule,
