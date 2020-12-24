@@ -35,7 +35,7 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.isEnabledBtn = true;
     const user = {
-      username: this.userNameFormControl.value,
+      name: this.userNameFormControl.value,
       email: this.emailFormControl.value,
       password: this.passwordFormControl.value,
     };

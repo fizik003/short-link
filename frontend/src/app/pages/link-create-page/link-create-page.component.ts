@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { MaterializeServices } from './../../shared/materialize/materialize.services';
+import { LinksService } from './../../shared/services/links.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -6,10 +9,11 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   templateUrl: './link-create-page.component.html',
   styleUrls: ['./link-create-page.component.scss'],
 })
-export class LinkCreatePageComponent implements OnInit {
+export class LinkCreatePageComponent implements OnInit, OnDestroy {
   form: FormGroup;
+  lSub: Subscription;
 
-  constructor() {}
+  constructor(private linkService: LinksService) {}
 
   reg = `(https?://)?([\\da-z.-]+)\\.([a-w.]{2,6})[/\\w .-]*/?`;
 
@@ -19,9 +23,28 @@ export class LinkCreatePageComponent implements OnInit {
         Validators.required,
         Validators.pattern(this.reg),
       ]),
-      describe: new FormControl(null, [Validators.required]),
+      description: new FormControl(null, [Validators.required]),
     });
   }
 
-  onSubmit() {}
+  ngOnDestroy() {
+    this.lSub.unsubscribe();
+  }
+
+  onSubmit() {
+    this.form.disable();
+    const link = {
+      originLink: this.form.value.originLink,
+      description: this.form.value.description,
+    };
+    this.lSub = this.linkService.create(link).subscribe(
+      (obj) => {
+        console.log(obj);
+      },
+      (error) => {
+        this.form.enable();
+        MaterializeServices.tooast(error.error.message);
+      }
+    );
+  }
 }

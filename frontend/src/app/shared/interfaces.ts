@@ -4,7 +4,12 @@ export interface User {
 }
 
 export interface UserReg {
-  username: string;
+  name: string;
   email: string;
   password: string;
+}
+
+export interface Link {
+  originLink: string;
+  description: string;
 }
