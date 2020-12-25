@@ -16,4 +16,12 @@ export class LinksService {
   getByLinkId(linkId: number): Observable<LinkFromServer> {
     return this.http.get<LinkFromServer>(`/api/link/${linkId}`);
   }
+
+  update(linkData: {
+    linkId: number;
+    description?: string;
+    tag?: string;
+  }): Observable<any> {
+    return this.http.put('/api/link/update', linkData);
+  }
 }

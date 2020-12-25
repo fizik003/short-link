@@ -66,5 +66,25 @@ export class LinkDetailsPageComponent implements OnInit, OnDestroy {
     this.isEdit = !this.isEdit;
   }
 
-  onSubmit() {}
+  onSubmit() {
+    this.isLoading = true;
+
+    const linkData = {
+      linkId: this.link.id,
+      description: this.form.value.description,
+    };
+
+    this.linkServices.update(linkData).subscribe(
+      () => {
+        this.isLoading = false;
+        this.isEdit = false;
+        this.link.description = this.form.value.description;
+      },
+      (error) => {
+        this.form.patchValue({ description: this.link.description });
+        MaterializeServices.tooast(error.error.message);
+        console.log(error);
+      }
+    );
+  }
 }

@@ -22,7 +22,7 @@ export class LinkCreatePageComponent implements OnInit, OnDestroy {
     this.form = new FormGroup({
       originLink: new FormControl(null, [
         Validators.required,
-        Validators.pattern(this.reg),
+        // Validators.pattern(this.reg),
       ]),
       description: new FormControl(null, [Validators.required]),
     });
