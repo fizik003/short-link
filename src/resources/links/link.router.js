@@ -61,4 +61,22 @@ route.post("/create", async (req, res) => {
   }
 });
 
+route.put("/update", async (req, res) => {
+  try {
+    const { linkId, ...linkData } = req.body;
+    const link = await linkService.update(linkId, linkData);
+    if (!link) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message: "не обновленно, попробуйте еще раз",
+      });
+    }
+    res.status(StatusCodes.OK).json(link);
+  } catch (err) {
+    console.log(err);
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: "problem on server" });
+  }
+});
+
 module.exports = { route };

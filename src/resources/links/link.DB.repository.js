@@ -23,7 +23,11 @@ const create = async (userId, linkData) => {
 };
 
 const update = async (linkId, linkData) => {
-  const updateLink = await Link.update({ description: linkData.description });
+  const updateLink = await Link.update(linkData, {
+    where: {
+      id: linkId,
+    },
+  });
   return updateLink;
 };
 

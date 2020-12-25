@@ -4,6 +4,7 @@ const shortId = require("shortid");
 const linkRepo = require("./link.DB.repository");
 
 const getByUserId = async (userId) => linkRepo.getByUserId(userId);
+
 const create = async (userId, linkData) => {
   const code = shortId.generate();
   const baseUrl = config.get("baseUrl");
