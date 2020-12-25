@@ -1,1 +1,64 @@
-<p>link-details-page works!</p>
+<div class="link-details" *ngIf="!isLoading && !isEmpty">
+  <div class="link-details__wrapper">
+    <div class="link-details__card card">
+      <mat-card>
+        <div class="card__title">
+          <span class="mat-h1">Ваша сокращенная ссылка:</span>
+        </div>
+        <div class="card__short-link">
+          <span class="mat-display-1">{{ link.newLink }}</span>
+        </div>
+        <div class="card__details-link">
+          <div class="card__description-title">
+            <span class="mat-h2">Описание:</span>
+
+            <button (click)="showEditForm()" mat-icon-button color="primary">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </div>
+          <div class="card__description-text value">
+            <span *ngIf="!isEdit"> {{ link.description }}</span>
+            <form
+              class="card__edit-form form"
+              (ngSubmit)="onSubmit()"
+              [formGroup]="form"
+              *ngIf="isEdit"
+            >
+              <mat-form-field class="form__input-field">
+                <mat-label>Описание</mat-label>
+                <input matInput type="text" formControlName="description" />
+
+                <mat-error> Это обязательное поле </mat-error>
+              </mat-form-field>
+              <button type="submit" mat-icon-button color="primary">
+                <mat-icon>save</mat-icon>
+              </button>
+            </form>
+          </div>
+          <div class="card__date-title">
+            <span class="mat-h2">Дата создания:</span>
+          </div>
+          <div class="card__date-value">
+            <span>{{ link.createdAt | date }}</span>
+          </div>
+          <div class="card__originlink-title">
+            <span class="mat-h2">Ссылка:</span>
+          </div>
+          <div class="card__originLink-value">
+            <span>{{ link.originLink }}</span>
+          </div>
+        </div>
+
+        <div class="card__clicks">
+          <span class="card__clicks-title mat-h1">Количетсво переходов</span>
+          <span class="card__clicks-value mat-display-2">{{
+            link.clicks
+          }}</span>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>
+<div class="spiner" *ngIf="isLoading">
+  <mat-spinner> </mat-spinner>
+</div>

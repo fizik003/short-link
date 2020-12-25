@@ -11,14 +11,19 @@ const create = async (userId, linkData) => {
   const link = await linkRepo.create(userId, { ...linkData, newLink, code });
   return link;
 };
+
+const getByUserLinkId = async (userId, linkId) =>
+  linkRepo.getByUserLinkId(userId, linkId);
+
 const update = async (linkId, linkData) => linkRepo.update(linkId, linkData);
 
-const getByOriginLink = async (originLink) =>
-  linkRepo.getByOriginLink(originLink);
+const getByUserOriginLink = async (userId, originLink) =>
+  linkRepo.getByUserOriginLink(userId, originLink);
 
 module.exports = {
   getByUserId,
   create,
   update,
-  getByOriginLink,
+  getByUserOriginLink,
+  getByUserLinkId,
 };

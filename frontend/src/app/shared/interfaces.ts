@@ -13,3 +13,14 @@ export interface Link {
   originLink: string;
   description: string;
 }
+
+export interface LinkFromServer {
+  id: number;
+  originLink: string;
+  newLink: string;
+  description: string;
+  clicks: number;
+  code: string;
+  createdAt: Date;
+  updatedAt: Date;
+}

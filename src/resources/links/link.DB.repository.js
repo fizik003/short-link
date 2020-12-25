@@ -7,8 +7,13 @@ const getByUserId = async (userId) => {
   return links;
 };
 
-const getByOriginLink = async (originLink) => {
-  const link = await Link.findOne({ where: { originLink } });
+const getByUserLinkId = async (userId, linkId) => {
+  const link = await Link.findOne({ where: { UserId: userId, id: linkId } });
+  return link;
+};
+
+const getByUserOriginLink = async (userId, originLink) => {
+  const link = await Link.findOne({ where: { originLink, UserId: userId } });
   return link;
 };
 
@@ -22,4 +27,10 @@ const update = async (linkId, linkData) => {
   return updateLink;
 };
 
-module.exports = { create, update, getByUserId, getByOriginLink };
+module.exports = {
+  create,
+  update,
+  getByUserId,
+  getByUserOriginLink,
+  getByUserLinkId,
+};

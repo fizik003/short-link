@@ -1,0 +1,55 @@
+.link-details {
+  max-width: 700px;
+  padding-top: 50px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.card {
+  &__title {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  &__short-link {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  &__details-link {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    align-items: center;
+    margin-bottom: 2rem;
+    @media (max-width: 768px) {
+      grid-template-columns: 100%;
+      justify-items: center;
+      row-gap: 1rem;
+    }
+  }
+
+  &__clicks {
+    text-align: center;
+
+    &-title {
+      margin-bottom: 1rem;
+    }
+
+    &-value {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
+.value {
+  align-self: center;
+  white-space: normal;
+}
+
+.spiner {
+  display: flex;
+  height: 70vh;
+  justify-content: center;
+  align-items: center;
+}

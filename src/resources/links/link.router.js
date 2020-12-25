@@ -22,16 +22,37 @@ route.get("/", async (req, res) => {
   }
 });
 
+route.get("/:id", async (req, res) => {
+  try {
+    const linkId = req.params.id;
+    const userId = req.user.id;
+    const link = await linkService.getByUserLinkId(userId, linkId);
+    if (!link) {
+      return res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ message: "Ссылка не найдена" });
+    }
+    res.status(StatusCodes.OK).json(link);
+  } catch {
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: "problem on server" });
+  }
+});
+
 route.post("/create", async (req, res) => {
   const linkData = req.body;
   const userId = req.user.id;
   try {
-    const checkLink = await linkService.getByOriginLink(linkData.originLink);
+    const checkLink = await linkService.getByUserOriginLink(
+      userId,
+      linkData.originLink
+    );
     if (checkLink) {
-      return res.status(StatusCodes.BAD_REQUEST).json(checkLink);
+      return res.status(StatusCodes.OK).json({ link: checkLink });
     }
     const link = await linkService.create(userId, linkData);
-    res.status(StatusCodes.OK).json(link);
+    res.status(StatusCodes.OK).json({ link });
   } catch (err) {
     console.log(err);
     return res
