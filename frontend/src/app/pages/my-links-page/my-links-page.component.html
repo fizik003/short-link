@@ -1,33 +1,45 @@
-<div class="my-links">
+<div class="my-links" *ngIf="links$ | async as links; else spinner">
   <div class="my-links__title">
     <span class="mat-display-1">Ваши ссылки:</span>
   </div>
-  <div class="my-links__card card">
-    <mat-card>
-      <div class="card__short-link">
-        <span class="mat-h1">short link</span>
-      </div>
-      <div class="card__description">
-        <div class="card__description-title">
-          <span class="mat-h2">Описание:</span>
+  <div class="my-links__cards-list">
+    <div class="my-links__card card" *ngFor="let link of links">
+      <mat-card>
+        <div class="card__short-link">
+          <span class="mat-h1">{{ link.newLink }}</span>
         </div>
-        <div class="card__description-text">
-          <span
-            >ropefje gplkfel l;gkfe;lv ;l'fgdk 'l;vkfd'; ';lvfdm'l; 'vl;dmc
-            fl;dkfl l;fkd;lgfd;'l ;l gjd;fl'gj ;lgjmd;fg ;lf'gmdl;' g'l;dfml';
-            gdfl;jgmd;fklgj'e gk'jd ;kl gjk;fd jg jd;klj d';lm</span
-          >
+        <div class="card__description">
+          <div class="card__description-title">
+            <span class="mat-h2">Описание:</span>
+          </div>
+          <div class="card__description-text">
+            <span>{{ link.description }}</span>
+          </div>
         </div>
-      </div>
 
-      <div class="card__button">
-        <button mat-raised-button color="primary" class="card__button-details">
-          Подробнее
-        </button>
-        <button mat-raised-button color="warn" class="card__button-delete">
-          Удалить
-        </button>
-      </div>
-    </mat-card>
+        <div class="card__button">
+          <a
+            routerLink="/link/details/{{ link.id }}"
+            mat-raised-button
+            color="primary"
+            class="card__button-details"
+          >
+            Подробнее
+          </a>
+          <button
+            (click)="onDelete(link.id)"
+            mat-raised-button
+            color="warn"
+            class="card__button-delete"
+          >
+            Удалить
+          </button>
+        </div>
+      </mat-card>
+    </div>
   </div>
 </div>
+
+<ng-template #spinner>
+  <app-spiner></app-spiner>
+</ng-template>

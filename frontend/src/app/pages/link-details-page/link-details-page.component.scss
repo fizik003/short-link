@@ -5,6 +5,8 @@
 }
 
 .card {
+  margin-bottom: 2rem;
+
   &__title {
     text-align: center;
     margin-bottom: 2rem;
@@ -44,11 +46,4 @@
 .value {
   align-self: center;
   white-space: normal;
-}
-
-.spiner {
-  display: flex;
-  height: 70vh;
-  justify-content: center;
-  align-items: center;
 }

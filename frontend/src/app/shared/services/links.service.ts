@@ -24,4 +24,12 @@ export class LinksService {
   }): Observable<any> {
     return this.http.put('/api/link/update', linkData);
   }
+
+  get(): Observable<any> {
+    return this.http.get('/api/link');
+  }
+
+  delete(id: number): Observable<any> {
+    return;
+  }
 }
