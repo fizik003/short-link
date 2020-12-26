@@ -76,10 +76,10 @@ export class LinkDetailsPageComponent implements OnInit, OnDestroy {
     };
 
     this.linkServices.update(linkData).subscribe(
-      () => {
+      (updateLink) => {
         this.isLoading = false;
         this.isEdit = false;
-        this.link.description = this.form.value.description;
+        this.link = updateLink;
       },
       (error) => {
         this.form.patchValue({ description: this.link.description });

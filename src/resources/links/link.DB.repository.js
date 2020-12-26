@@ -27,7 +27,9 @@ const update = async (linkId, linkData) => {
     where: {
       id: linkId,
     },
+    returning: true,
   });
+
   return updateLink;
 };
 

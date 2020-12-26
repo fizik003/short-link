@@ -73,7 +73,7 @@ route.put("/update", async (req, res) => {
         message: "не обновленно, попробуйте еще раз",
       });
     }
-    res.status(StatusCodes.OK).json(link);
+    res.status(StatusCodes.OK).json(link[1][0].dataValues);
   } catch (err) {
     console.log(err);
     return res
