@@ -1,12 +1,25 @@
 .main-page {
   &__wrapper {
     padding: 50px 100px;
+    @media (max-width: 600px) {
+      padding: unset;
+    }
   }
 
   &__main-cards {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     column-gap: 20px;
+
+    @media (max-width: 1200px) {
+      grid-template-columns: 1fr 1fr;
+      row-gap: 60px;
+    }
+
+    @media (max-width: 400px) {
+      grid-template-columns: 1fr;
+      row-gap: 60px;
+    }
   }
 }
 
