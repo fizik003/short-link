@@ -13,8 +13,7 @@ const create = async (userId, linkData) => {
   return link;
 };
 
-const getByUserLinkId = async (userId, linkId) =>
-  linkRepo.getByUserLinkId(userId, linkId);
+const getByLinkId = async (linkId) => linkRepo.getByLinkId(linkId);
 
 const update = async (linkId, linkData) => linkRepo.update(linkId, linkData);
 
@@ -26,5 +25,5 @@ module.exports = {
   create,
   update,
   getByUserOriginLink,
-  getByUserLinkId,
+  getByLinkId,
 };

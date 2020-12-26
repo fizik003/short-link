@@ -7,8 +7,8 @@ const getByUserId = async (userId) => {
   return links;
 };
 
-const getByUserLinkId = async (userId, linkId) => {
-  const link = await Link.findOne({ where: { UserId: userId, id: linkId } });
+const getByLinkId = async (linkId) => {
+  const link = await Link.findOne({ where: { id: linkId } });
   return link;
 };
 
@@ -36,5 +36,5 @@ module.exports = {
   update,
   getByUserId,
   getByUserOriginLink,
-  getByUserLinkId,
+  getByLinkId,
 };

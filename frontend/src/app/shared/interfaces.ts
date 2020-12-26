@@ -23,4 +23,5 @@ export interface LinkFromServer {
   code: string;
   createdAt: Date;
   updatedAt: Date;
+  author: boolean;
 }

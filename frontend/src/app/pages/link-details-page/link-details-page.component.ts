@@ -20,6 +20,7 @@ export class LinkDetailsPageComponent implements OnInit, OnDestroy {
   isEmpty = false;
   form: FormGroup;
   isEdit = false;
+  isCanEdit = false;
 
   constructor(
     private route: ActivatedRoute,

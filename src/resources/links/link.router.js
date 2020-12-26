@@ -25,15 +25,18 @@ route.get("/", async (req, res) => {
 route.get("/:id", async (req, res) => {
   try {
     const linkId = req.params.id;
-    const userId = req.user.id;
-    const link = await linkService.getByUserLinkId(userId, linkId);
+    const link = await linkService.getByLinkId(linkId);
     if (!link) {
       return res
         .status(StatusCodes.NOT_FOUND)
         .json({ message: "Ссылка не найдена" });
     }
-    res.status(StatusCodes.OK).json(link);
-  } catch {
+
+    let author = false;
+    if (req.user && req.user.id === link.UserId) author = true;
+    res.status(StatusCodes.OK).json({ ...link.dataValues, author });
+  } catch (error) {
+    console.log(error);
     return res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
       .json({ message: "problem on server" });

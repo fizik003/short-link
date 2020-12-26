@@ -14,7 +14,12 @@
           <div class="card__description-title">
             <span class="mat-h2">Описание:</span>
 
-            <button (click)="showEditForm()" mat-icon-button color="primary">
+            <button
+              (click)="showEditForm()"
+              mat-icon-button
+              color="primary"
+              *ngIf="link.author"
+            >
               <mat-icon>edit</mat-icon>
             </button>
           </div>
