@@ -88,4 +88,8 @@ export class LinkDetailsPageComponent implements OnInit, OnDestroy {
       }
     );
   }
+
+  onClickLink() {
+    this.link.clicks += 1;
+  }
 }

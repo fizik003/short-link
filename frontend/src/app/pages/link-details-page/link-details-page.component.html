@@ -6,9 +6,14 @@
           <span class="mat-h1">Ваша сокращенная ссылка:</span>
         </div>
         <div class="card__short-link">
-          <a href="{{ link.newLink }}" target="blank" class="mat-display-1">{{
-            link.newLink
-          }}</a>
+          <a
+            (click)="onClickLink()"
+            (auxclick)="onClickLink()"
+            href="{{ link.newLink }}"
+            target="blank"
+            class="mat-display-1"
+            >{{ link.newLink }}</a
+          >
         </div>
         <div class="card__details-link">
           <div class="card__description-title">
