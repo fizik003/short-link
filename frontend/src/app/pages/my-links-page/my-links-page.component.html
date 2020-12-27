@@ -3,40 +3,12 @@
     <span class="mat-display-1">Ваши ссылки:</span>
   </div>
   <div class="my-links__cards-list">
-    <div class="my-links__card card" *ngFor="let link of links">
-      <mat-card>
-        <div class="card__short-link">
-          <span class="mat-h1">{{ link.newLink }}</span>
-        </div>
-        <div class="card__description">
-          <div class="card__description-title">
-            <span class="mat-h2">Описание:</span>
-          </div>
-          <div class="card__description-text">
-            <span>{{ link.description }}</span>
-          </div>
-        </div>
-
-        <div class="card__button">
-          <a
-            routerLink="/link/details/{{ link.id }}"
-            mat-raised-button
-            color="primary"
-            class="card__button-details"
-          >
-            Подробнее
-          </a>
-          <button
-            (click)="onDelete(link.id)"
-            mat-raised-button
-            color="warn"
-            class="card__button-delete"
-          >
-            Удалить
-          </button>
-        </div>
-      </mat-card>
-    </div>
+    <app-link-card
+      *ngFor="let link of links"
+      [linkData]="link"
+      (onDelete)="onDelete($event)"
+    >
+    </app-link-card>
   </div>
 </div>
 

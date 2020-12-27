@@ -19,6 +19,7 @@ import { MyLinksPageComponent } from './pages/my-links-page/my-links-page.compon
 import { LinkEditPageComponent } from './pages/link-edit-page/link-edit-page.component';
 import { LinkDetailsPageComponent } from './pages/link-details-page/link-details-page.component';
 import { SpinerComponent } from './shared/components/spiner/spiner.component';
+import { LinkCardComponent } from './shared/components/link-card/link-card.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { SpinerComponent } from './shared/components/spiner/spiner.component';
     LinkEditPageComponent,
     LinkDetailsPageComponent,
     SpinerComponent,
+    LinkCardComponent,
   ],
   imports: [
     BrowserModule,
