@@ -16,6 +16,7 @@ const create = async (userId, linkData) => {
 const getByLinkId = async (linkId) => linkRepo.getByLinkId(linkId);
 
 const update = async (linkId, linkData) => linkRepo.update(linkId, linkData);
+const destroy = async (userId, linkId) => linkRepo.destroy(userId, linkId);
 
 const getByUserOriginLink = async (userId, originLink) =>
   linkRepo.getByUserOriginLink(userId, originLink);
@@ -26,4 +27,5 @@ module.exports = {
   update,
   getByUserOriginLink,
   getByLinkId,
+  destroy,
 };

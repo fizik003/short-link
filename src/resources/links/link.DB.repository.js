@@ -33,10 +33,29 @@ const update = async (linkId, linkData) => {
   return updateLink;
 };
 
+const destroy = async (userId, linkId) => {
+  // const link = await Link.findOne({
+  //   where: {
+  //     id: linkId,
+  //     UserId: userId,
+  //   },
+  // });
+
+  const link = await Link.destroy({
+    where: {
+      UserId: userId,
+      id: linkId,
+    },
+  });
+
+  return link;
+};
+
 module.exports = {
   create,
   update,
   getByUserId,
   getByUserOriginLink,
   getByLinkId,
+  destroy,
 };

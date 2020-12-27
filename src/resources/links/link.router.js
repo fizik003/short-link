@@ -13,7 +13,7 @@ route.get("/", async (req, res) => {
       return res.status(StatusCodes.OK).json({ message: "ссылок нет" });
     }
     // console.log(typeof links);
-    res.status(StatusCodes.OK).json({ links });
+    res.status(StatusCodes.OK).json(links);
   } catch (err) {
     console.log(err);
     res
@@ -76,6 +76,26 @@ route.put("/update", async (req, res) => {
     res.status(StatusCodes.OK).json(link[1][0].dataValues);
   } catch (err) {
     console.log(err);
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: "problem on server" });
+  }
+});
+
+route.delete("/delete/:id", async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const linkId = req.params.id;
+    const link = await linkService.destroy(userId, linkId);
+    if (!link) {
+      console.log(1111111111111111111111111111);
+      return res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ message: "Такая ссылка не найдена" });
+    }
+
+    res.status(StatusCodes.NO_CONTENT).json(link);
+  } catch (error) {
     return res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
       .json({ message: "problem on server" });

@@ -1,4 +1,4 @@
-<div class="my-links" *ngIf="links$ | async as links; else spinner">
+<div class="my-links" *ngIf="!isLoading; else spinner">
   <div class="my-links__title">
     <span class="mat-display-1">Ваши ссылки:</span>
   </div>

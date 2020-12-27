@@ -30,6 +30,6 @@ export class LinksService {
   }
 
   delete(id: number): Observable<any> {
-    return;
+    return this.http.delete(`/api/link/delete/${id}`);
   }
 }
