@@ -23,9 +23,10 @@ app.use("/api/link", linkRouter);
 const syncDb = async () => {
   // await sequelize.sync({ force: true });
   await sequelize.sync();
+  console.log("db sync");
 };
 
-const start = async () => {
+const start = () => {
   try {
     // await sequelize.authenticate();
     // console.log("Connection has been established successfully.");

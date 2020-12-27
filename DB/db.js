@@ -7,6 +7,7 @@ const sequelize = new Sequelize(db, user, password, {
   host,
   dialect,
   operatorsAliases: 0,
+  logging: false,
   pool: {
     max: pool.max,
     min: pool.min,

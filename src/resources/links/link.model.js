@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 
 const { sequelize } = require("../../../DB/db");
-const { User } = require("../users/user.model");
+const { Tag } = require("../tags/tag.model");
 
 const Link = sequelize.define("Link", {
   originLink: {
@@ -20,6 +20,14 @@ const Link = sequelize.define("Link", {
   code: {
     type: DataTypes.STRING,
   },
+});
+
+Tag.belongsToMany(Link, {
+  through: "LinkTag",
+});
+
+Link.belongsToMany(Tag, {
+  through: "LinkTag",
 });
 
 module.exports = { Link };
