@@ -1,8 +1,6 @@
 const express = require("express");
 const config = require("config");
 const bodyParser = require("body-parser");
-const { User } = require("./resources/users/user.model");
-const { Link } = require("./resources/links/link.model");
 
 const { sequelize } = require("../DB/db");
 
@@ -14,7 +12,10 @@ const PORT = config.get("port");
 const { router: userRouter } = require("./resources/users/user.router");
 const { route: linkRouter } = require("./resources/links/link.router");
 const { checkToken } = require("./middlewares/checkToken");
-
+const {
+  route: redirectRouter,
+} = require("./resources/redirect/redirect.router");
+app.use("/go", redirectRouter);
 app.use("/api/user", userRouter);
 app.use(checkToken);
 app.use("/api/link", linkRouter);

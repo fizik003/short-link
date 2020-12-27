@@ -8,7 +8,7 @@ const getByUserId = async (userId) => linkRepo.getByUserId(userId);
 const create = async (userId, linkData) => {
   const code = shortId.generate();
   const baseUrl = config.get("baseUrl");
-  const newLink = `${baseUrl}/${code}`;
+  const newLink = `${baseUrl}/go/${code}`;
   const link = await linkRepo.create(userId, { ...linkData, newLink, code });
   return link;
 };

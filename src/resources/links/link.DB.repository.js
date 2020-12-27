@@ -17,6 +17,11 @@ const getByUserOriginLink = async (userId, originLink) => {
   return link;
 };
 
+const getByCode = async (code) => {
+  const link = await Link.findOne({ where: { code } });
+  return link;
+};
+
 const create = async (userId, linkData) => {
   const newLink = await Link.create({ ...linkData, UserId: userId });
   return newLink;
@@ -34,13 +39,6 @@ const update = async (linkId, linkData) => {
 };
 
 const destroy = async (userId, linkId) => {
-  // const link = await Link.findOne({
-  //   where: {
-  //     id: linkId,
-  //     UserId: userId,
-  //   },
-  // });
-
   const link = await Link.destroy({
     where: {
       UserId: userId,
@@ -58,4 +56,5 @@ module.exports = {
   getByUserOriginLink,
   getByLinkId,
   destroy,
+  getByCode,
 };
