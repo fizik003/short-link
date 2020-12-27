@@ -45,7 +45,6 @@ export class LinkDetailsPageComponent implements OnInit, OnDestroy {
           this.isLoading = false;
           MaterializeServices.tooast('У вас нет такой ссылки');
         }
-        console.log(error);
       }
     );
   }
@@ -84,7 +83,6 @@ export class LinkDetailsPageComponent implements OnInit, OnDestroy {
       (error) => {
         this.form.patchValue({ description: this.link.description });
         MaterializeServices.tooast(error.error.message);
-        console.log(error);
       }
     );
   }

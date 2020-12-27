@@ -27,16 +27,13 @@ router.get("/", checkToken, async (req, res) => {
 router.post("/create", async (req, res) => {
   try {
     const { name, email, password } = req.body;
-    console.log("ttttttttttttttttttttttttt", email);
     const condidate = await userService.getByEmail(email);
     if (condidate) {
       return res
         .status(StatusCodes.BAD_REQUEST)
         .json({ message: "такой пользователь уже есть" });
     }
-    console.log(req.body);
     const user = await userService.create({ name, email, password });
-    console.log("uuuuseeer", user);
     const { id } = user;
     res.status(StatusCodes.OK).json({ email, name, id });
   } catch (err) {

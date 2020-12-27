@@ -12,7 +12,6 @@ route.get("/", async (req, res) => {
     if (Object.keys(links).length === 0) {
       return res.status(StatusCodes.OK).json({ message: "ссылок нет" });
     }
-    // console.log(typeof links);
     res.status(StatusCodes.OK).json(links);
   } catch (err) {
     console.log(err);
@@ -88,7 +87,6 @@ route.delete("/delete/:id", async (req, res) => {
     const linkId = req.params.id;
     const link = await linkService.destroy(userId, linkId);
     if (!link) {
-      console.log(1111111111111111111111111111);
       return res
         .status(StatusCodes.NOT_FOUND)
         .json({ message: "Такая ссылка не найдена" });

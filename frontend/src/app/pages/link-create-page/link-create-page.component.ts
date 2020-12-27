@@ -25,6 +25,7 @@ export class LinkCreatePageComponent implements OnInit, OnDestroy {
         // Validators.pattern(this.reg),
       ]),
       description: new FormControl(null, [Validators.required]),
+      tags: new FormControl(null, [Validators.required]),
     });
   }
 
@@ -47,7 +48,7 @@ export class LinkCreatePageComponent implements OnInit, OnDestroy {
       },
       (error) => {
         this.form.enable();
-        console.log(error);
+        MaterializeServices.tooast(error.error.message);
       }
     );
   }

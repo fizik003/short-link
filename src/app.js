@@ -30,10 +30,9 @@ const start = () => {
   try {
     // await sequelize.authenticate();
     // console.log("Connection has been established successfully.");
-    app.listen(PORT, () => {
+    app.listen(PORT, async () => {
       console.log(`App has been started on port ${PORT}`);
-
-      syncDb();
+      await syncDb();
     });
   } catch (err) {
     console.error("Unable to connect to the database:", err);
