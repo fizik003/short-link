@@ -20,6 +20,7 @@ import { LinkEditPageComponent } from './pages/link-edit-page/link-edit-page.com
 import { LinkDetailsPageComponent } from './pages/link-details-page/link-details-page.component';
 import { SpinerComponent } from './shared/components/spiner/spiner.component';
 import { LinkCardComponent } from './shared/components/link-card/link-card.component';
+import { TagLinksComponent } from './pages/tag-links/tag-links.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { LinkCardComponent } from './shared/components/link-card/link-card.compo
     LinkDetailsPageComponent,
     SpinerComponent,
     LinkCardComponent,
+    TagLinksComponent,
   ],
   imports: [
     BrowserModule,
