@@ -1,1 +1,16 @@
-<p>tag-links works!</p>
+<div class="tag-links" *ngIf="!isLoading; else spinner">
+  <div class="tag-links__title">
+    <span class="mat-display-1"> Ссылки с тэгом "{{ tag.name }}"</span>
+  </div>
+  <div class="tag-links__list-link">
+    <app-link-card
+      *ngFor="let link of tag.Links"
+      [linkData]="link"
+      [isCanDelete]="false"
+    ></app-link-card>
+  </div>
+</div>
+
+<ng-template #spinner>
+  <app-spiner></app-spiner>
+</ng-template>

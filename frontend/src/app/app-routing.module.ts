@@ -1,3 +1,4 @@
+import { TagLinksComponent } from './pages/tag-links/tag-links.component';
 import { LinkDetailsPageComponent } from './pages/link-details-page/link-details-page.component';
 import { MyLinksPageComponent } from './pages/my-links-page/my-links-page.component';
 import { LinkEditPageComponent } from './pages/link-edit-page/link-edit-page.component';
@@ -30,7 +31,15 @@ const routes: Routes = [
       { path: 'main', component: MainPageComponent },
       { path: 'link/create', component: LinkCreatePageComponent },
       { path: 'link/edit/:id', component: LinkEditPageComponent },
+    ],
+  },
+
+  {
+    path: '',
+    component: SiteLayoutComponent,
+    children: [
       { path: 'link/details/:id', component: LinkDetailsPageComponent },
+      { path: 'tag/:tag', component: TagLinksComponent },
     ],
   },
 ];

@@ -80,13 +80,14 @@
           </div>
           <div class="card__tags-list" *ngIf="!isEdit">
             <div class="card__tags-list-wrapper">
-              <button
+              <a
                 mat-stroked-button
                 color="primary"
                 *ngFor="let tag of link.Tags"
+                routerLink="/tag/{{ tag.name }}"
               >
                 {{ tag.name }}
-              </button>
+              </a>
             </div>
           </div>
           <div class="card__date-title">
