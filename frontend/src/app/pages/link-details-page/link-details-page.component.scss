@@ -29,6 +29,12 @@
     }
   }
 
+  &__tags-list {
+    button:not(:last-child) {
+      margin-right: 0.5rem;
+    }
+  }
+
   &__clicks {
     text-align: center;
 

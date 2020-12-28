@@ -12,6 +12,7 @@ export interface UserReg {
 export interface Link {
   originLink: string;
   description: string;
+  tags: string;
 }
 
 export interface LinkFromServer {
@@ -24,4 +25,5 @@ export interface LinkFromServer {
   createdAt: Date;
   updatedAt: Date;
   author: boolean;
+  Tags: any[];
 }

@@ -37,6 +37,8 @@ export class LinkDetailsPageComponent implements OnInit, OnDestroy {
       (link: LinkFromServer) => {
         this.isLoading = false;
         this.link = link;
+        console.log(link);
+
         this.initFrom();
       },
       (error) => {

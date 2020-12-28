@@ -52,6 +52,19 @@
               </button>
             </form>
           </div>
+
+          <div class="card__tags-title">
+            <span class="mat-h2">Тэги:</span>
+          </div>
+          <div class="card__tags-list">
+            <button
+              mat-stroked-button
+              color="primary"
+              *ngFor="let tag of link.Tags"
+            >
+              {{ tag.name }}
+            </button>
+          </div>
           <div class="card__date-title">
             <span class="mat-h2">Дата создания:</span>
           </div>

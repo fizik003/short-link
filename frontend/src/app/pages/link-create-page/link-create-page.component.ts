@@ -25,7 +25,7 @@ export class LinkCreatePageComponent implements OnInit, OnDestroy {
         // Validators.pattern(this.reg),
       ]),
       description: new FormControl(null, [Validators.required]),
-      tags: new FormControl(null, [Validators.required]),
+      tags: new FormControl(null),
     });
   }
 
@@ -40,7 +40,10 @@ export class LinkCreatePageComponent implements OnInit, OnDestroy {
     const link = {
       originLink: this.form.value.originLink,
       description: this.form.value.description,
+      tags: this.form.value.tags,
     };
+
+    console.log(link);
 
     this.lSub = this.linkService.create(link).subscribe(
       ({ link }) => {

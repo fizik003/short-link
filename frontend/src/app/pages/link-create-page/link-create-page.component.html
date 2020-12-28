@@ -30,6 +30,15 @@
             <input matInput type="text" formControlName="description" />
             <mat-error> Это <strong>обязательное </strong>поле </mat-error>
           </mat-form-field>
+          <mat-form-field class="form__input-field">
+            <mat-label>Тэги</mat-label>
+            <input
+              matInput
+              type="text"
+              formControlName="tags"
+              placeholder="Введите тэги через пробел"
+            />
+          </mat-form-field>
           <div class="form__btn-submit">
             <button
               [disabled]="form.invalid || form.disabled"
