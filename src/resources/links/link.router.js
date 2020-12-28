@@ -3,9 +3,9 @@ const { StatusCodes } = require("http-status-codes");
 
 const linkService = require("./link.service");
 
-const route = Router();
+const router = Router();
 
-route.get("/", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const userId = req.user.id;
     const links = await linkService.getByUserId(userId);
@@ -21,7 +21,7 @@ route.get("/", async (req, res) => {
   }
 });
 
-route.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const linkId = req.params.id;
     const link = await linkService.getByLinkId(linkId);
@@ -42,7 +42,7 @@ route.get("/:id", async (req, res) => {
   }
 });
 
-route.post("/create", async (req, res) => {
+router.post("/create", async (req, res) => {
   const linkData = req.body;
   const userId = req.user.id;
   try {
@@ -63,7 +63,7 @@ route.post("/create", async (req, res) => {
   }
 });
 
-route.put("/update", async (req, res) => {
+router.put("/update", async (req, res) => {
   try {
     const { linkId, ...linkData } = req.body;
     const link = await linkService.update(linkId, linkData);
@@ -81,7 +81,7 @@ route.put("/update", async (req, res) => {
   }
 });
 
-route.delete("/delete/:id", async (req, res) => {
+router.delete("/delete/:id", async (req, res) => {
   try {
     const userId = req.user.id;
     const linkId = req.params.id;
@@ -100,4 +100,4 @@ route.delete("/delete/:id", async (req, res) => {
   }
 });
 
-module.exports = { route };
+module.exports = { router };
