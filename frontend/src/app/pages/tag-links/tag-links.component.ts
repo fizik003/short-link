@@ -24,7 +24,6 @@ export class TagLinksComponent implements OnInit {
       (data: any) => {
         this.isLoading = false;
         this.tag = data;
-        console.log(this.tag);
       },
       (error) => {
         this.isLoading = false;

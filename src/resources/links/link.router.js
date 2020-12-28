@@ -1,11 +1,12 @@
 const { Router } = require("express");
 const { StatusCodes } = require("http-status-codes");
+const { checkToken } = require("../../middlewares/checkToken");
 
 const linkService = require("./link.service");
 
 const router = Router();
 
-router.get("/", async (req, res) => {
+router.get("/", checkToken, async (req, res) => {
   try {
     const userId = req.user.id;
     const links = await linkService.getByUserId(userId);
@@ -42,7 +43,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/create", async (req, res) => {
+router.post("/create", checkToken, async (req, res) => {
   const linkData = req.body;
   const userId = req.user.id;
   try {
@@ -63,7 +64,7 @@ router.post("/create", async (req, res) => {
   }
 });
 
-router.put("/update", async (req, res) => {
+router.put("/update", checkToken, async (req, res) => {
   try {
     const { linkId, ...linkData } = req.body;
     const link = await linkService.update(linkId, linkData);
@@ -81,7 +82,7 @@ router.put("/update", async (req, res) => {
   }
 });
 
-router.delete("/delete/:id", async (req, res) => {
+router.delete("/delete/:id", checkToken, async (req, res) => {
   try {
     const userId = req.user.id;
     const linkId = req.params.id;

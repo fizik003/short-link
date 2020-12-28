@@ -7,11 +7,9 @@ const { sequelize } = require("../DB/db");
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(express.json({ extended: true }));
 const PORT = config.get("port");
 const { router: userRouter } = require("./resources/users/user.router");
 const { router: linkRouter } = require("./resources/links/link.router");
-const { checkToken } = require("./middlewares/checkToken");
 const {
   route: redirectRouter,
 } = require("./resources/redirect/redirect.router");
@@ -20,7 +18,6 @@ const { router: tagRouter } = require("./resources/tags/tag.router");
 app.use("/go", redirectRouter);
 app.use("/api/user", userRouter);
 app.use("/api/tag", tagRouter);
-app.use(checkToken);
 app.use("/api/link", linkRouter);
 
 const syncDb = async () => {
