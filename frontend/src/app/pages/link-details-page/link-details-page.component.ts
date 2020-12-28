@@ -33,22 +33,7 @@ export class LinkDetailsPageComponent implements OnInit, OnDestroy {
       this.linkId = params['id'];
     });
 
-    this.lSub = this.linkServices.getByLinkId(this.linkId).subscribe(
-      (link: LinkFromServer) => {
-        this.isLoading = false;
-        this.link = link;
-        console.log(link);
-
-        this.initFrom();
-      },
-      (error) => {
-        if (error.status === 404) {
-          this.isEmpty = true;
-          this.isLoading = false;
-          MaterializeServices.tooast('У вас нет такой ссылки');
-        }
-      }
-    );
+    this.getLinkById(this.linkId);
   }
 
   ngOnDestroy(): void {
@@ -57,10 +42,12 @@ export class LinkDetailsPageComponent implements OnInit, OnDestroy {
   }
 
   initFrom() {
+    const strTags = this.link.Tags.map((el) => el.name).join(',');
     this.form = new FormGroup({
       description: new FormControl(this.link.description, [
         Validators.required,
       ]),
+      tags: new FormControl(strTags, [Validators.required]),
     });
   }
 
@@ -70,17 +57,19 @@ export class LinkDetailsPageComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.isLoading = true;
-
     const linkData = {
       linkId: this.link.id,
       description: this.form.value.description,
+      tags: this.form.value.tags,
     };
 
     this.linkServices.update(linkData).subscribe(
       (updateLink) => {
-        this.isLoading = false;
+        // this.isLoading = false;
+        // this.isEditDescription = false;
+        // this.link = updateLink;
+        this.getLinkById(this.linkId);
         this.isEdit = false;
-        this.link = updateLink;
       },
       (error) => {
         this.form.patchValue({ description: this.link.description });
@@ -91,5 +80,22 @@ export class LinkDetailsPageComponent implements OnInit, OnDestroy {
 
   onClickLink() {
     this.link.clicks += 1;
+  }
+
+  private getLinkById(id: number) {
+    this.lSub = this.linkServices.getByLinkId(id).subscribe(
+      (link: LinkFromServer) => {
+        this.isLoading = false;
+        this.link = link;
+        this.initFrom();
+      },
+      (error) => {
+        if (error.status === 404) {
+          this.isEmpty = true;
+          this.isLoading = false;
+          MaterializeServices.tooast('У вас нет такой ссылки');
+        }
+      }
+    );
   }
 }

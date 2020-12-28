@@ -20,7 +20,7 @@ export class LinksService {
   update(linkData: {
     linkId: number;
     description?: string;
-    tag?: string;
+    tags?: string;
   }): Observable<any> {
     return this.http.put('/api/link/update', linkData);
   }

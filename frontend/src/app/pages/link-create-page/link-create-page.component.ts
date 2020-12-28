@@ -43,8 +43,6 @@ export class LinkCreatePageComponent implements OnInit, OnDestroy {
       tags: this.form.value.tags,
     };
 
-    console.log(link);
-
     this.lSub = this.linkService.create(link).subscribe(
       ({ link }) => {
         this.router.navigate([`/link/details/${link.id}`]);

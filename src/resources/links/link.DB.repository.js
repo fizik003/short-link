@@ -1,5 +1,6 @@
 const { Link } = require("./link.model");
 const { Tag } = require("../tags/tag.model");
+const strToArray = require("../../utils/strToArray");
 
 const getByUserId = async (userId) => {
   const links = await Link.findAll({
@@ -26,20 +27,6 @@ const getByCode = async (code) => {
   return link;
 };
 
-async function strToArray(strTags) {
-  const arrTag = [];
-  strTags
-    .toLowerCase()
-    .split(",")
-    .map((item) => {
-      const tag = item.trim();
-      console.log("in other fun");
-      if (tag) arrTag.push(tag);
-    });
-
-  return arrTag;
-}
-
 const create = async (userId, linkData) => {
   const { tags, ...link } = linkData;
   const newLink = await Link.create({ ...link, UserId: userId });
@@ -57,13 +44,30 @@ const create = async (userId, linkData) => {
   return newLink;
 };
 
-const update = async (linkId, linkData) => {
+const update = async (linkId, data) => {
+  const { tags, ...linkData } = data;
+
   const updateLink = await Link.update(linkData, {
     where: {
       id: linkId,
     },
     returning: true,
   });
+  let arrTagInstance = [];
+
+  if (tags && updateLink) {
+    const arrTags = await strToArray(tags);
+    arrTagInstance = await Promise.all(
+      arrTags.map(async (tag) => {
+        const [tagInstance] = await Tag.findOrCreate({ where: { name: tag } });
+        return tagInstance;
+      })
+    );
+
+    await updateLink[1][0].setTags(arrTagInstance);
+  }
+
+  // console.log(arrTagInstance);
 
   return updateLink;
 };

@@ -53,3 +53,16 @@
   align-self: center;
   white-space: normal;
 }
+
+.form {
+  display: flex;
+  flex-direction: column;
+  &__btns {
+    display: flex;
+    justify-content: flex-end;
+
+    button:not(:last-child) {
+      margin-right: 1rem;
+    }
+  }
+}
