@@ -34,6 +34,6 @@ export class LinksService {
   }
 
   getStats(): Observable<any> {
-    return this.http.get('/api/link/stats');
+    return this.http.get('/api/link/my/stats');
   }
 }

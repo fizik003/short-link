@@ -85,6 +85,10 @@ const destroy = async (userId, linkId) => {
 
 const getStatsByUser = async (userId) => {
   const countLink = await Link.count({ where: { UserId: userId } });
+  const countAllRedirect = await Link.sum("clicks", {
+    where: { UserId: userId },
+  });
+  return { countLink: countLink, countAllRedirect };
 };
 
 module.exports = {

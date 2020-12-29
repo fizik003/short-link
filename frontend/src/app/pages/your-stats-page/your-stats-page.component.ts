@@ -9,17 +9,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./your-stats-page.component.scss'],
 })
 export class YourStatsPageComponent implements OnInit {
-  links: LinkFromServer[];
+  stats: any;
   isLoading: boolean;
   constructor(private linkService: LinksService) {}
 
   ngOnInit(): void {
     this.isLoading = true;
-    this.linkService.get().subscribe(
-      (data: LinkFromServer[]) => {
+    this.linkService.getStats().subscribe(
+      (data: any) => {
         this.isLoading = false;
-        this.links = data;
-        console.log(this.links[1]);
+        this.stats = data;
       },
       (error) => {
         this.isLoading = false;

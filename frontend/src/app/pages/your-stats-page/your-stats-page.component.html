@@ -1,4 +1,4 @@
-<div class="your-stats">
+<div class="your-stats" *ngIf="!isLoading; else spinner">
   <div class="your-stats__title">
     <span class="mat-display-1">Ваша статистика</span>
   </div>
@@ -7,13 +7,17 @@
       <span class="mat-h2">Количество ссылок:</span>
     </div>
     <div class="card__count-value">
-      <span class="mat-display-3">10</span>
+      <span class="mat-display-3">{{ stats.countLink }}</span>
     </div>
     <div class="card__redirect-title">
       <span class="mat-h2">Количество переходов по вашим ссылкам:</span>
     </div>
     <div class="card__redirect-value">
-      <span class="mat-display-3">10</span>
+      <span class="mat-display-3">{{ stats.countAllRedirect }}</span>
     </div>
   </mat-card>
 </div>
+
+<ng-template #spinner>
+  <app-spiner></app-spiner>
+</ng-template>

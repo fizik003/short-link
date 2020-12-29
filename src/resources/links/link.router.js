@@ -101,17 +101,18 @@ router.delete("/delete/:id", checkToken, async (req, res) => {
   }
 });
 
-router.get("/stats", checkToken, async (req, res) => {
+router.get("/my/stats", checkToken, async (req, res) => {
+  const userId = req.user.id;
   try {
-    const userId = req.user.id;
-    const countLinks = await linkService.getStatsByUser(userId);
-    if (!countLinks) {
+    const stats = await linkService.getStatsByUser(userId);
+    if (!stats) {
       return res
         .status(StatusCodes.BAD_REQUEST)
-        .json({ message: "Статичтики нет, надо чаще заходить)" });
+        .json({ message: "Статиcтики нет, надо чаще заходить)" });
     }
-    res.status(StatusCodes.OK).json({ count: countLinks });
+    res.status(StatusCodes.OK).json(stats);
   } catch (error) {
+    console.log(error);
     return res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
       .json({ message: "problem on server" });
