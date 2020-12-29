@@ -21,6 +21,7 @@ import { LinkDetailsPageComponent } from './pages/link-details-page/link-details
 import { SpinerComponent } from './shared/components/spiner/spiner.component';
 import { LinkCardComponent } from './shared/components/link-card/link-card.component';
 import { TagLinksComponent } from './pages/tag-links/tag-links.component';
+import { YourStatsPageComponent } from './pages/your-stats-page/your-stats-page.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { TagLinksComponent } from './pages/tag-links/tag-links.component';
     SpinerComponent,
     LinkCardComponent,
     TagLinksComponent,
+    YourStatsPageComponent,
   ],
   imports: [
     BrowserModule,

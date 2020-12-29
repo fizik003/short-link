@@ -1,3 +1,4 @@
+import { YourStatsPageComponent } from './pages/your-stats-page/your-stats-page.component';
 import { TagLinksComponent } from './pages/tag-links/tag-links.component';
 import { LinkDetailsPageComponent } from './pages/link-details-page/link-details-page.component';
 import { MyLinksPageComponent } from './pages/my-links-page/my-links-page.component';
@@ -31,6 +32,7 @@ const routes: Routes = [
       { path: 'main', component: MainPageComponent },
       { path: 'link/create', component: LinkCreatePageComponent },
       { path: 'link/edit/:id', component: LinkEditPageComponent },
+      { path: 'my-stats', component: YourStatsPageComponent },
     ],
   },
 
