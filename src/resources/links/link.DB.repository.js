@@ -83,6 +83,10 @@ const destroy = async (userId, linkId) => {
   return link;
 };
 
+const getStatsByUser = async (userId) => {
+  const countLink = await Link.count({ where: { UserId: userId } });
+};
+
 module.exports = {
   create,
   update,
@@ -91,4 +95,5 @@ module.exports = {
   getByLinkId,
   destroy,
   getByCode,
+  getStatsByUser,
 };

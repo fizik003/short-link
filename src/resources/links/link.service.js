@@ -3,7 +3,7 @@ const shortId = require("shortid");
 
 const linkRepo = require("./link.DB.repository");
 
-const getByUserId = async (userId) => linkRepo.getByUserId(userId);
+const getByUserId = (userId) => linkRepo.getByUserId(userId);
 
 const create = async (userId, linkData) => {
   const code = shortId.generate();
@@ -13,13 +13,15 @@ const create = async (userId, linkData) => {
   return link;
 };
 
-const getByLinkId = async (linkId) => linkRepo.getByLinkId(linkId);
+const getByLinkId = (linkId) => linkRepo.getByLinkId(linkId);
 
-const update = async (linkId, linkData) => linkRepo.update(linkId, linkData);
-const destroy = async (userId, linkId) => linkRepo.destroy(userId, linkId);
+const update = (linkId, linkData) => linkRepo.update(linkId, linkData);
+const destroy = (userId, linkId) => linkRepo.destroy(userId, linkId);
 
-const getByUserOriginLink = async (userId, originLink) =>
+const getByUserOriginLink = (userId, originLink) =>
   linkRepo.getByUserOriginLink(userId, originLink);
+
+const getStatsByUser = (userId) => linkRepo.getStatsByUser(userId);
 
 module.exports = {
   getByUserId,
@@ -28,4 +30,5 @@ module.exports = {
   getByUserOriginLink,
   getByLinkId,
   destroy,
+  getStatsByUser,
 };

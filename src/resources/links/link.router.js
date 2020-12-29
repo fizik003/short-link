@@ -101,4 +101,21 @@ router.delete("/delete/:id", checkToken, async (req, res) => {
   }
 });
 
+router.get("/stats", checkToken, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const countLinks = await linkService.getStatsByUser(userId);
+    if (!countLinks) {
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ message: "Статичтики нет, надо чаще заходить)" });
+    }
+    res.status(StatusCodes.OK).json({ count: countLinks });
+  } catch (error) {
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: "problem on server" });
+  }
+});
+
 module.exports = { router };
