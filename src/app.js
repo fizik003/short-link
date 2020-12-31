@@ -1,6 +1,7 @@
 const express = require("express");
 const config = require("config");
 const bodyParser = require("body-parser");
+const path = require("path");
 
 const { sequelize } = require("../DB/db");
 
@@ -28,8 +29,6 @@ const syncDb = async () => {
 
 const start = () => {
   try {
-    // await sequelize.authenticate();
-    // console.log("Connection has been established successfully.");
     app.listen(PORT, async () => {
       console.log(`App has been started on port ${PORT}`);
       await syncDb();
@@ -40,3 +39,10 @@ const start = () => {
 };
 
 start();
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("frontend/dist/frontend"));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+  });
+}
