@@ -21,7 +21,7 @@ export class AuthService {
   }
 
   register(user: UserReg): Observable<any> {
-    return this.http.post('/api/user/create', user);
+    return this.http.post('/api/user', user);
   }
 
   setToken(token: string) {

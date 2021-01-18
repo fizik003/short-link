@@ -22,7 +22,25 @@ router.get("/", checkToken, async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/stats", checkToken, async (req, res) => {
+  const userId = req.user.id;
+  try {
+    const stats = await linkService.getStatsByUser(userId);
+    if (!stats) {
+      return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ message: "Статиcтики нет, надо чаще заходить)" });
+    }
+    res.status(StatusCodes.OK).json(stats);
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: "problem on server" });
+  }
+});
+
+router.get("/:id", checkToken, async (req, res) => {
   try {
     const linkId = req.params.id;
     const link = await linkService.getByLinkId(linkId);
@@ -43,7 +61,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/create", checkToken, async (req, res) => {
+router.post("/", checkToken, async (req, res) => {
   const linkData = req.body;
   const userId = req.user.id;
   try {
@@ -64,7 +82,7 @@ router.post("/create", checkToken, async (req, res) => {
   }
 });
 
-router.put("/update", checkToken, async (req, res) => {
+router.put("/", checkToken, async (req, res) => {
   try {
     const { linkId, ...linkData } = req.body;
     const link = await linkService.update(linkId, linkData);
@@ -82,7 +100,7 @@ router.put("/update", checkToken, async (req, res) => {
   }
 });
 
-router.delete("/delete/:id", checkToken, async (req, res) => {
+router.delete("/:id", checkToken, async (req, res) => {
   try {
     const userId = req.user.id;
     const linkId = req.params.id;
@@ -95,24 +113,6 @@ router.delete("/delete/:id", checkToken, async (req, res) => {
 
     res.status(StatusCodes.NO_CONTENT).json(link);
   } catch (error) {
-    return res
-      .status(StatusCodes.INTERNAL_SERVER_ERROR)
-      .json({ message: "problem on server" });
-  }
-});
-
-router.get("/my/stats", checkToken, async (req, res) => {
-  const userId = req.user.id;
-  try {
-    const stats = await linkService.getStatsByUser(userId);
-    if (!stats) {
-      return res
-        .status(StatusCodes.BAD_REQUEST)
-        .json({ message: "Статиcтики нет, надо чаще заходить)" });
-    }
-    res.status(StatusCodes.OK).json(stats);
-  } catch (error) {
-    console.log(error);
     return res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
       .json({ message: "problem on server" });

@@ -10,7 +10,7 @@ export class LinksService {
   constructor(private http: HttpClient) {}
 
   create(link: Link): Observable<any> {
-    return this.http.post('/api/link/create', link);
+    return this.http.post('/api/link', link);
   }
 
   getByLinkId(linkId: number): Observable<LinkFromServer> {
@@ -22,7 +22,7 @@ export class LinksService {
     description?: string;
     tags?: string;
   }): Observable<any> {
-    return this.http.put('/api/link/update', linkData);
+    return this.http.put('/api/link', linkData);
   }
 
   get(): Observable<any> {
@@ -30,10 +30,10 @@ export class LinksService {
   }
 
   delete(id: number): Observable<any> {
-    return this.http.delete(`/api/link/delete/${id}`);
+    return this.http.delete(`/api/link/${id}`);
   }
 
   getStats(): Observable<any> {
-    return this.http.get('/api/link/my/stats');
+    return this.http.get('/api/link/stats');
   }
 }

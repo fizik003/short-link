@@ -29,9 +29,7 @@ export class MainPageComponent implements OnInit {
 
   constructor() {}
 
-  show() {
-    console.log(343224);
-  }
+  show() {}
 
   ngOnInit(): void {}
 }

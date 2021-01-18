@@ -24,7 +24,7 @@ router.get("/", checkToken, async (req, res) => {
   }
 });
 
-router.post("/create", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const { name, email, password } = req.body;
     const condidate = await userService.getByEmail(email);
