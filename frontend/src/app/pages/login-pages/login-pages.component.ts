@@ -42,6 +42,7 @@ export class LoginPagesComponent implements OnInit, OnDestroy {
       (err) => {
         MaterializeServices.tooast(err.error.message);
         this.isEnabledBtn = false;
+        console.log(err);
       }
     );
   };

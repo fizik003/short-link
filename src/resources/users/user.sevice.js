@@ -14,9 +14,10 @@ const tokenCreate = async (userData) => {
   }
 
   const { id, email } = user;
-  const token = jwt.sign({ id, email }, JWT_SECRET, { expiresIn: "1h" });
+  const token = jwt.sign({ id, email }, JWT_SECRET);
+  const resp = { id, email, token: `Bearer ${token}` };
 
-  return `Bearer ${token}`;
+  return resp;
 };
 
 const getByEmail = async (email) => userRepo.getByEmail(email);

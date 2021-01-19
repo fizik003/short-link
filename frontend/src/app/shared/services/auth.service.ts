@@ -1,3 +1,4 @@
+import { LoginRequestInterface } from './../../store/types/loginRequest.interface';
 import { User, UserReg } from './../interfaces';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -11,9 +12,10 @@ export class AuthService {
   private token = null;
   constructor(private http: HttpClient) {}
 
-  login(user: User): Observable<{ token: string }> {
+  login(user: LoginRequestInterface): Observable<{ token: string }> {
     return this.http.post<{ token: string }>('/api/user/login', user).pipe(
       tap(({ token }) => {
+        console.log(token);
         localStorage.setItem('auth-token', token);
         this.setToken(token);
       })

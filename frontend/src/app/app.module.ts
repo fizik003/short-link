@@ -1,3 +1,4 @@
+import { environment } from './../environments/environment';
 import { TokenInterceptor } from './shared/interceptor/token.interceptor';
 import { AuthService } from './shared/services/auth.service';
 import { MaterialModule } from './material/material.module';
@@ -22,6 +23,10 @@ import { SpinerComponent } from './shared/components/spiner/spiner.component';
 import { LinkCardComponent } from './shared/components/link-card/link-card.component';
 import { TagLinksComponent } from './pages/tag-links/tag-links.component';
 import { YourStatsPageComponent } from './pages/your-stats-page/your-stats-page.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { reducer } from './store/reducers';
 
 @NgModule({
   declarations: [
@@ -49,6 +54,12 @@ import { YourStatsPageComponent } from './pages/your-stats-page/your-stats-page.
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    StoreModule.forRoot({ app: reducer }),
+    EffectsModule.forRoot([]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
   ],
   providers: [
     AuthService,

@@ -47,13 +47,13 @@ router.post("/", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const userData = req.body;
-    const token = await userService.tokenCreate(userData);
-    if (!token) {
+    const currentUser = await userService.tokenCreate(userData);
+    if (!currentUser) {
       return res
         .status(StatusCodes.BAD_REQUEST)
         .json({ message: "пользователь не найден" });
     }
-    res.status(StatusCodes.OK).json({ token });
+    res.status(StatusCodes.OK).json(currentUser);
   } catch (err) {
     console.log(err);
     return res
