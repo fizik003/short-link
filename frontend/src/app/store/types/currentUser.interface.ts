@@ -1,5 +1,5 @@
 export interface CurrentUserInterface {
-  id: number;
+  id: string;
   email: string;
   token: string;
 }

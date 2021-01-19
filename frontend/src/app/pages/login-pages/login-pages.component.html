@@ -37,11 +37,7 @@
           mat-flat-button
           color="primary"
           type="submit"
-          [disabled]="
-            !emailFormControl.valid ||
-            !passwordFormControl.valid ||
-            isEnabledBtn
-          "
+          [disabled]="isEnabledBtn"
         >
           Войти
         </button>

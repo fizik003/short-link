@@ -1,3 +1,6 @@
+import { isSubmittingSelector } from './../../store/selectors';
+import { LoginRequestInterface } from './../../store/types/loginRequest.interface';
+import { loginAction } from './../../store/actions/login.action';
 import { MaterializeServices } from './../../shared/materialize/materialize.services';
 import { AuthService } from './../../shared/services/auth.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
@@ -9,9 +12,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { Route } from '@angular/compiler/src/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { select, Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-login-pages',
@@ -19,36 +23,41 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
   styleUrls: ['./login-pages.component.scss'],
 })
 export class LoginPagesComponent implements OnInit, OnDestroy {
-  isEnabledBtn = false;
+  isEnabledBtn: boolean = false;
   aSub: Subscription;
+  isSubmitting$: Observable<boolean>;
 
   constructor(
     private auth: AuthService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private store: Store
   ) {}
 
   onSubmit = () => {
-    this.isEnabledBtn = true;
-
-    const user = {
+    const user: LoginRequestInterface = {
       email: this.emailFormControl.value,
       password: this.passwordFormControl.value,
     };
-    this.aSub = this.auth.login(user).subscribe(
-      () => {
-        this.router.navigate(['/main']);
-      },
-      (err) => {
-        MaterializeServices.tooast(err.error.message);
-        this.isEnabledBtn = false;
-        console.log(err);
-      }
-    );
+
+    // this.aSub = this.auth.login(user).subscribe(
+    //   () => {
+
+    //     this.router.navigate(['/main']);
+    //   },
+    //   (err) => {
+    //     MaterializeServices.tooast(err.error.message);
+    //     this.isEnabledBtn = false;
+    //     console.log(err);
+    //   }
+    // );
+
+    this.store.dispatch(loginAction({ request: user }));
+    console.log(user);
   };
 
   ngOnDestroy(): void {
-    if (this.aSub) this.aSub.unsubscribe();
+    // if (this.aSub) this.aSub.unsubscribe();
   }
 
   ngOnInit(): void {
@@ -61,6 +70,8 @@ export class LoginPagesComponent implements OnInit, OnDestroy {
         MaterializeServices.tooast('Войдите еще раз');
       }
     });
+
+    this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector));
   }
 
   emailFormControl = new FormControl(null, [

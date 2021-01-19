@@ -53,6 +53,7 @@ router.post("/login", async (req, res) => {
         .status(StatusCodes.BAD_REQUEST)
         .json({ message: "пользователь не найден" });
     }
+
     res.status(StatusCodes.OK).json(currentUser);
   } catch (err) {
     console.log(err);

@@ -1,3 +1,4 @@
+import { LoginEffect } from './store/effects/login.effects';
 import { environment } from './../environments/environment';
 import { TokenInterceptor } from './shared/interceptor/token.interceptor';
 import { AuthService } from './shared/services/auth.service';
@@ -55,7 +56,7 @@ import { reducer } from './store/reducers';
     FormsModule,
     ReactiveFormsModule,
     StoreModule.forRoot({ app: reducer }),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([LoginEffect]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
