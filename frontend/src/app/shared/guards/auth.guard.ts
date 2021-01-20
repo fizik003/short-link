@@ -1,5 +1,7 @@
+import { isLoggedInSelector } from './../../store/selectors';
+import { Store, select } from '@ngrx/store';
 import { AuthService } from './../services/auth.service';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import {
   CanActivate,
   CanActivateChild,
@@ -14,7 +16,12 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate, CanActivateChild {
-  constructor(private auth: AuthService, private router: Router) {}
+  isCanGo: boolean;
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private store: Store
+  ) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -24,7 +31,14 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (this.auth.isAuthenticated()) {
+    const sub = this.store
+      .pipe(select(isLoggedInSelector))
+      .subscribe((isLoggedIn) => {
+        this.isCanGo = isLoggedIn;
+        sub.unsubscribe();
+      });
+
+    if (this.isCanGo) {
       return of(true);
     } else {
       this.router.navigate(['/login'], {

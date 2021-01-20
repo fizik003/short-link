@@ -10,13 +10,12 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AuthService {
-  private token = null;
+  // private token = null;
   constructor(private http: HttpClient) {}
 
   login(user: LoginRequestInterface): Observable<CurrentUserInterface> {
     return this.http.post<CurrentUserInterface>('/api/user/login', user).pipe(
       tap(({ token }) => {
-        localStorage.setItem('auth-token', token);
         this.setToken(token);
       })
     );
@@ -27,19 +26,16 @@ export class AuthService {
   }
 
   setToken(token: string) {
-    this.token = token;
+    // this.token = token;
+    localStorage.setItem('auth-token', token);
   }
 
-  getToken(): string {
-    return this.token;
-  }
-
-  isAuthenticated(): boolean {
-    return !!this.token;
+  getToken(key: string): string {
+    // return this.token;
+    return localStorage.getItem(key);
   }
 
   logout() {
-    this.setToken(null);
     localStorage.clear();
   }
 }

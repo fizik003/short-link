@@ -1,3 +1,4 @@
+import { logoutAction } from './actions/logout.action';
 import {
   loginAction,
   loginSuccessAction,
@@ -32,7 +33,7 @@ const appReducer = createReducer(
       return {
         ...state,
         isSubmitting: false,
-        isLoading: true,
+        isLoggedIn: true,
         currentUser: action.currentUser,
       };
     }
@@ -41,6 +42,11 @@ const appReducer = createReducer(
     return {
       ...state,
       errors: action.error,
+    };
+  }),
+  on(logoutAction, (state) => {
+    return {
+      ...initialState,
     };
   })
 );

@@ -1,3 +1,5 @@
+import { logoutAction } from './../../../store/actions/logout.action';
+import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -8,7 +10,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./site-layout.component.scss'],
 })
 export class SiteLayoutComponent implements OnInit {
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(
+    private auth: AuthService,
+    private store: Store,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {}
 
@@ -16,5 +22,6 @@ export class SiteLayoutComponent implements OnInit {
     event.preventDefault();
     this.auth.logout();
     this.router.navigate(['/login']);
+    this.store.dispatch(logoutAction());
   }
 }

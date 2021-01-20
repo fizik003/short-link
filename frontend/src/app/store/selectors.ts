@@ -11,3 +11,8 @@ export const isSubmittingSelector = createSelector(
   appFeatureSelector,
   (appState) => appState.isSubmitting
 );
+
+export const isLoggedInSelector = createSelector(
+  appFeatureSelector,
+  (appState) => appState.isLoggedIn
+);

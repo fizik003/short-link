@@ -53,7 +53,6 @@ export class LoginPagesComponent implements OnInit, OnDestroy {
     // );
 
     this.store.dispatch(loginAction({ request: user }));
-    console.log(user);
   };
 
   ngOnDestroy(): void {
