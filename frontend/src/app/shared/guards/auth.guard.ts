@@ -32,12 +32,13 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    this.store
-      .pipe(select(isLoggedInSelector))
-      .subscribe((isLoggedIn) => {
-        this.isCanGo = isLoggedIn;
-      })
-      .unsubscribe();
+    // this.store
+    //   .pipe(select(isLoggedInSelector))
+    //   .subscribe((isLoggedIn) => {
+    //     this.isCanGo = isLoggedIn;
+    //   })
+    //   .unsubscribe();
+    this.isCanGo = !!this.auth.getToken();
 
     if (this.isCanGo) {
       return of(true);

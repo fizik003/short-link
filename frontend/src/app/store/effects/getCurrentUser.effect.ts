@@ -1,6 +1,8 @@
+import { Route } from '@angular/compiler/src/core';
+import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CurrentUserInterface } from './../types/currentUser.interface';
-import { switchMap, map, catchError } from 'rxjs/operators';
+import { switchMap, map, catchError, tap } from 'rxjs/operators';
 import {
   getCurrnetUserAction,
   getCurrentUserFailureAction,
@@ -13,7 +15,11 @@ import { of } from 'rxjs';
 
 @Injectable()
 export class GetCurrentUserEffect {
-  constructor(private actions$: Actions, private authService: AuthService) {}
+  constructor(
+    private actions$: Actions,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   getCurrentUser$ = createEffect(() =>
     this.actions$.pipe(
@@ -28,11 +34,25 @@ export class GetCurrentUserEffect {
             return getCurrentUserSuccessAction({ currentUser });
           }),
           catchError((errorResponse: HttpErrorResponse) => {
-            console.log(errorResponse);
+            this.router.navigate(['login']);
             return of(getCurrentUserFailureAction());
           })
         );
       })
     )
   );
+
+  // redirectAfterGetUser$ = createEffect(
+  //   () => {
+  //     return this.actions$.pipe(
+  //       ofType(getCurrentUserSuccessAction),
+  //       tap(() => {
+  //         console.log('in effect');
+
+  //         this.router.navigate(['main']);
+  //       })
+  //     );
+  //   },
+  //   { dispatch: false }
+  // );
 }

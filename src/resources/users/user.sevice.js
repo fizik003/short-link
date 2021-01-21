@@ -14,9 +14,14 @@ const tokenCreate = async (userData) => {
     return undefined;
   }
 
-  const { id, email } = user;
+  const { id, email, links } = user;
   const token = jwt.sign({ id, email }, JWT_SECRET);
-  const response = { id, email, token: `Bearer ${token}` };
+  const response = {
+    id,
+    email,
+    token: `Bearer ${token}`,
+    links,
+  };
 
   return response;
 };
@@ -24,4 +29,9 @@ const tokenCreate = async (userData) => {
 const getByEmail = async (email) => userRepo.getByEmail(email);
 
 const getById = async (userId) => userRepo.getById(userId);
-module.exports = { create, tokenCreate, getByEmail, getById };
+module.exports = {
+  create,
+  tokenCreate,
+  getByEmail,
+  getById,
+};

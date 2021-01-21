@@ -14,8 +14,8 @@ router.get("/", checkToken, async (req, res) => {
         .status(StatusCodes.BAD_REQUEST)
         .json({ message: "user not found" });
     }
-
-    res.status(StatusCodes.OK).json(user);
+    const { email, id, links } = user;
+    res.status(StatusCodes.OK).json({ email, id, links });
   } catch (err) {
     console.log(err);
     return res
