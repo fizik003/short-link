@@ -1,3 +1,5 @@
+import { getCurrnetUserAction } from './store/actions/getCurrentUser.action';
+import { Store } from '@ngrx/store';
 import { AuthService } from './shared/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -7,11 +9,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService, private store: Store) {}
   ngOnInit() {
-    const potentialToken = localStorage.getItem('auth-token');
-    if (potentialToken) {
-      this.auth.setToken(potentialToken);
-    }
+    // const potentialToken = localStorage.getItem('auth-token');
+    // if (potentialToken) {
+    //   this.auth.setToken(potentialToken);
+    // }
+
+    this.store.dispatch(getCurrnetUserAction());
   }
 }

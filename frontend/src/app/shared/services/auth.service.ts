@@ -25,14 +25,18 @@ export class AuthService {
     return this.http.post('/api/user', user);
   }
 
+  getCurrentUser(): Observable<CurrentUserInterface> {
+    return this.http.get<CurrentUserInterface>('/api/user');
+  }
+
   setToken(token: string) {
     // this.token = token;
     localStorage.setItem('auth-token', token);
   }
 
-  getToken(key: string): string {
+  getToken(): string {
     // return this.token;
-    return localStorage.getItem(key);
+    return localStorage.getItem('auth-token');
   }
 
   logout() {

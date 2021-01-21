@@ -1,3 +1,4 @@
+import { GetCurrentUserEffect } from './store/effects/getCurrentUser.effect';
 import { LoginEffect } from './store/effects/login.effects';
 import { environment } from './../environments/environment';
 import { TokenInterceptor } from './shared/interceptor/token.interceptor';
@@ -56,7 +57,7 @@ import { reducer } from './store/reducers';
     FormsModule,
     ReactiveFormsModule,
     StoreModule.forRoot({ app: reducer }),
-    EffectsModule.forRoot([LoginEffect]),
+    EffectsModule.forRoot([LoginEffect, GetCurrentUserEffect]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,

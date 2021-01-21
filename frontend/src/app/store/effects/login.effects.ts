@@ -24,14 +24,11 @@ export class LoginEffect {
     this.actions$.pipe(
       ofType(loginAction),
       switchMap(({ request }) => {
-        console.log(request);
-
         return this.authService.login(request).pipe(
           map((currentUser: CurrentUserInterface) => {
             return loginSuccessAction({ currentUser });
           }),
           catchError((errorResponse: HttpErrorResponse) => {
-            console.log(errorResponse);
             return of(
               loginFailureAction({ error: errorResponse.error.message })
             );

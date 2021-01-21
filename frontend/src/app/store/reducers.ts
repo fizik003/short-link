@@ -1,3 +1,8 @@
+import {
+  getCurrnetUserAction,
+  getCurrentUserSuccessAction,
+  getCurrentUserFailureAction,
+} from './actions/getCurrentUser.action';
 import { logoutAction } from './actions/logout.action';
 import {
   loginAction,
@@ -47,6 +52,28 @@ const appReducer = createReducer(
   on(logoutAction, (state) => {
     return {
       ...initialState,
+    };
+  }),
+  on(getCurrnetUserAction, (state) => {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }),
+  on(getCurrentUserSuccessAction, (state, action) => {
+    return {
+      ...state,
+      currentUser: action.currentUser,
+      isLoggedIn: true,
+      isLoading: false,
+    };
+  }),
+  on(getCurrentUserFailureAction, (state) => {
+    return {
+      ...state,
+      isLoading: false,
+      isLoggedIn: false,
+      currentUser: null,
     };
   })
 );

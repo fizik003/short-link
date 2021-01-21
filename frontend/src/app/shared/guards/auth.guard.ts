@@ -10,13 +10,14 @@ import {
   UrlTree,
   Router,
 } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate, CanActivateChild {
   isCanGo: boolean;
+  subscribeOnIsLogged: Subscription;
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -31,12 +32,12 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    const sub = this.store
+    this.store
       .pipe(select(isLoggedInSelector))
       .subscribe((isLoggedIn) => {
         this.isCanGo = isLoggedIn;
-        sub.unsubscribe();
-      });
+      })
+      .unsubscribe();
 
     if (this.isCanGo) {
       return of(true);
