@@ -16,3 +16,13 @@ export const isLoggedInSelector = createSelector(
   appFeatureSelector,
   (appState) => appState.isLoggedIn
 );
+
+export const currentUserSelector = createSelector(
+  appFeatureSelector,
+  (appState) => appState.currentUser
+);
+
+export const isLoaddingSelector = createSelector(
+  appFeatureSelector,
+  (appState) => appState.isLoading
+);

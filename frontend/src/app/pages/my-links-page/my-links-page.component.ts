@@ -1,3 +1,10 @@
+import { CurrentUserInterface } from './../../store/types/currentUser.interface';
+import {
+  currentUserSelector,
+  isLoaddingSelector,
+} from './../../store/selectors';
+import { LinkResponseInterface } from './../../store/types/linkResponse.interface';
+import { Store, select } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { MaterializeServices } from './../../shared/materialize/materialize.services';
 import { Observable, Subscription } from 'rxjs';
@@ -12,16 +19,35 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 export class MyLinksPageComponent implements OnInit, OnDestroy {
   lSub: Subscription;
   lSubDele: Subscription;
+  curentUserSubscription: Subscription;
+  isLoadingSubscription: Subscription;
   isLoading: boolean;
-  links: any;
-  constructor(private linkService: LinksService, private router: Router) {}
+  currentUser: CurrentUserInterface;
+  links: LinkResponseInterface[];
+  constructor(private linkService: LinksService, private store: Store) {}
 
   ngOnInit(): void {
-    this.isLoading = true;
-    this.lSub = this.linkService.get().subscribe((data) => {
-      this.links = data;
-      this.isLoading = false;
-    });
+    // this.isLoading = true;
+    // this.lSub = this.linkService.get().subscribe((data) => {
+    //   this.links = data;
+    //   this.isLoading = false;
+    // });
+
+    this.curentUserSubscription = this.store
+      .pipe(select(currentUserSelector))
+      .subscribe((currentUserResponse: CurrentUserInterface) => {
+        // console.log(currentUser);
+        if (currentUserResponse) {
+          this.currentUser = currentUserResponse;
+          this.links = currentUserResponse.links;
+        }
+      });
+
+    this.isLoadingSubscription = this.store
+      .pipe(select(isLoaddingSelector))
+      .subscribe((isLoadding: boolean) => {
+        this.isLoading = isLoadding;
+      });
   }
 
   ngOnDestroy(): void {
