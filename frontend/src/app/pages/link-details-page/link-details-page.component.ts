@@ -1,3 +1,7 @@
+import { LinkResponseInterface } from './../../store/types/linkResponse.interface';
+import { currentUserSelector } from './../../store/selectors';
+import { switchMap, map } from 'rxjs/operators';
+import { Store, select } from '@ngrx/store';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MaterializeServices } from './../../shared/materialize/materialize.services';
 import { LinkFromServer } from './../../shared/interfaces';
@@ -12,10 +16,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
   styleUrls: ['./link-details-page.component.scss'],
 })
 export class LinkDetailsPageComponent implements OnInit, OnDestroy {
-  rSub: Subscription;
-  lSub: Subscription;
+  paramsSubscription: Subscription;
+  linkSubscription: Subscription;
   linkId: number;
-  link: LinkFromServer;
+  link: LinkResponseInterface;
   isLoading = false;
   isEmpty = false;
   form: FormGroup;
@@ -24,21 +28,49 @@ export class LinkDetailsPageComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private linkServices: LinksService
+    private linkServices: LinksService,
+    private store: Store
   ) {}
 
   ngOnInit(): void {
-    this.isLoading = true;
-    this.rSub = this.route.params.subscribe((params: Params) => {
+    // this.isLoading = true;
+
+    this.paramsSubscription = this.route.params
+      .pipe(
+        switchMap((params: Params) => {
+          return this.store.pipe(
+            select(currentUserSelector),
+            map((currentUser) => {
+              if (currentUser) {
+                const currentLink = currentUser.links.find((link) => {
+                  return link.id == params['id'];
+                });
+
+                return currentLink;
+              }
+            })
+          );
+        })
+      )
+      .subscribe(
+        (link) => {
+          if (link) {
+            this.link = link;
+          }
+        },
+        (err) => console.log(err.message)
+      );
+
+    this.paramsSubscription = this.route.params.subscribe((params: Params) => {
       this.linkId = params['id'];
     });
 
-    this.getLinkById(this.linkId);
+    // this.getLinkById(this.linkId);
   }
 
   ngOnDestroy(): void {
-    if (this.rSub) this.rSub.unsubscribe();
-    if (this.lSub) this.lSub.unsubscribe();
+    if (this.paramsSubscription) this.paramsSubscription.unsubscribe();
+    if (this.linkSubscription) this.linkSubscription.unsubscribe();
   }
 
   initFrom() {
@@ -68,7 +100,7 @@ export class LinkDetailsPageComponent implements OnInit, OnDestroy {
         // this.isLoading = false;
         // this.isEditDescription = false;
         // this.link = updateLink;
-        this.getLinkById(this.linkId);
+        // this.getLinkById(this.linkId);
         this.isEdit = false;
       },
       (error) => {
@@ -82,20 +114,20 @@ export class LinkDetailsPageComponent implements OnInit, OnDestroy {
     this.link.clicks += 1;
   }
 
-  private getLinkById(id: number) {
-    this.lSub = this.linkServices.getByLinkId(id).subscribe(
-      (link: LinkFromServer) => {
-        this.isLoading = false;
-        this.link = link;
-        this.initFrom();
-      },
-      (error) => {
-        if (error.status === 404) {
-          this.isEmpty = true;
-          this.isLoading = false;
-          MaterializeServices.tooast('У вас нет такой ссылки');
-        }
-      }
-    );
-  }
+  // getLinkById(id: number) {
+  //   this.linkSubscription = this.linkServices.getByLinkId(id).subscribe(
+  //     (link: LinkFromServer) => {
+  //       this.isLoading = false;
+  //       this.link = link;
+  //       this.initFrom();
+  //     },
+  //     (error) => {
+  //       if (error.status === 404) {
+  //         this.isEmpty = true;
+  //         this.isLoading = false;
+  //         MaterializeServices.tooast('У вас нет такой ссылки');
+  //       }
+  //     }
+  //   );
+  // }
 }

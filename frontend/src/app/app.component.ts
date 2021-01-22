@@ -1,5 +1,7 @@
+import { isLoaddingSelector } from './store/selectors';
+import { Observable } from 'rxjs';
 import { getCurrnetUserAction } from './store/actions/getCurrentUser.action';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { AuthService } from './shared/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
+  isLoading$: Observable<boolean>;
   constructor(private auth: AuthService, private store: Store) {}
   ngOnInit() {
     // const potentialToken = localStorage.getItem('auth-token');
@@ -17,5 +20,6 @@ export class AppComponent implements OnInit {
     // }
 
     this.store.dispatch(getCurrnetUserAction());
+    this.isLoading$ = this.store.pipe(select(isLoaddingSelector));
   }
 }

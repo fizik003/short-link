@@ -1,3 +1,4 @@
+import { TagResponseInterface } from './tagResponse.interface';
 export interface LinkResponseInterface {
   id: number;
   originLink: string;
@@ -8,4 +9,5 @@ export interface LinkResponseInterface {
   createdAt: string;
   updatedAt: string;
   UserId: number;
+  Tags: TagResponseInterface[];
 }
