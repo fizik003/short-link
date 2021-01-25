@@ -1,3 +1,5 @@
+import { LinkResponseInterface } from './../../store/types/linkResponse.interface';
+import { LinkUpdateRequestInterface } from './../../store/types/linkUpdateRequest.interface';
 import { Link, LinkFromServer } from './../interfaces';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -17,12 +19,10 @@ export class LinksService {
     return this.http.get<LinkFromServer>(`/api/link/${linkId}`);
   }
 
-  update(linkData: {
-    linkId: number;
-    description?: string;
-    tags?: string;
-  }): Observable<any> {
-    return this.http.put('/api/link', linkData);
+  update(
+    linkData: LinkUpdateRequestInterface
+  ): Observable<LinkResponseInterface> {
+    return this.http.put<LinkResponseInterface>('/api/link', linkData);
   }
 
   get(): Observable<any> {

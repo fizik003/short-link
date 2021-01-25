@@ -63,13 +63,11 @@ const update = async (linkId, data) => {
         return tagInstance;
       })
     );
-
+    // console.log(arrTagInstance);
     await updateLink[1][0].setTags(arrTagInstance);
   }
 
-  // console.log(arrTagInstance);
-
-  return updateLink;
+  return getByLinkId(updateLink[1][0].id);
 };
 
 const destroy = async (userId, linkId) => {
@@ -88,7 +86,7 @@ const getStatsByUser = async (userId) => {
   const countAllRedirect = await Link.sum("clicks", {
     where: { UserId: userId },
   });
-  return { countLink: countLink, countAllRedirect };
+  return { countLink, countAllRedirect };
 };
 
 module.exports = {

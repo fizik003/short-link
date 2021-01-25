@@ -1,3 +1,4 @@
+import { LinkUpdateEffect } from './store/effects/linkUpdate.effect';
 import { GetCurrentUserEffect } from './store/effects/getCurrentUser.effect';
 import { LoginEffect } from './store/effects/login.effects';
 import { environment } from './../environments/environment';
@@ -57,7 +58,11 @@ import { reducer } from './store/reducers';
     FormsModule,
     ReactiveFormsModule,
     StoreModule.forRoot({ app: reducer }),
-    EffectsModule.forRoot([LoginEffect, GetCurrentUserEffect]),
+    EffectsModule.forRoot([
+      LoginEffect,
+      GetCurrentUserEffect,
+      LinkUpdateEffect,
+    ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,

@@ -1,3 +1,6 @@
+import { linkAddClickAction } from './../../store/actions/linkAddClick.action';
+import { LinkUpdateRequestInterface } from './../../store/types/linkUpdateRequest.interface';
+import { linkUpdateActions } from './../../store/actions/linkUpdate.action';
 import { LinkResponseInterface } from './../../store/types/linkResponse.interface';
 import { currentUserSelector } from './../../store/selectors';
 import { switchMap, map } from 'rxjs/operators';
@@ -56,21 +59,21 @@ export class LinkDetailsPageComponent implements OnInit, OnDestroy {
         (link) => {
           if (link) {
             this.link = link;
+            this.initFrom();
           }
         },
         (err) => console.log(err.message)
       );
 
-    this.paramsSubscription = this.route.params.subscribe((params: Params) => {
-      this.linkId = params['id'];
-    });
+    // this.paramsSubscription = this.route.params.subscribe((params: Params) => {
+    //   this.linkId = params['id'];
+    // });
 
     // this.getLinkById(this.linkId);
   }
 
   ngOnDestroy(): void {
     if (this.paramsSubscription) this.paramsSubscription.unsubscribe();
-    if (this.linkSubscription) this.linkSubscription.unsubscribe();
   }
 
   initFrom() {
@@ -88,30 +91,34 @@ export class LinkDetailsPageComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.isLoading = true;
-    const linkData = {
+    // this.isLoading = true;
+    const linkData: LinkUpdateRequestInterface = {
       linkId: this.link.id,
       description: this.form.value.description,
       tags: this.form.value.tags,
     };
 
-    this.linkServices.update(linkData).subscribe(
-      (updateLink) => {
-        // this.isLoading = false;
-        // this.isEditDescription = false;
-        // this.link = updateLink;
-        // this.getLinkById(this.linkId);
-        this.isEdit = false;
-      },
-      (error) => {
-        this.form.patchValue({ description: this.link.description });
-        MaterializeServices.tooast(error.error.message);
-      }
-    );
+    this.store.dispatch(linkUpdateActions({ request: linkData }));
+
+    // this.linkServices.update(linkData).subscribe(
+    //   (updateLink) => {
+    //     this.isLoading = false;
+    //     this.isEditDescription = false;
+    //     this.link = updateLink;
+    //     this.getLinkById(this.linkId);
+    //     this.isEdit = false;
+    //   },
+    //   (error) => {
+    //     this.form.patchValue({ description: this.link.description });
+    //     MaterializeServices.tooast(error.error.message);
+    //   }
+    // );
   }
 
   onClickLink() {
-    this.link.clicks += 1;
+    this.store.dispatch(linkAddClickAction({ idClickLink: this.link.id }));
+    console.log(this.link.clicks);
+    // this.link.clicks += 1;
   }
 
   // getLinkById(id: number) {

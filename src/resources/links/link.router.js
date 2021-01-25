@@ -50,9 +50,7 @@ router.get("/:id", checkToken, async (req, res) => {
         .json({ message: "Ссылка не найдена" });
     }
 
-    let author = false;
-    if (req.user && req.user.id === link.UserId) author = true;
-    res.status(StatusCodes.OK).json({ ...link.dataValues, author });
+    res.status(StatusCodes.OK).json({ ...link.dataValues });
   } catch (error) {
     console.log(error);
     return res
@@ -91,7 +89,7 @@ router.put("/", checkToken, async (req, res) => {
         message: "не обновленно, попробуйте еще раз",
       });
     }
-    res.status(StatusCodes.OK).json(link[1][0].dataValues);
+    res.status(StatusCodes.OK).json(link);
   } catch (err) {
     console.log(err);
     return res

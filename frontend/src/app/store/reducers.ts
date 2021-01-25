@@ -1,3 +1,9 @@
+import { linkAddClickAction } from './actions/linkAddClick.action';
+import {
+  linkUpdateActions,
+  linkUpdateSuccessAction,
+  linkUpdateFailureAction,
+} from './actions/linkUpdate.action';
 import {
   getCurrnetUserAction,
   getCurrentUserSuccessAction,
@@ -74,6 +80,60 @@ const appReducer = createReducer(
       isLoading: false,
       isLoggedIn: false,
       currentUser: null,
+    };
+  }),
+  on(linkUpdateActions, (state) => {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }),
+  on(linkUpdateSuccessAction, (state, action) => {
+    const { updatedLink } = action;
+    const indexUpdatedLink = state.currentUser.links.findIndex(
+      (el) => el.id === updatedLink.id
+    );
+    const newLinksArr = [
+      ...state.currentUser.links.slice(0, indexUpdatedLink),
+      updatedLink,
+      ...state.currentUser.links.slice(indexUpdatedLink + 1),
+    ];
+
+    return {
+      ...state,
+      isLoading: false,
+      currentUser: {
+        ...state.currentUser,
+        links: newLinksArr,
+      },
+    };
+  }),
+  on(linkUpdateFailureAction, (state, action) => {
+    return {
+      ...state,
+      errors: action.error,
+    };
+  }),
+  on(linkAddClickAction, (state, action) => {
+    const { idClickLink } = action;
+    const currenLink = {
+      ...state.currentUser.links.find((el) => el.id == idClickLink),
+    };
+
+    const indexClickLink = state.currentUser.links.findIndex(
+      (el) => el.id == idClickLink
+    );
+    currenLink.clicks = currenLink.clicks + 1;
+    return {
+      ...state,
+      currentUser: {
+        ...state.currentUser.links,
+        links: [
+          ...state.currentUser.links.slice(0, indexClickLink),
+          currenLink,
+          ...state.currentUser.links.slice(indexClickLink + 1),
+        ],
+      },
     };
   })
 );
