@@ -9,7 +9,6 @@ const create = async (user) => userRepo.create(user);
 
 const tokenCreate = async (userData) => {
   const user = await userRepo.getByEmail(userData.email);
-  console.log(111111111111111111111111, JSON.stringify(user));
   if (!user || user.password !== userData.password) {
     return undefined;
   }

@@ -36,7 +36,6 @@ export class MyLinksPageComponent implements OnInit, OnDestroy {
     this.curentUserSubscription = this.store
       .pipe(select(currentUserSelector))
       .subscribe((currentUserResponse: CurrentUserInterface) => {
-        // console.log(currentUser);
         if (currentUserResponse) {
           this.currentUser = currentUserResponse;
           this.links = currentUserResponse.links;

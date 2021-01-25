@@ -20,6 +20,5 @@ export class AppComponent implements OnInit {
     // }
 
     this.store.dispatch(getCurrnetUserAction());
-    this.isLoading$ = this.store.pipe(select(isLoaddingSelector));
   }
 }

@@ -14,4 +14,8 @@ export enum ActionTypes {
   UPDATE_LINK_FAILURE = '[App] Update Link failure',
 
   LINK_CLICKS_ADD = '[App] Add one click om link',
+
+  CREATE_LINK = '[App] Create link',
+  CREATE_LINK_SUCCESS = '[App] Create link success',
+  CREATE_LINK_FAILURE = '[App] Create link failure',
 }

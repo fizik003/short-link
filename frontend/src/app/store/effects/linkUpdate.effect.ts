@@ -1,4 +1,3 @@
-import { loginFailureAction } from './../actions/login.action';
 import { HttpErrorResponse } from '@angular/common/http';
 import { LinkResponseInterface } from './../types/linkResponse.interface';
 import { switchMap, map, catchError } from 'rxjs/operators';
@@ -6,7 +5,7 @@ import {
   linkUpdateActions,
   linkUpdateSuccessAction,
   linkUpdateFailureAction,
-} from './../actions/linkUpdate.action';
+} from '../actions/linkUpdate.action';
 import { LinksService } from './../../shared/services/links.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';

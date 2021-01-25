@@ -1,15 +1,15 @@
 import { linkAddClickAction } from './../../store/actions/linkAddClick.action';
 import { LinkUpdateRequestInterface } from './../../store/types/linkUpdateRequest.interface';
-import { linkUpdateActions } from './../../store/actions/linkUpdate.action';
+import { linkUpdateActions } from '../../store/actions/linkUpdate.action';
 import { LinkResponseInterface } from './../../store/types/linkResponse.interface';
-import { currentUserSelector } from './../../store/selectors';
+import {
+  currentUserSelector,
+  isLoaddingSelector,
+} from './../../store/selectors';
 import { switchMap, map } from 'rxjs/operators';
 import { Store, select } from '@ngrx/store';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MaterializeServices } from './../../shared/materialize/materialize.services';
-import { LinkFromServer } from './../../shared/interfaces';
-import { Subscription } from 'rxjs';
-import { LinksService } from './../../shared/services/links.service';
+import { Subscription, Observable } from 'rxjs';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
@@ -23,21 +23,16 @@ export class LinkDetailsPageComponent implements OnInit, OnDestroy {
   linkSubscription: Subscription;
   linkId: number;
   link: LinkResponseInterface;
-  isLoading = false;
+  isLoading$: Observable<boolean>;
   isEmpty = false;
   form: FormGroup;
   isEdit = false;
   isCanEdit = false;
 
-  constructor(
-    private route: ActivatedRoute,
-    private linkServices: LinksService,
-    private store: Store
-  ) {}
+  constructor(private route: ActivatedRoute, private store: Store) {}
 
   ngOnInit(): void {
-    // this.isLoading = true;
-
+    this.isLoading$ = this.store.pipe(select(isLoaddingSelector));
     this.paramsSubscription = this.route.params
       .pipe(
         switchMap((params: Params) => {
@@ -64,12 +59,6 @@ export class LinkDetailsPageComponent implements OnInit, OnDestroy {
         },
         (err) => console.log(err.message)
       );
-
-    // this.paramsSubscription = this.route.params.subscribe((params: Params) => {
-    //   this.linkId = params['id'];
-    // });
-
-    // this.getLinkById(this.linkId);
   }
 
   ngOnDestroy(): void {
@@ -91,7 +80,6 @@ export class LinkDetailsPageComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    // this.isLoading = true;
     const linkData: LinkUpdateRequestInterface = {
       linkId: this.link.id,
       description: this.form.value.description,
@@ -99,42 +87,10 @@ export class LinkDetailsPageComponent implements OnInit, OnDestroy {
     };
 
     this.store.dispatch(linkUpdateActions({ request: linkData }));
-
-    // this.linkServices.update(linkData).subscribe(
-    //   (updateLink) => {
-    //     this.isLoading = false;
-    //     this.isEditDescription = false;
-    //     this.link = updateLink;
-    //     this.getLinkById(this.linkId);
-    //     this.isEdit = false;
-    //   },
-    //   (error) => {
-    //     this.form.patchValue({ description: this.link.description });
-    //     MaterializeServices.tooast(error.error.message);
-    //   }
-    // );
+    this.isEdit = !this.isEdit;
   }
 
   onClickLink() {
     this.store.dispatch(linkAddClickAction({ idClickLink: this.link.id }));
-    console.log(this.link.clicks);
-    // this.link.clicks += 1;
   }
-
-  // getLinkById(id: number) {
-  //   this.linkSubscription = this.linkServices.getByLinkId(id).subscribe(
-  //     (link: LinkFromServer) => {
-  //       this.isLoading = false;
-  //       this.link = link;
-  //       this.initFrom();
-  //     },
-  //     (error) => {
-  //       if (error.status === 404) {
-  //         this.isEmpty = true;
-  //         this.isLoading = false;
-  //         MaterializeServices.tooast('У вас нет такой ссылки');
-  //       }
-  //     }
-  //   );
-  // }
 }

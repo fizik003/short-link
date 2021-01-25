@@ -41,7 +41,7 @@ const create = async (userId, linkData) => {
       })
     );
   }
-  return newLink;
+  return getByLinkId(newLink.id);
 };
 
 const update = async (linkId, data) => {
@@ -63,7 +63,6 @@ const update = async (linkId, data) => {
         return tagInstance;
       })
     );
-    // console.log(arrTagInstance);
     await updateLink[1][0].setTags(arrTagInstance);
   }
 
