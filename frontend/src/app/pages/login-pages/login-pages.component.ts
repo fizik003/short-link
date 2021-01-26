@@ -1,4 +1,7 @@
-import { isSubmittingSelector } from './../../store/selectors';
+import {
+  isSubmittingSelector,
+  isLoggedInSelector,
+} from './../../store/selectors';
 import { LoginRequestInterface } from './../../store/types/loginRequest.interface';
 import { loginAction } from './../../store/actions/login.action';
 import { MaterializeServices } from './../../shared/materialize/materialize.services';
@@ -24,7 +27,7 @@ import { select, Store } from '@ngrx/store';
 })
 export class LoginPagesComponent implements OnInit, OnDestroy {
   isEnabledBtn: boolean = false;
-  aSub: Subscription;
+  isLoggedInSubscription: Subscription;
   isSubmitting$: Observable<boolean>;
 
   constructor(
@@ -40,26 +43,22 @@ export class LoginPagesComponent implements OnInit, OnDestroy {
       password: this.passwordFormControl.value,
     };
 
-    // this.aSub = this.auth.login(user).subscribe(
-    //   () => {
-
-    //     this.router.navigate(['/main']);
-    //   },
-    //   (err) => {
-    //     MaterializeServices.tooast(err.error.message);
-    //     this.isEnabledBtn = false;
-    //     console.log(err);
-    //   }
-    // );
-
     this.store.dispatch(loginAction({ request: user }));
   };
 
   ngOnDestroy(): void {
-    // if (this.aSub) this.aSub.unsubscribe();
+    if (this.isLoggedInSubscription) this.isLoggedInSubscription.unsubscribe();
   }
 
   ngOnInit(): void {
+    this.isLoggedInSubscription = this.store
+      .pipe(select(isLoggedInSelector))
+      .subscribe((isLoggedIn: boolean) => {
+        if (isLoggedIn) {
+          this.router.navigate(['main']);
+        }
+      });
+
     this.route.queryParams.subscribe((params: Params) => {
       if (params['registered']) {
         MaterializeServices.tooast('Теперь мы можете зайти в свой аккаунт');

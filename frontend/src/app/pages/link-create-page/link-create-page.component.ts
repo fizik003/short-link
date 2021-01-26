@@ -1,9 +1,12 @@
+import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MaterializeServices } from './../../shared/materialize/materialize.services';
 import { LinksService } from './../../shared/services/links.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { createLinkAction } from 'src/app/store/actions/createLink.action';
+import { CreateLinkRequestInterface } from 'src/app/store/types/createLink.interface';
 
 @Component({
   selector: 'app-link-create-page',
@@ -14,7 +17,11 @@ export class LinkCreatePageComponent implements OnInit, OnDestroy {
   form: FormGroup;
   lSub: Subscription;
 
-  constructor(private linkService: LinksService, private router: Router) {}
+  constructor(
+    private linkService: LinksService,
+    private router: Router,
+    private store: Store
+  ) {}
 
   reg = `(https?://)?([\\da-z.-]+)\\.([a-w.]{2,6})[/\\w .-]*/?`;
 
@@ -37,22 +44,24 @@ export class LinkCreatePageComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.form.disable();
-    const link = {
+    const link: CreateLinkRequestInterface = {
       originLink: this.form.value.originLink,
       description: this.form.value.description,
       tags: this.form.value.tags,
     };
 
-    this.lSub = this.linkService.create(link).subscribe(
-      ({ link }) => {
-        console.log(link);
+    this.store.dispatch(createLinkAction({ request: link }));
 
-        // this.router.navigate([`/link/details/${link.id}`]);
-      },
-      (error) => {
-        this.form.enable();
-        MaterializeServices.tooast(error.error.message);
-      }
-    );
+    // this.lSub = this.linkService.create(link).subscribe(
+    //   (link) => {
+    //     console.log(link);
+
+    //     this.router.navigate([`/link/details/${link.id}`]);
+    //   },
+    //   (error) => {
+    //     this.form.enable();
+    //     MaterializeServices.tooast(error.error.message);
+    //   }
+    // );
   }
 }

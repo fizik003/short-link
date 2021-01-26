@@ -1,3 +1,4 @@
+import { CreateLinkRequestInterface } from './../../store/types/createLink.interface';
 import { LinkResponseInterface } from './../../store/types/linkResponse.interface';
 import { LinkUpdateRequestInterface } from './../../store/types/linkUpdateRequest.interface';
 import { Link, LinkFromServer } from './../interfaces';
@@ -11,8 +12,8 @@ import { Observable } from 'rxjs';
 export class LinksService {
   constructor(private http: HttpClient) {}
 
-  create(link: Link): Observable<any> {
-    return this.http.post('/api/link', link);
+  create(link: CreateLinkRequestInterface): Observable<LinkResponseInterface> {
+    return this.http.post<LinkResponseInterface>('/api/link', link);
   }
 
   getByLinkId(linkId: number): Observable<LinkFromServer> {

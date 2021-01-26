@@ -1,3 +1,4 @@
+import { CreateLinkEffect } from './store/effects/createLink.effect';
 import { LinkUpdateEffect } from './store/effects/linkUpdate.effect';
 import { GetCurrentUserEffect } from './store/effects/getCurrentUser.effect';
 import { LoginEffect } from './store/effects/login.effects';
@@ -62,6 +63,7 @@ import { reducer } from './store/reducers';
       LoginEffect,
       GetCurrentUserEffect,
       LinkUpdateEffect,
+      CreateLinkEffect,
     ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,

@@ -1,3 +1,9 @@
+import { BackendErrorsInterface } from './types/backendError.interface';
+import {
+  createLinkAction,
+  createLinkFailureAction,
+  createLinkSuccessAction,
+} from './actions/createLink.action';
 import { linkAddClickAction } from './actions/linkAddClick.action';
 import {
   linkUpdateActions,
@@ -15,7 +21,7 @@ import {
   loginSuccessAction,
   loginFailureAction,
 } from './actions/login.action';
-import { createReducer, on, Action } from '@ngrx/store';
+import { createReducer, on, Action, createAction } from '@ngrx/store';
 import { AppStateInterface } from './types/appState.interface';
 
 const initialState: AppStateInterface = {
@@ -134,6 +140,29 @@ const appReducer = createReducer(
           ...state.currentUser.links.slice(indexClickLink + 1),
         ],
       },
+    };
+  }),
+  on(createLinkAction, (state) => {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }),
+  on(createLinkSuccessAction, (state, action) => {
+    const { createdLink } = action;
+    return {
+      ...state,
+      isLoading: false,
+      currentUser: {
+        ...state.currentUser,
+        links: [...state.currentUser.links, createdLink],
+      },
+    };
+  }),
+  on(createLinkFailureAction, (state, action) => {
+    return {
+      ...state,
+      errors: action.error,
     };
   })
 );

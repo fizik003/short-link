@@ -71,7 +71,7 @@ router.post("/", checkToken, async (req, res) => {
       return res.status(StatusCodes.OK).json({ link: checkLink });
     }
     const link = await linkService.create(userId, linkData);
-    res.status(StatusCodes.OK).json({ link });
+    res.status(StatusCodes.OK).json(link);
   } catch (err) {
     console.log(err);
     return res
