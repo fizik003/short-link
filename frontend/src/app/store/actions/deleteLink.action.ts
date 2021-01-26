@@ -4,12 +4,12 @@ import { createAction, props } from '@ngrx/store';
 
 export const deleteLinkAction = createAction(
   ActionTypes.DELETE_LINK,
-  props<{ idDeleteLink: string }>()
+  props<{ idDeleteLink: number }>()
 );
 
 export const deleteLinkSuccessAction = createAction(
   ActionTypes.DELETE_LINK_SUCCESS,
-  props<{ idDeletedLink: string }>()
+  props<{ idDeletedLink: number }>()
 );
 
 export const deleteLinkFailureAction = createAction(
