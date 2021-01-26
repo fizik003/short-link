@@ -18,4 +18,8 @@ export enum ActionTypes {
   CREATE_LINK = '[App] Create link',
   CREATE_LINK_SUCCESS = '[App] Create link success',
   CREATE_LINK_FAILURE = '[App] Create link failure',
+
+  DELETE_LINK = '[App] Delete link',
+  DELETE_LINK_SUCCESS = '[App] Delete link success',
+  DELETE_LINK_FAILURE = '[App] Delete link failure',
 }

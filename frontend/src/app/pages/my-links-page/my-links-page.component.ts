@@ -27,12 +27,6 @@ export class MyLinksPageComponent implements OnInit, OnDestroy {
   constructor(private linkService: LinksService, private store: Store) {}
 
   ngOnInit(): void {
-    // this.isLoading = true;
-    // this.lSub = this.linkService.get().subscribe((data) => {
-    //   this.links = data;
-    //   this.isLoading = false;
-    // });
-
     this.curentUserSubscription = this.store
       .pipe(select(currentUserSelector))
       .subscribe((currentUserResponse: CurrentUserInterface) => {

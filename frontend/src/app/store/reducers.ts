@@ -1,4 +1,3 @@
-import { BackendErrorsInterface } from './types/backendError.interface';
 import {
   createLinkAction,
   createLinkFailureAction,
@@ -23,6 +22,11 @@ import {
 } from './actions/login.action';
 import { createReducer, on, Action, createAction } from '@ngrx/store';
 import { AppStateInterface } from './types/appState.interface';
+import {
+  deleteLinkAction,
+  deleteLinkFailureAction,
+  deleteLinkSuccessAction,
+} from './actions/deleteLink.action';
 
 const initialState: AppStateInterface = {
   currentUser: null,
@@ -118,6 +122,7 @@ const appReducer = createReducer(
     return {
       ...state,
       errors: action.error,
+      isLoading: false,
     };
   }),
   on(linkAddClickAction, (state, action) => {
@@ -162,6 +167,37 @@ const appReducer = createReducer(
   on(createLinkFailureAction, (state, action) => {
     return {
       ...state,
+      errors: action.error,
+      isLoading: false,
+    };
+  }),
+  on(deleteLinkAction, (state, action) => {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }),
+  on(deleteLinkSuccessAction, (state, action) => {
+    const { idDeletedLink } = action;
+    const arrLinks = [...state.currentUser.links];
+    const indexDeletedLink = arrLinks.findIndex(
+      (link) => link.id == idDeletedLink
+    );
+    arrLinks.splice(indexDeletedLink, 1);
+    return {
+      ...state,
+      isLoading: false,
+      currentUser: {
+        ...state.currentUser,
+        links: arrLinks,
+      },
+    };
+  }),
+
+  on(deleteLinkFailureAction, (state, action) => {
+    return {
+      ...state,
+      isLoading: false,
       errors: action.error,
     };
   })
