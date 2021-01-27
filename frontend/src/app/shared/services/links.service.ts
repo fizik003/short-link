@@ -1,3 +1,4 @@
+import { StatisticsResponseInterface } from './../../store/types/statisticsRsponse.interface';
 import { CreateLinkRequestInterface } from './../../store/types/createLink.interface';
 import { LinkResponseInterface } from './../../store/types/linkResponse.interface';
 import { LinkUpdateRequestInterface } from './../../store/types/linkUpdateRequest.interface';
@@ -34,7 +35,7 @@ export class LinksService {
     return this.http.delete(`/api/link/${id}`);
   }
 
-  getStats(): Observable<any> {
-    return this.http.get('/api/link/stats');
+  getStats(): Observable<StatisticsResponseInterface> {
+    return this.http.get<StatisticsResponseInterface>('/api/link/stats');
   }
 }

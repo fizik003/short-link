@@ -22,4 +22,12 @@ export enum ActionTypes {
   DELETE_LINK = '[App] Delete link',
   DELETE_LINK_SUCCESS = '[App] Delete link success',
   DELETE_LINK_FAILURE = '[App] Delete link failure',
+
+  GET_STATISTICS = '[App] Get statistics',
+  GET_STATISTICS_SUCCESS = '[App] Get statistics success',
+  GET_STATISTICS_FAILURE = '[App] Get statistics failure',
+
+  GET_TAG = '[App] Get tag',
+  GET_TAG_SUCCESS = '[App] Get tag success',
+  GET_TAG_FAILURE = '[App] Get tag failure',
 }

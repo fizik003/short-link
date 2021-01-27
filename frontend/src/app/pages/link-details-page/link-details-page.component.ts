@@ -1,3 +1,4 @@
+import { getStatisticsAction } from './../../store/actions/getStatistics.action';
 import { linkAddClickAction } from './../../store/actions/linkAddClick.action';
 import { LinkUpdateRequestInterface } from './../../store/types/linkUpdateRequest.interface';
 import { linkUpdateActions } from '../../store/actions/linkUpdate.action';

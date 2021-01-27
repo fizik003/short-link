@@ -22,6 +22,7 @@ export class TagLinksComponent implements OnInit {
 
     this.tagService.getTag(this.tagNmae).subscribe(
       (data: any) => {
+        console.log(data);
         this.isLoading = false;
         this.tag = data;
       },

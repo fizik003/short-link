@@ -9,5 +9,11 @@ export interface LinkResponseInterface {
   createdAt: string;
   updatedAt: string;
   UserId: number;
-  Tags: TagResponseInterface[];
+  Tags?: TagResponseInterface[];
+  LinkTag?: {
+    linkId: number;
+    TagId: number;
+    createdAt: string;
+    updatedAt: string;
+  };
 }

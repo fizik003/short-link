@@ -26,3 +26,8 @@ export const isLoaddingSelector = createSelector(
   appFeatureSelector,
   (appState) => appState.isLoading
 );
+
+export const statisticsSelector = createSelector(
+  appFeatureSelector,
+  (appState) => appState.statistics
+);

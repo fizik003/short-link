@@ -1,4 +1,9 @@
 import {
+  getStatisticsAction,
+  getStatisticsSuccessAction,
+  getStatisticsFailureAction,
+} from './actions/getStatistics.action';
+import {
   createLinkAction,
   createLinkFailureAction,
   createLinkSuccessAction,
@@ -34,6 +39,9 @@ const initialState: AppStateInterface = {
   isLoggedIn: false,
   isSubmitting: false,
   errors: null,
+  statistics: null,
+  linksOtherUsers: null,
+  linksByTag: null,
 };
 
 const appReducer = createReducer(
@@ -198,6 +206,27 @@ const appReducer = createReducer(
     return {
       ...state,
       isLoading: false,
+      errors: action.error,
+    };
+  }),
+  on(getStatisticsAction, (state) => {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }),
+  on(getStatisticsSuccessAction, (state, action) => {
+    return {
+      ...state,
+      isLoading: false,
+      statistics: action.statisticsCurrenUser,
+    };
+  }),
+  on(getStatisticsFailureAction, (state, action) => {
+    return {
+      ...state,
+      isLoading: false,
+      statistics: null,
       errors: action.error,
     };
   })

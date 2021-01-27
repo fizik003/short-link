@@ -1,3 +1,5 @@
+import { getStatisticsAction } from './../actions/getStatistics.action';
+import { Store } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
 import {
   createLinkSuccessAction,
@@ -16,7 +18,8 @@ export class CreateLinkEffect {
   constructor(
     private actions$: Actions,
     private linkService: LinksService,
-    private router: Router
+    private router: Router,
+    private store: Store
   ) {}
 
   createLink$ = createEffect(() => {
@@ -44,6 +47,16 @@ export class CreateLinkEffect {
         tap(({ createdLink }) => {
           this.router.navigate(['link', 'details', createdLink.id]);
         })
+      );
+    },
+    { dispatch: false }
+  );
+
+  updateStatisticAfterCreate = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(createLinkSuccessAction),
+        tap(() => this.store.dispatch(getStatisticsAction()))
       );
     },
     { dispatch: false }
