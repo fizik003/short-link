@@ -31,3 +31,8 @@ export const statisticsSelector = createSelector(
   appFeatureSelector,
   (appState) => appState.statistics
 );
+
+export const tagSelector = createSelector(
+  appFeatureSelector,
+  (appState) => appState.tags
+);

@@ -1,4 +1,9 @@
 import {
+  getTagAction,
+  getTagSucccessAction,
+  getTagFailureAction,
+} from './actions/getTag.action';
+import {
   getStatisticsAction,
   getStatisticsSuccessAction,
   getStatisticsFailureAction,
@@ -40,8 +45,8 @@ const initialState: AppStateInterface = {
   isSubmitting: false,
   errors: null,
   statistics: null,
-  linksOtherUsers: null,
-  linksByTag: null,
+  linksOtherUsers: [],
+  tags: [],
 };
 
 const appReducer = createReducer(
@@ -227,6 +232,27 @@ const appReducer = createReducer(
       ...state,
       isLoading: false,
       statistics: null,
+      errors: action.error,
+    };
+  }),
+  on(getTagAction, (state) => {
+    return {
+      ...state,
+      isLoading: true,
+    };
+  }),
+  on(getTagSucccessAction, (state, action) => {
+    return {
+      ...state,
+      isLoading: false,
+      tags: [...state.tags, action.currentTag],
+    };
+  }),
+  on(getTagFailureAction, (state, action) => {
+    return {
+      ...state,
+      isLoading: false,
+      linksByTag: [],
       errors: action.error,
     };
   })

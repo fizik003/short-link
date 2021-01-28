@@ -1,3 +1,4 @@
+import { GetTagEffect } from './store/effects/getTag.effect';
 import { GetStatisticsEffect } from './store/effects/getStatistics.effect';
 import { DeleteLinkEffect } from './store/effects/deleteLink.effect';
 import { CreateLinkEffect } from './store/effects/createLink.effect';
@@ -68,6 +69,7 @@ import { reducer } from './store/reducers';
       CreateLinkEffect,
       DeleteLinkEffect,
       GetStatisticsEffect,
+      GetTagEffect,
     ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,

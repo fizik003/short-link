@@ -11,5 +11,5 @@ export interface AppStateInterface {
   errors: BackendErrorsInterface | null;
   statistics: null | StatisticsResponseInterface;
   linksOtherUsers: null | LinkResponseInterface[];
-  linksByTag: null | TagResponseInterface[];
+  tags: null | TagResponseInterface[];
 }
