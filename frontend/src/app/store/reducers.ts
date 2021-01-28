@@ -1,4 +1,9 @@
 import {
+  getLinkByIdAction,
+  getLinkByIdSuccessAction,
+  getLinkByIdFailureAction,
+} from './actions/getLinkById.action';
+import {
   getTagAction,
   getTagSucccessAction,
   getTagFailureAction,
@@ -253,6 +258,27 @@ const appReducer = createReducer(
       ...state,
       isLoading: false,
       linksByTag: [],
+      errors: action.error,
+    };
+  }),
+  on(getLinkByIdAction, (state) => {
+    return {
+      ...state,
+      isLoading: true,
+      errors: null,
+    };
+  }),
+  on(getLinkByIdSuccessAction, (state, action) => {
+    const link = action.responseLink;
+    return {
+      ...state,
+      isLoading: false,
+      linksOtherUsers: [...state.linksOtherUsers, link],
+    };
+  }),
+  on(getLinkByIdFailureAction, (state, action) => {
+    return {
+      ...state,
       errors: action.error,
     };
   })

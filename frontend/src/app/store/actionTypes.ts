@@ -30,4 +30,8 @@ export enum ActionTypes {
   GET_TAG = '[App] Get tag',
   GET_TAG_SUCCESS = '[App] Get tag success',
   GET_TAG_FAILURE = '[App] Get tag failure',
+
+  GET_LINK_BY_ID = '[App] Get link by id',
+  GET_LINK_BY_ID_SUCCESS = '[App] Get link by id success',
+  GET_LINK_BY_ID_FAILURE = '[App] Get link by id failure',
 }

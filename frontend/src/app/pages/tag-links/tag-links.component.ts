@@ -5,7 +5,6 @@ import { getTagAction } from './../../store/actions/getTag.action';
 import { Store, select } from '@ngrx/store';
 import { MaterializeServices } from './../../shared/materialize/materialize.services';
 import { ActivatedRoute, Params } from '@angular/router';
-import { TagsService } from './../../shared/services/tags.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

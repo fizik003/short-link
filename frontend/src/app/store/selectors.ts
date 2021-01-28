@@ -22,6 +22,11 @@ export const currentUserSelector = createSelector(
   (appState) => appState.currentUser
 );
 
+export const idCurrentUserSelector = createSelector(
+  appFeatureSelector,
+  (appState) => Number(appState.currentUser.id)
+);
+
 export const isLoaddingSelector = createSelector(
   appFeatureSelector,
   (appState) => appState.isLoading
@@ -35,4 +40,9 @@ export const statisticsSelector = createSelector(
 export const tagSelector = createSelector(
   appFeatureSelector,
   (appState) => appState.tags
+);
+
+export const linksOtherUsersSelector = createSelector(
+  appFeatureSelector,
+  (appState) => appState.linksOtherUsers
 );

@@ -17,8 +17,8 @@ export class LinksService {
     return this.http.post<LinkResponseInterface>('/api/link', link);
   }
 
-  getByLinkId(linkId: number): Observable<LinkFromServer> {
-    return this.http.get<LinkFromServer>(`/api/link/${linkId}`);
+  getByLinkId(linkId: number): Observable<LinkResponseInterface> {
+    return this.http.get<LinkResponseInterface>(`/api/link/${linkId}`);
   }
 
   update(

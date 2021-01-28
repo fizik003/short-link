@@ -1,4 +1,4 @@
-import { getStatisticsAction } from './../../store/actions/getStatistics.action';
+import { getLinkByIdAction } from './../../store/actions/getLinkById.action';
 import { linkAddClickAction } from './../../store/actions/linkAddClick.action';
 import { LinkUpdateRequestInterface } from './../../store/types/linkUpdateRequest.interface';
 import { linkUpdateActions } from '../../store/actions/linkUpdate.action';
@@ -6,11 +6,13 @@ import { LinkResponseInterface } from './../../store/types/linkResponse.interfac
 import {
   currentUserSelector,
   isLoaddingSelector,
+  linksOtherUsersSelector,
+  idCurrentUserSelector,
 } from './../../store/selectors';
 import { switchMap, map } from 'rxjs/operators';
 import { Store, select } from '@ngrx/store';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Subscription, Observable } from 'rxjs';
+import { Subscription, Observable, pipe } from 'rxjs';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
@@ -21,32 +23,43 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 })
 export class LinkDetailsPageComponent implements OnInit, OnDestroy {
   paramsSubscription: Subscription;
-  linkSubscription: Subscription;
-  linkId: number;
   link: LinkResponseInterface;
   isLoading$: Observable<boolean>;
-  isEmpty = false;
   form: FormGroup;
-  isEdit = false;
-  isCanEdit = false;
+  isEdit: boolean = false;
+
+  idCurrentUser$: Observable<number>;
 
   constructor(private route: ActivatedRoute, private store: Store) {}
 
   ngOnInit(): void {
+    this.idCurrentUser$ = this.store.pipe(select(idCurrentUserSelector));
     this.isLoading$ = this.store.pipe(select(isLoaddingSelector));
     this.paramsSubscription = this.route.params
       .pipe(
         switchMap((params: Params) => {
-          return this.store.pipe(
-            select(currentUserSelector),
-            map((currentUser) => {
-              if (currentUser) {
-                const currentLink = currentUser.links.find((link) => {
-                  return link.id == params['id'];
-                });
+          return this.store.pipe(select(currentUserSelector)).pipe(
+            switchMap((currentUser) => {
+              return this.store.pipe(
+                select(linksOtherUsersSelector),
+                map((linksOtherUser) => {
+                  let links: LinkResponseInterface[] = [];
+                  if (currentUser) {
+                    links = [...currentUser.links, ...linksOtherUser];
+                  } else links = linksOtherUser;
 
-                return currentLink;
-              }
+                  const currentLink = links.find(
+                    (link) => link.id == params['id']
+                  );
+                  if (currentLink) {
+                    return currentLink;
+                  }
+
+                  return this.store.dispatch(
+                    getLinkByIdAction({ requestLinkId: params['id'] })
+                  );
+                })
+              );
             })
           );
         })
@@ -58,7 +71,9 @@ export class LinkDetailsPageComponent implements OnInit, OnDestroy {
             this.initFrom();
           }
         },
-        (err) => console.log(err.message)
+        (err) => {
+          console.log(err);
+        }
       );
   }
 
