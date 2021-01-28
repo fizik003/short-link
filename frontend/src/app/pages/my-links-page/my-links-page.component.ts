@@ -50,19 +50,6 @@ export class MyLinksPageComponent implements OnInit, OnDestroy {
   }
 
   onDelete(id: number) {
-    // this.lSubDele = this.linkService.delete(id).subscribe(
-    //   (data) => {
-    //     MaterializeServices.tooast('Ссылка удалена');
-    //     const delId = this.links.findIndex((item) => {
-    //       return item.id === id;
-    //     });
-    //     this.links.splice(delId, 1);
-    //   },
-    //   (error) => {
-    //     MaterializeServices.tooast(error.error.message);
-    //   }
-    // );
-
     this.store.dispatch(deleteLinkAction({ idDeleteLink: id }));
   }
 }

@@ -1,22 +1,15 @@
 import {
   isSubmittingSelector,
   isLoggedInSelector,
+  errorsSelector,
 } from './../../store/selectors';
 import { LoginRequestInterface } from './../../store/types/loginRequest.interface';
 import { loginAction } from './../../store/actions/login.action';
 import { MaterializeServices } from './../../shared/materialize/materialize.services';
 import { AuthService } from './../../shared/services/auth.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  FormGroupDirective,
-  NgForm,
-  Validators,
-} from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
+import { FormControl, Validators } from '@angular/forms';
 import { Subscription, Observable } from 'rxjs';
-import { Route } from '@angular/compiler/src/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 

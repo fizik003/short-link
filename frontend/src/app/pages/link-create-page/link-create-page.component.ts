@@ -1,7 +1,7 @@
-import { Store } from '@ngrx/store';
+import { errorsSelector } from './../../store/selectors';
+import { Store, select } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { MaterializeServices } from './../../shared/materialize/materialize.services';
 import { LinksService } from './../../shared/services/links.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -17,11 +17,7 @@ export class LinkCreatePageComponent implements OnInit, OnDestroy {
   form: FormGroup;
   lSub: Subscription;
 
-  constructor(
-    private linkService: LinksService,
-    private router: Router,
-    private store: Store
-  ) {}
+  constructor(private store: Store) {}
 
   reg = `(https?://)?([\\da-z.-]+)\\.([a-w.]{2,6})[/\\w .-]*/?`;
 
@@ -51,17 +47,5 @@ export class LinkCreatePageComponent implements OnInit, OnDestroy {
     };
 
     this.store.dispatch(createLinkAction({ request: link }));
-
-    // this.lSub = this.linkService.create(link).subscribe(
-    //   (link) => {
-    //     console.log(link);
-
-    //     this.router.navigate([`/link/details/${link.id}`]);
-    //   },
-    //   (error) => {
-    //     this.form.enable();
-    //     MaterializeServices.tooast(error.error.message);
-    //   }
-    // );
   }
 }

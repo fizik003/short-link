@@ -279,6 +279,7 @@ const appReducer = createReducer(
   on(getLinkByIdFailureAction, (state, action) => {
     return {
       ...state,
+      isLoading: false,
       errors: action.error,
     };
   })

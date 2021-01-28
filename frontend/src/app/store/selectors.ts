@@ -46,3 +46,8 @@ export const linksOtherUsersSelector = createSelector(
   appFeatureSelector,
   (appState) => appState.linksOtherUsers
 );
+
+export const errorsSelector = createSelector(
+  appFeatureSelector,
+  (appState) => appState.errors
+);
