@@ -5,14 +5,14 @@ import { getTagAction } from './../../store/actions/getTag.action';
 import { Store, select } from '@ngrx/store';
 import { MaterializeServices } from './../../shared/materialize/materialize.services';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-tag-links',
   templateUrl: './tag-links.component.html',
   styleUrls: ['./tag-links.component.scss'],
 })
-export class TagLinksComponent implements OnInit {
+export class TagLinksComponent implements OnInit, OnDestroy {
   tagNmae: string;
   tag: any;
   isLoading: boolean;
@@ -48,5 +48,9 @@ export class TagLinksComponent implements OnInit {
           MaterializeServices.tooast(err.message);
         }
       );
+  }
+
+  ngOnDestroy(): void {
+    if (this.paramsSubscribe) this.paramsSubscribe.unsubscribe();
   }
 }

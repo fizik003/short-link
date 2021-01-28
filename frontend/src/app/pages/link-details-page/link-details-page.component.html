@@ -56,7 +56,10 @@
               (click)="showEditForm()"
               mat-icon-button
               color="primary"
-              *ngIf="(idCurrentUser$ | async) === link.UserId"
+              *ngIf="
+                (currentUser$ | async) &&
+                (currentUser$ | async).id == link.UserId
+              "
               data-btn="desc"
             >
               <mat-icon>edit</mat-icon>
@@ -72,7 +75,10 @@
               (click)="showEditForm()"
               mat-icon-button
               color="primary"
-              *ngIf="(idCurrentUser$ | async) === link.UserId"
+              *ngIf="
+                (currentUser$ | async) &&
+                (currentUser$ | async).id == link.UserId
+              "
               data-btn="tag"
             >
               <mat-icon>edit</mat-icon>

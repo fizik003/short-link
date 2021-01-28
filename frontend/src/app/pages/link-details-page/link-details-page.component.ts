@@ -1,3 +1,4 @@
+import { CurrentUserInterface } from './../../store/types/currentUser.interface';
 import { getLinkByIdAction } from './../../store/actions/getLinkById.action';
 import { linkAddClickAction } from './../../store/actions/linkAddClick.action';
 import { LinkUpdateRequestInterface } from './../../store/types/linkUpdateRequest.interface';
@@ -28,12 +29,12 @@ export class LinkDetailsPageComponent implements OnInit, OnDestroy {
   form: FormGroup;
   isEdit: boolean = false;
 
-  idCurrentUser$: Observable<number>;
+  currentUser$: Observable<CurrentUserInterface>;
 
   constructor(private route: ActivatedRoute, private store: Store) {}
 
   ngOnInit(): void {
-    this.idCurrentUser$ = this.store.pipe(select(idCurrentUserSelector));
+    this.currentUser$ = this.store.pipe(select(currentUserSelector));
     this.isLoading$ = this.store.pipe(select(isLoaddingSelector));
     this.paramsSubscription = this.route.params
       .pipe(
