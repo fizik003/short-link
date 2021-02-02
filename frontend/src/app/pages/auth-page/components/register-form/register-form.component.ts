@@ -1,17 +1,17 @@
-import { MaterializeServices } from './../../shared/materialize/materialize.services';
+import { MaterializeServices } from '../../../../shared/materialize/materialize.services';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { Route } from '@angular/compiler/src/core';
-import { AuthService } from './../../shared/services/auth.service';
+import { AuthService } from '../../../../shared/services/auth.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-register-page',
-  templateUrl: './register-page.component.html',
-  styleUrls: ['./register-page.component.scss'],
+  selector: 'app-register-form',
+  templateUrl: './register-form.component.html',
+  styleUrls: ['./register-form.component.scss'],
 })
-export class RegisterPageComponent implements OnInit, OnDestroy {
+export class RegisterFormComponent implements OnInit, OnDestroy {
   isEnabledBtn = false;
   constructor(private auth: AuthService, private router: Router) {}
   aSub: Subscription;

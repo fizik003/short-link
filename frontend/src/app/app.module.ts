@@ -18,10 +18,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginPagesComponent } from './pages/login-pages/login-pages.component';
+
 import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.component';
 import { SiteLayoutComponent } from './shared/layouts/site-layout/site-layout.component';
-import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { LinkCreatePageComponent } from './pages/link-create-page/link-create-page.component';
 import { MyLinksPageComponent } from './pages/my-links-page/my-links-page.component';
@@ -35,14 +34,15 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducer } from './store/reducers';
+import { AuthPageComponent } from './pages/auth-page/auth-page.component';
+import { RegisterFormComponent } from './pages/auth-page/components/register-form/register-form.component';
+import { LoginFormComponent } from './pages/auth-page/components/login-form/login-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginPagesComponent,
     AuthLayoutComponent,
     SiteLayoutComponent,
-    RegisterPageComponent,
     MainPageComponent,
     LinkCreatePageComponent,
     MyLinksPageComponent,
@@ -52,6 +52,9 @@ import { reducer } from './store/reducers';
     LinkCardComponent,
     TagLinksComponent,
     YourStatsPageComponent,
+    AuthPageComponent,
+    RegisterFormComponent,
+    LoginFormComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,12 +1,10 @@
 import {
   isSubmittingSelector,
   isLoggedInSelector,
-  errorsSelector,
-} from './../../store/selectors';
-import { LoginRequestInterface } from './../../store/types/loginRequest.interface';
-import { loginAction } from './../../store/actions/login.action';
-import { MaterializeServices } from './../../shared/materialize/materialize.services';
-import { AuthService } from './../../shared/services/auth.service';
+} from '../../../../store/selectors';
+import { LoginRequestInterface } from '../../../../store/types/loginRequest.interface';
+import { loginAction } from '../../../../store/actions/login.action';
+import { MaterializeServices } from '../../../../shared/materialize/materialize.services';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Subscription, Observable } from 'rxjs';
@@ -14,17 +12,16 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 
 @Component({
-  selector: 'app-login-pages',
-  templateUrl: './login-pages.component.html',
-  styleUrls: ['./login-pages.component.scss'],
+  selector: 'app-login-form',
+  templateUrl: './login-form.component.html',
+  styleUrls: ['./login-form.component.scss'],
 })
-export class LoginPagesComponent implements OnInit, OnDestroy {
+export class LoginFormComponent implements OnInit, OnDestroy {
   isEnabledBtn: boolean = false;
   isLoggedInSubscription: Subscription;
   isSubmitting$: Observable<boolean>;
 
   constructor(
-    private auth: AuthService,
     private router: Router,
     private route: ActivatedRoute,
     private store: Store

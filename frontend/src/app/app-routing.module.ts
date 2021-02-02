@@ -1,3 +1,4 @@
+import { AuthPageComponent } from './pages/auth-page/auth-page.component';
 import { YourStatsPageComponent } from './pages/your-stats-page/your-stats-page.component';
 import { TagLinksComponent } from './pages/tag-links/tag-links.component';
 import { LinkDetailsPageComponent } from './pages/link-details-page/link-details-page.component';
@@ -6,11 +7,10 @@ import { LinkEditPageComponent } from './pages/link-edit-page/link-edit-page.com
 import { LinkCreatePageComponent } from './pages/link-create-page/link-create-page.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.component';
-import { LoginPagesComponent } from './pages/login-pages/login-pages.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SiteLayoutComponent } from './shared/layouts/site-layout/site-layout.component';
-import { RegisterPageComponent } from './pages/register-page/register-page.component';
+
 import { AuthGuard } from './shared/guards/auth.guard';
 
 const routes: Routes = [
@@ -19,8 +19,8 @@ const routes: Routes = [
     component: AuthLayoutComponent,
     children: [
       { path: '', redirectTo: '/login', pathMatch: 'full' },
-      { path: 'login', component: LoginPagesComponent },
-      { path: 'register', component: RegisterPageComponent },
+      { path: 'login', component: AuthPageComponent },
+      { path: 'register', component: AuthPageComponent },
     ],
   },
   {
