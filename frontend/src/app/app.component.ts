@@ -2,6 +2,7 @@ import { MaterializeServices } from './shared/materialize/materialize.services';
 import { isLoaddingSelector, errorsSelector } from './store/selectors';
 import { Observable, Subscription } from 'rxjs';
 import { getCurrnetUserAction } from './store/actions/getCurrentUser.action';
+import { getCurrentUserAction as ggg } from './store/user/user.action';
 import { Store, select } from '@ngrx/store';
 import { AuthService } from './shared/services/auth.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
