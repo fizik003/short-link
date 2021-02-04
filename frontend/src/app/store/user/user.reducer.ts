@@ -4,12 +4,17 @@ import {
   getCurrentUserAction,
   getCurrentUserFailureAction,
   getCurrentUserSuccessAction,
+  loginAction,
+  loginFailureAction,
+  loginSuccessAction,
+  logoutAction,
 } from './user.action';
 
 const initialState: UserStateInterface = {
   currentUser: null,
   isLoadding: false,
   isLoggedIn: false,
+  errors: null,
 };
 
 const userReducer = createReducer(
@@ -34,6 +39,33 @@ const userReducer = createReducer(
       isLoadding: false,
       isLoggedIn: false,
       currentUser: null,
+    };
+  }),
+  on(loginAction, (state) => {
+    return {
+      ...state,
+      errors: null,
+      isLoadding: true,
+    };
+  }),
+  on(loginSuccessAction, (state, action) => {
+    return {
+      ...state,
+      isLoggedIn: true,
+      currentUser: action.currentUser,
+      isLoadding: false,
+    };
+  }),
+  on(loginFailureAction, (state, action) => {
+    return {
+      ...state,
+      errors: action.error,
+    };
+  }),
+
+  on(logoutAction, (state) => {
+    return {
+      ...initialState,
     };
   })
 );

@@ -1,9 +1,16 @@
+import { setUserLinkAction } from './../links/link.action';
+import { Store } from '@ngrx/store';
 import { CurrentUserInterface } from './../types/currentUser.interface';
+// import {
+//   loginAction,
+//   loginSuccessAction,
+//   loginFailureAction,
+// } from './../actions/login.action';
 import {
   loginAction,
-  loginSuccessAction,
   loginFailureAction,
-} from './../actions/login.action';
+  loginSuccessAction,
+} from '../user/user.action';
 import { Router } from '@angular/router';
 import { AuthService } from './../../shared/services/auth.service';
 import { Injectable } from '@angular/core';
@@ -17,7 +24,8 @@ export class LoginEffect {
   constructor(
     private actions$: Actions,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private store: Store
   ) {}
 
   login$ = createEffect(() =>
@@ -26,7 +34,11 @@ export class LoginEffect {
       switchMap(({ request }) => {
         return this.authService.login(request).pipe(
           map((currentUser: CurrentUserInterface) => {
-            return loginSuccessAction({ currentUser });
+            const { email, id, token, links } = currentUser;
+            const responseCurentUser = { email, id, token };
+            this.store.dispatch(setUserLinkAction({ userLink: links }));
+
+            return loginSuccessAction({ currentUser: responseCurentUser });
           }),
           catchError((errorResponse: HttpErrorResponse) => {
             return of(

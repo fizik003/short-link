@@ -38,6 +38,7 @@ import { AuthPageComponent } from './pages/auth-page/auth-page.component';
 import { RegisterFormComponent } from './pages/auth-page/components/register-form/register-form.component';
 import { LoginFormComponent } from './pages/auth-page/components/login-form/login-form.component';
 import { reducer as userReducer } from './store/user/user.reducer';
+import { LinkReducer } from './store/links/link.reducer';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,7 @@ import { reducer as userReducer } from './store/user/user.reducer';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    StoreModule.forRoot({ app: reducer, user: userReducer }),
+    StoreModule.forRoot({ app: reducer, user: userReducer, link: LinkReducer }),
     EffectsModule.forRoot([
       LoginEffect,
       GetCurrentUserEffect,
