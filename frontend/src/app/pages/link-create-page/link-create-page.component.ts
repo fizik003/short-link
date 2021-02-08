@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { LinksService } from './../../shared/services/links.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { createLinkAction } from 'src/app/store/actions/createLink.action';
+import { createLinkAction } from 'src/app/store/links/link.action';
 import { CreateLinkRequestInterface } from 'src/app/store/types/createLink.interface';
 
 @Component({

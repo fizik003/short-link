@@ -1,15 +1,17 @@
+import { userIsLoadingSelector } from './../../store/user/user.selector';
+import {
+  linksIsLoadingSelector,
+  yourLinksSelector,
+  linksSelector,
+} from './../../store/links/link.selector';
+import { currentUserSelector } from '../../store/user/user.selector';
 import { CurrentUserInterface } from './../../store/types/currentUser.interface';
 import { getLinkByIdAction } from './../../store/actions/getLinkById.action';
 import { linkAddClickAction } from './../../store/actions/linkAddClick.action';
 import { LinkUpdateRequestInterface } from './../../store/types/linkUpdateRequest.interface';
 import { linkUpdateActions } from '../../store/actions/linkUpdate.action';
 import { LinkResponseInterface } from './../../store/types/linkResponse.interface';
-import {
-  currentUserSelector,
-  isLoaddingSelector,
-  linksOtherUsersSelector,
-  idCurrentUserSelector,
-} from './../../store/selectors';
+import { linksOtherUsersSelector } from './../../store/selectors';
 import { switchMap, map } from 'rxjs/operators';
 import { Store, select } from '@ngrx/store';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -35,32 +37,15 @@ export class LinkDetailsPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.currentUser$ = this.store.pipe(select(currentUserSelector));
-    this.isLoading$ = this.store.pipe(select(isLoaddingSelector));
+    this.isLoading$ = this.store.pipe(select(userIsLoadingSelector));
     this.paramsSubscription = this.route.params
       .pipe(
         switchMap((params: Params) => {
-          return this.store.pipe(select(currentUserSelector)).pipe(
-            switchMap((currentUser) => {
-              return this.store.pipe(
-                select(linksOtherUsersSelector),
-                map((linksOtherUser) => {
-                  let links: LinkResponseInterface[] = [];
-                  if (currentUser) {
-                    links = [...currentUser.links, ...linksOtherUser];
-                  } else links = linksOtherUser;
-
-                  const currentLink = links.find(
-                    (link) => link.id == params['id']
-                  );
-                  if (currentLink) {
-                    return currentLink;
-                  }
-
-                  return this.store.dispatch(
-                    getLinkByIdAction({ requestLinkId: params['id'] })
-                  );
-                })
-              );
+          const linkId = params['id'];
+          return this.store.pipe(
+            select(linksSelector),
+            map((links: LinkResponseInterface[]) => {
+              return links.find((link) => link.id == linkId);
             })
           );
         })

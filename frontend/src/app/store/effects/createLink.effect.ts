@@ -1,16 +1,16 @@
 import { getStatisticsAction } from './../actions/getStatistics.action';
 import { Store } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
-import {
-  createLinkSuccessAction,
-  createLinkFailureAction,
-} from './../actions/createLink.action';
 import { switchMap, map, catchError, tap } from 'rxjs/operators';
 import { LinksService } from './../../shared/services/links.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { createLinkAction } from '../actions/createLink.action';
+import {
+  createLinkAction,
+  createLinkSuccessAction,
+  createLinkFailureAction,
+} from '../links/link.action';
 import { of } from 'rxjs';
 
 @Injectable()

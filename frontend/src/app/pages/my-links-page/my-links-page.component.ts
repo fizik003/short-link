@@ -1,3 +1,7 @@
+import {
+  yourLinksSelector,
+  linksIsLoadingSelector,
+} from './../../store/links/link.selector';
 import { CurrentUserInterface } from './../../store/types/currentUser.interface';
 import {
   currentUserSelector,
@@ -18,9 +22,7 @@ import { deleteLinkAction } from 'src/app/store/actions/deleteLink.action';
   styleUrls: ['./my-links-page.component.scss'],
 })
 export class MyLinksPageComponent implements OnInit, OnDestroy {
-  lSub: Subscription;
-  lSubDele: Subscription;
-  curentUserSubscription: Subscription;
+  linksSubscription: Subscription;
   isLoadingSubscription: Subscription;
   isLoading: boolean;
   currentUser: CurrentUserInterface;
@@ -28,26 +30,22 @@ export class MyLinksPageComponent implements OnInit, OnDestroy {
   constructor(private linkService: LinksService, private store: Store) {}
 
   ngOnInit(): void {
-    this.curentUserSubscription = this.store
-      .pipe(select(currentUserSelector))
-      .subscribe((currentUserResponse: CurrentUserInterface) => {
-        if (currentUserResponse) {
-          this.currentUser = currentUserResponse;
-          this.links = currentUserResponse.links;
+    this.linksSubscription = this.store
+      .pipe(select(yourLinksSelector))
+      .subscribe((links: LinkResponseInterface[]) => {
+        if (links) {
+          this.links = links;
         }
       });
 
     this.isLoadingSubscription = this.store
-      .pipe(select(isLoaddingSelector))
+      .pipe(select(linksIsLoadingSelector))
       .subscribe((isLoadding: boolean) => {
         this.isLoading = isLoadding;
       });
   }
 
-  ngOnDestroy(): void {
-    if (this.lSub) this.lSub.unsubscribe();
-    if (this.lSubDele) this.lSubDele.unsubscribe();
-  }
+  ngOnDestroy(): void {}
 
   onDelete(id: number) {
     this.store.dispatch(deleteLinkAction({ idDeleteLink: id }));

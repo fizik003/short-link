@@ -22,9 +22,9 @@ import {
 
 const initialState: LinkStateInterface = {
   isLoading: false,
-  othersUsersLink: null,
-  tags: null,
-  yourLinks: null,
+  othersUsersLink: [],
+  tags: [],
+  yourLinks: [],
   errors: null,
 };
 
