@@ -1,9 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
+
 import {
-  getStatisticsSuccessAction,
-  getStatisticsFailureAction,
-  getStatisticsAction,
-} from './../actions/getStatistics.action';
+  getStatisticAction,
+  getStatisticFailureAction,
+  getStatisticSuccessAction,
+} from '../stat/stat.actions';
 import { switchMap, map, catchError } from 'rxjs/operators';
 import { LinksService } from './../../shared/services/links.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
@@ -16,18 +17,18 @@ export class GetStatisticsEffect {
 
   getStatistics$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(getStatisticsAction),
+      ofType(getStatisticAction),
       switchMap(() => {
         return this.linksService.getStats().pipe(
           map(
             (statistics) => {
-              return getStatisticsSuccessAction({
-                statisticsCurrenUser: statistics,
+              return getStatisticSuccessAction({
+                statisticCurrentUser: statistics,
               });
             },
             catchError((errorResponse: HttpErrorResponse) => {
               return of(
-                getStatisticsFailureAction({
+                getStatisticFailureAction({
                   error: errorResponse.error.message,
                 })
               );

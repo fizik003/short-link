@@ -38,7 +38,7 @@ const reducer = createReducer(
   }),
   on(linkUpdateSuccessAction, (state, action) => {
     const { updatedLink } = action;
-    const newArrLinks = state.yourLinks;
+    const newArrLinks = [...state.yourLinks];
     const indexUpdatedLink = newArrLinks.findIndex(
       (link) => link.id === updatedLink.id
     );

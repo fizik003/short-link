@@ -1,8 +1,5 @@
-import {
-  isLoaddingSelector,
-  statisticsSelector,
-} from './../../store/selectors';
-import { getStatisticsAction } from './../../store/actions/getStatistics.action';
+import { statSelector, statIsLoading } from './../../store/stat/stat.selector';
+import { getStatisticAction } from './../../store/stat/stat.actions';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { MaterializeServices } from './../../shared/materialize/materialize.services';
@@ -21,19 +18,8 @@ export class YourStatsPageComponent implements OnInit {
   constructor(private linkService: LinksService, private store: Store) {}
 
   ngOnInit(): void {
-    this.store.dispatch(getStatisticsAction());
-    this.statistics$ = this.store.pipe(select(statisticsSelector));
-    this.isLoading$ = this.store.pipe(select(isLoaddingSelector));
-    // this.linkService.getStats().subscribe(
-    //   (data: any) => {
-    //     console.log(data);
-    //     this.isLoading = false;
-    //     this.stats = data;
-    //   },
-    //   (error) => {
-    //     this.isLoading = false;
-    //     MaterializeServices.tooast(error.error.message);
-    //   }
-    // );
+    this.store.dispatch(getStatisticAction());
+    this.statistics$ = this.store.pipe(select(statSelector));
+    this.isLoading$ = this.store.pipe(select(statIsLoading));
   }
 }

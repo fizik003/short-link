@@ -12,6 +12,7 @@ import {
   createLinkFailureAction,
 } from '../links/link.action';
 import { of } from 'rxjs';
+import { getStatisticAction } from '../stat/stat.actions';
 
 @Injectable()
 export class CreateLinkEffect {
@@ -28,6 +29,7 @@ export class CreateLinkEffect {
       switchMap(({ request }) => {
         return this.linkService.create(request).pipe(
           map((createdLink) => {
+            this.store.dispatch(getStatisticAction());
             return createLinkSuccessAction({ createdLink });
           }),
           catchError((errorResponse: HttpErrorResponse) => {
@@ -47,16 +49,6 @@ export class CreateLinkEffect {
         tap(({ createdLink }) => {
           this.router.navigate(['link', 'details', createdLink.id]);
         })
-      );
-    },
-    { dispatch: false }
-  );
-
-  updateStatisticAfterCreate = createEffect(
-    () => {
-      return this.actions$.pipe(
-        ofType(createLinkSuccessAction),
-        tap(() => this.store.dispatch(getStatisticsAction()))
       );
     },
     { dispatch: false }

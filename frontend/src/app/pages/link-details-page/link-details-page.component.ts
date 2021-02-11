@@ -1,17 +1,11 @@
 import { userIsLoadingSelector } from './../../store/user/user.selector';
-import {
-  linksIsLoadingSelector,
-  yourLinksSelector,
-  linksSelector,
-} from './../../store/links/link.selector';
+import { linksSelector } from './../../store/links/link.selector';
 import { currentUserSelector } from '../../store/user/user.selector';
 import { CurrentUserInterface } from './../../store/types/currentUser.interface';
-import { getLinkByIdAction } from './../../store/actions/getLinkById.action';
 import { linkAddClickAction } from './../../store/actions/linkAddClick.action';
 import { LinkUpdateRequestInterface } from './../../store/types/linkUpdateRequest.interface';
-import { linkUpdateActions } from '../../store/actions/linkUpdate.action';
+import { linkUpdateActions } from '../../store/links/link.action';
 import { LinkResponseInterface } from './../../store/types/linkResponse.interface';
-import { linksOtherUsersSelector } from './../../store/selectors';
 import { switchMap, map } from 'rxjs/operators';
 import { Store, select } from '@ngrx/store';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
