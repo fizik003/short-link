@@ -58,18 +58,17 @@ const reducer = createReducer(
   }),
 
   on(linkAddClickAction, (state, action) => {
-    const { idClickLink } = action;
-    const currenLink = {
-      ...state.yourLinks.find((el) => el.id == idClickLink),
-    };
+    const idLink = action.idClickLink;
+    let arrYourLinks = [...state.yourLinks];
+    let currentLink = arrYourLinks.find((link) => link.id == idLink);
+    currentLink = { ...currentLink };
+    currentLink.clicks += 1;
+    let indexCurrentLink = arrYourLinks.findIndex((link) => link.id === idLink);
+    arrYourLinks.splice(indexCurrentLink, 1, currentLink);
 
-    const indexClickLink = state.yourLinks.findIndex(
-      (el) => el.id == idClickLink
-    );
-    currenLink.clicks = currenLink.clicks + 1;
     return {
       ...state,
-      yourLinks: state.yourLinks.splice(indexClickLink, 1, currenLink),
+      yourLinks: arrYourLinks,
     };
   }),
 

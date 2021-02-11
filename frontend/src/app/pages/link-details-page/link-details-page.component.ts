@@ -2,7 +2,7 @@ import { userIsLoadingSelector } from './../../store/user/user.selector';
 import { linksSelector } from './../../store/links/link.selector';
 import { currentUserSelector } from '../../store/user/user.selector';
 import { CurrentUserInterface } from './../../store/types/currentUser.interface';
-import { linkAddClickAction } from './../../store/actions/linkAddClick.action';
+import { linkAddClickAction } from './../../store/links/link.action';
 import { LinkUpdateRequestInterface } from './../../store/types/linkUpdateRequest.interface';
 import { linkUpdateActions } from '../../store/links/link.action';
 import { LinkResponseInterface } from './../../store/types/linkResponse.interface';

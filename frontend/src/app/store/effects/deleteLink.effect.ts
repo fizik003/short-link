@@ -7,7 +7,7 @@ import {
   deleteLinkAction,
   deleteLinkFailureAction,
   deleteLinkSuccessAction,
-} from '../actions/deleteLink.action';
+} from '../links/link.action';
 import { of } from 'rxjs';
 
 @Injectable()

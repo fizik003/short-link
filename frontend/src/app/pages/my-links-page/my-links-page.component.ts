@@ -3,18 +3,12 @@ import {
   linksIsLoadingSelector,
 } from './../../store/links/link.selector';
 import { CurrentUserInterface } from './../../store/types/currentUser.interface';
-import {
-  currentUserSelector,
-  isLoaddingSelector,
-} from './../../store/selectors';
 import { LinkResponseInterface } from './../../store/types/linkResponse.interface';
 import { Store, select } from '@ngrx/store';
-import { Router } from '@angular/router';
-import { MaterializeServices } from './../../shared/materialize/materialize.services';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { LinksService } from './../../shared/services/links.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { deleteLinkAction } from 'src/app/store/actions/deleteLink.action';
+import { deleteLinkAction } from 'src/app/store/links/link.action';
 
 @Component({
   selector: 'app-my-links-page',
