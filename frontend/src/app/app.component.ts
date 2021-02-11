@@ -1,5 +1,4 @@
 import { MaterializeServices } from './shared/materialize/materialize.services';
-import { isLoaddingSelector, errorsSelector } from './store/selectors';
 import { Observable, Subscription } from 'rxjs';
 // import { getCurrnetUserAction } from './store/actions/getCurrentUser.action';
 import { getCurrentUserAction } from './store/user/user.action';
@@ -22,13 +21,13 @@ export class AppComponent implements OnInit, OnDestroy {
     //   this.auth.setToken(potentialToken);
     // }
 
-    this.errorsSubscription = this.store
-      .pipe(select(errorsSelector))
-      .subscribe((err) => {
-        if (err) {
-          MaterializeServices.tooast(String(err));
-        }
-      });
+    // this.errorsSubscription = this.store
+    //   .pipe(select(errorsSelector))
+    //   .subscribe((err) => {
+    //     if (err) {
+    //       MaterializeServices.tooast(String(err));
+    //     }
+    //   });
 
     this.store.dispatch(getCurrentUserAction());
   }

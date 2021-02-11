@@ -1,7 +1,4 @@
-import {
-  isSubmittingSelector,
-  isLoggedInSelector,
-} from '../../../../store/selectors';
+import { isLoggedInSelector } from './../../../../store/user/user.selector';
 import { LoginRequestInterface } from '../../../../store/types/loginRequest.interface';
 // import { loginAction } from '../../../../store/actions/login.action';
 import { loginAction } from '../../../../store/user/user.action';
@@ -59,8 +56,6 @@ export class LoginFormComponent implements OnInit, OnDestroy {
         MaterializeServices.tooast('Войдите еще раз');
       }
     });
-
-    this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector));
   }
 
   emailFormControl = new FormControl(null, [

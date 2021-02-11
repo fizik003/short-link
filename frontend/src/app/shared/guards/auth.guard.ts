@@ -1,7 +1,6 @@
-import { isLoggedInSelector } from './../../store/selectors';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { AuthService } from './../services/auth.service';
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   CanActivate,
   CanActivateChild,

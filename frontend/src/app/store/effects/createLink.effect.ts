@@ -1,4 +1,3 @@
-import { getStatisticsAction } from './../actions/getStatistics.action';
 import { Store } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
 import { switchMap, map, catchError, tap } from 'rxjs/operators';

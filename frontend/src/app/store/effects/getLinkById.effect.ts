@@ -4,7 +4,7 @@ import {
   getLinkByIdAction,
   getLinkByIdSuccessAction,
   getLinkByIdFailureAction,
-} from './../actions/getLinkById.action';
+} from './../links/link.action';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { LinksService } from './../../shared/services/links.service';

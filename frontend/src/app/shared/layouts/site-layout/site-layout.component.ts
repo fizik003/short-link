@@ -1,4 +1,4 @@
-import { logoutAction } from './../../../store/actions/logout.action';
+import { logoutAction } from './../../../store/user/user.action';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { AuthService } from './../../services/auth.service';

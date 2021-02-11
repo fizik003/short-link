@@ -33,7 +33,6 @@ import { YourStatsPageComponent } from './pages/your-stats-page/your-stats-page.
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { reducer } from './store/reducers';
 import { AuthPageComponent } from './pages/auth-page/auth-page.component';
 import { RegisterFormComponent } from './pages/auth-page/components/register-form/register-form.component';
 import { LoginFormComponent } from './pages/auth-page/components/login-form/login-form.component';
@@ -69,7 +68,6 @@ import { statReducer } from './store/stat/stat.reducer';
     FormsModule,
     ReactiveFormsModule,
     StoreModule.forRoot({
-      app: reducer,
       user: userReducer,
       link: LinkReducer,
       stat: statReducer,

@@ -1,5 +1,4 @@
-import { tagSelector } from './../selectors';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
 import { switchMap, map, catchError } from 'rxjs/operators';
 import {
@@ -24,7 +23,6 @@ export class GetTagEffect {
     return this.actions$.pipe(
       ofType(getTagAction),
       switchMap(({ requestTag }) => {
-        this.store.pipe(select(tagSelector));
         return this.tagsService.getTag(requestTag).pipe(
           map((currentTag) => {
             return getTagSucccessAction({ currentTag });
