@@ -1,9 +1,9 @@
-import { setUserLinkAction } from './../links/link.action';
+import { setUserLinkAction } from '../../links/link.action';
 import { Store } from '@ngrx/store';
 import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import { CurrentUserInterface } from './../types/currentUser.interface';
+import { CurrentUserInterface } from '../../types/currentUser.interface';
 import { switchMap, map, catchError, tap } from 'rxjs/operators';
 // import {
 //   getCurrnetUserAction,
@@ -15,8 +15,8 @@ import {
   getCurrentUserAction,
   getCurrentUserSuccessAction,
   getCurrentUserFailureAction,
-} from '../user/user.action';
-import { AuthService } from './../../shared/services/auth.service';
+} from '../user.action';
+import { AuthService } from '../../../shared/services/auth.service';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';

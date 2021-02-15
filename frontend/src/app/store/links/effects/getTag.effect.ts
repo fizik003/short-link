@@ -5,8 +5,8 @@ import {
   getTagAction,
   getTagSucccessAction,
   getTagFailureAction,
-} from './../links/link.action';
-import { TagsService } from './../../shared/services/tags.service';
+} from '../link.action';
+import { TagsService } from '../../../shared/services/tags.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';

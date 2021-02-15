@@ -1,6 +1,6 @@
-import { setUserLinkAction } from './../links/link.action';
+import { setUserLinkAction } from '../../links/link.action';
 import { Store } from '@ngrx/store';
-import { CurrentUserInterface } from './../types/currentUser.interface';
+import { CurrentUserInterface } from '../../types/currentUser.interface';
 // import {
 //   loginAction,
 //   loginSuccessAction,
@@ -10,9 +10,9 @@ import {
   loginAction,
   loginFailureAction,
   loginSuccessAction,
-} from '../user/user.action';
+} from '../user.action';
 import { Router } from '@angular/router';
-import { AuthService } from './../../shared/services/auth.service';
+import { AuthService } from '../../../shared/services/auth.service';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, switchMap, catchError, tap } from 'rxjs/operators';

@@ -1,4 +1,7 @@
-<div class="link-details" *ngIf="!(isLoading$ | async)">
+<div
+  class="link-details"
+  *ngIf="!(userIsLoading$ | async) && !(linkIsLoading$ | async)"
+>
   <div class="link-details__wrapper">
     <div class="link-details__card card">
       <mat-card>
@@ -121,4 +124,5 @@
   </div>
 </div>
 
-<app-spiner *ngIf="isLoading$ | async"> </app-spiner>
+<app-spiner *ngIf="(userIsLoading$ | async) || (linkIsLoading$ | async)">
+</app-spiner>

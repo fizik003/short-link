@@ -1,5 +1,8 @@
 import { userIsLoadingSelector } from './../../store/user/user.selector';
-import { linksSelector } from './../../store/links/link.selector';
+import {
+  linksSelector,
+  linksIsLoadingSelector,
+} from './../../store/links/link.selector';
 import { currentUserSelector } from '../../store/user/user.selector';
 import { CurrentUserInterface } from './../../store/types/currentUser.interface';
 import { linkAddClickAction } from './../../store/links/link.action';
@@ -21,7 +24,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 export class LinkDetailsPageComponent implements OnInit, OnDestroy {
   paramsSubscription: Subscription;
   link: LinkResponseInterface;
-  isLoading$: Observable<boolean>;
+  userIsLoading$: Observable<boolean>;
+  linkIsLoading$: Observable<boolean>;
   form: FormGroup;
   isEdit: boolean = false;
 
@@ -31,7 +35,8 @@ export class LinkDetailsPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.currentUser$ = this.store.pipe(select(currentUserSelector));
-    this.isLoading$ = this.store.pipe(select(userIsLoadingSelector));
+    this.userIsLoading$ = this.store.pipe(select(userIsLoadingSelector));
+    this.linkIsLoading$ = this.store.pipe(select(linksIsLoadingSelector));
     this.paramsSubscription = this.route.params
       .pipe(
         switchMap((params: Params) => {

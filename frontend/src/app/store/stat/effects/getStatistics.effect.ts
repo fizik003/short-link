@@ -4,9 +4,9 @@ import {
   getStatisticAction,
   getStatisticFailureAction,
   getStatisticSuccessAction,
-} from '../stat/stat.actions';
+} from '../stat.actions';
 import { switchMap, map, catchError } from 'rxjs/operators';
-import { LinksService } from './../../shared/services/links.service';
+import { LinksService } from '../../../shared/services/links.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';

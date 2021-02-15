@@ -4,10 +4,10 @@ import {
   getLinkByIdAction,
   getLinkByIdSuccessAction,
   getLinkByIdFailureAction,
-} from './../links/link.action';
+} from '../link.action';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { LinksService } from './../../shared/services/links.service';
+import { LinksService } from '../../../shared/services/links.service';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 
