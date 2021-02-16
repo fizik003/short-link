@@ -22,9 +22,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.component';
 import { SiteLayoutComponent } from './shared/layouts/site-layout/site-layout.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
-import { LinkCreatePageComponent } from './pages/link-create-page/link-create-page.component';
+import { LinkCreatePageComponent } from './pages/content-page/components/link-create-page/link-create-page.component';
 import { MyLinksPageComponent } from './pages/my-links-page/my-links-page.component';
-import { LinkEditPageComponent } from './pages/link-edit-page/link-edit-page.component';
 import { LinkDetailsPageComponent } from './pages/link-details-page/link-details-page.component';
 import { SpinerComponent } from './shared/components/spiner/spiner.component';
 import { LinkCardComponent } from './shared/components/link-card/link-card.component';
@@ -39,6 +38,7 @@ import { LoginFormComponent } from './pages/auth-page/components/login-form/logi
 import { reducer as userReducer } from './store/user/user.reducer';
 import { LinkReducer } from './store/links/link.reducer';
 import { statReducer } from './store/stat/stat.reducer';
+import { ContentPageComponent } from './pages/content-page/content-page.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +48,6 @@ import { statReducer } from './store/stat/stat.reducer';
     MainPageComponent,
     LinkCreatePageComponent,
     MyLinksPageComponent,
-    LinkEditPageComponent,
     LinkDetailsPageComponent,
     SpinerComponent,
     LinkCardComponent,
@@ -57,6 +56,7 @@ import { statReducer } from './store/stat/stat.reducer';
     AuthPageComponent,
     RegisterFormComponent,
     LoginFormComponent,
+    ContentPageComponent,
   ],
   imports: [
     BrowserModule,

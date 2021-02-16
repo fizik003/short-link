@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LinkEditPageComponent } from './link-edit-page.component';
+import { ContentPageComponent } from './content-page.component';
 
-describe('LinkEditPageComponent', () => {
-  let component: LinkEditPageComponent;
-  let fixture: ComponentFixture<LinkEditPageComponent>;
+describe('ContentPageComponent', () => {
+  let component: ContentPageComponent;
+  let fixture: ComponentFixture<ContentPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LinkEditPageComponent ]
+      declarations: [ ContentPageComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LinkEditPageComponent);
+    fixture = TestBed.createComponent(ContentPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

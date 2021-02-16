@@ -16,8 +16,12 @@
               </a>
             </div>
             <div class="header__nav">
-              <a routerLink="/link/create">Создать</a>
-              <a routerLink="/mylinks">Мои ссылки</a>
+              <a routerLink="/content" [queryParams]="{ create: true }"
+                >Создать</a
+              >
+              <a routerLink="/content" [queryParams]="{ myLinks: true }"
+                >Мои ссылки</a
+              >
               <a href="#" (click)="onLogOut($event)">Выйти</a>
             </div>
           </div>

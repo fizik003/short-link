@@ -15,6 +15,7 @@
     <div class="card__button">
       <a
         routerLink="/link/details/{{ linkData.id }}"
+        [queryParams]="{ debug: true }"
         mat-raised-button
         color="primary"
         class="card__button-details"
