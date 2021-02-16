@@ -37,10 +37,11 @@ export class LinkDetailsPageComponent implements OnInit, OnDestroy {
     this.currentUser$ = this.store.pipe(select(currentUserSelector));
     this.userIsLoading$ = this.store.pipe(select(userIsLoadingSelector));
     this.linkIsLoading$ = this.store.pipe(select(linksIsLoadingSelector));
-    this.paramsSubscription = this.route.params
+    this.paramsSubscription = this.route.queryParams
       .pipe(
         switchMap((params: Params) => {
-          const linkId = params['id'];
+          const linkId = Number(params['id']);
+          console.log(linkId);
           return this.store.pipe(
             select(linksSelector),
             map((links: LinkResponseInterface[]) => {

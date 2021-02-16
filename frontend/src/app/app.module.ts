@@ -23,7 +23,7 @@ import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.co
 import { SiteLayoutComponent } from './shared/layouts/site-layout/site-layout.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { LinkCreatePageComponent } from './pages/content-page/components/link-create-page/link-create-page.component';
-import { MyLinksPageComponent } from './pages/my-links-page/my-links-page.component';
+import { MyLinksPageComponent } from './pages/content-page/components/my-links-page/my-links-page.component';
 import { LinkDetailsPageComponent } from './pages/link-details-page/link-details-page.component';
 import { SpinerComponent } from './shared/components/spiner/spiner.component';
 import { LinkCardComponent } from './shared/components/link-card/link-card.component';

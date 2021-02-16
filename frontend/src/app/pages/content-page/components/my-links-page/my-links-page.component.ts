@@ -1,12 +1,12 @@
 import {
   yourLinksSelector,
   linksIsLoadingSelector,
-} from './../../store/links/link.selector';
-import { CurrentUserInterface } from './../../store/types/currentUser.interface';
-import { LinkResponseInterface } from './../../store/types/linkResponse.interface';
+} from '../../../../store/links/link.selector';
+import { CurrentUserInterface } from '../../../../store/types/currentUser.interface';
+import { LinkResponseInterface } from '../../../../store/types/linkResponse.interface';
 import { Store, select } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { LinksService } from './../../shared/services/links.service';
+import { LinksService } from '../../../../shared/services/links.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { deleteLinkAction } from 'src/app/store/links/link.action';
 

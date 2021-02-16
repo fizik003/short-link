@@ -3,7 +3,7 @@ import { AuthPageComponent } from './pages/auth-page/auth-page.component';
 import { YourStatsPageComponent } from './pages/your-stats-page/your-stats-page.component';
 import { TagLinksComponent } from './pages/tag-links/tag-links.component';
 import { LinkDetailsPageComponent } from './pages/link-details-page/link-details-page.component';
-import { MyLinksPageComponent } from './pages/my-links-page/my-links-page.component';
+import { MyLinksPageComponent } from './pages/content-page/components/my-links-page/my-links-page.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.component';
 import { NgModule } from '@angular/core';
