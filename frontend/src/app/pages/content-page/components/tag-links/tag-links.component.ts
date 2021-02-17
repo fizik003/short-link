@@ -3,11 +3,11 @@ import { switchMap, map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 // import { getTagAction } from './../../store/actions/getTag.action';
 import { Store, select } from '@ngrx/store';
-import { MaterializeServices } from './../../shared/materialize/materialize.services';
+import { MaterializeServices } from '../../../../shared/materialize/materialize.services';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { getTagAction } from '../../store/links/link.action';
-import { tagSelector } from '../../store/links/link.selector';
+import { getTagAction } from '../../../../store/links/link.action';
+import { tagSelector } from '../../../../store/links/link.selector';
 
 @Component({
   selector: 'app-tag-links',
@@ -24,17 +24,18 @@ export class TagLinksComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.isLoading = true;
 
-    this.paramsSubscribe = this.route.params
+    this.paramsSubscribe = this.route.queryParams
       .pipe(
-        switchMap((params: Params) => {
-          this.tagNmae = params['tag'];
+        switchMap((qParams: Params) => {
+          this.tagNmae = qParams['tag'];
           return this.store.pipe(select(tagSelector)).pipe(
             map((tags) => {
               if (tags.length) {
-                const tag = tags.find((tag) => tag.name === this.tagNmae);
+                const tag = tags.find((tag) => tag.name == this.tagNmae);
                 if (tag) return tag;
               }
-              this.store.dispatch(getTagAction({ requestTag: this.tagNmae }));
+              if (qParams['tag'])
+                this.store.dispatch(getTagAction({ requestTag: this.tagNmae }));
             })
           );
         })

@@ -1,18 +1,19 @@
-import { userIsLoadingSelector } from './../../store/user/user.selector';
+import { getLinkByIdAction } from './../../../../store/links/link.action';
+import { userIsLoadingSelector } from '../../../../store/user/user.selector';
 import {
   linksSelector,
   linksIsLoadingSelector,
-} from './../../store/links/link.selector';
-import { currentUserSelector } from '../../store/user/user.selector';
-import { CurrentUserInterface } from './../../store/types/currentUser.interface';
-import { linkAddClickAction } from './../../store/links/link.action';
-import { LinkUpdateRequestInterface } from './../../store/types/linkUpdateRequest.interface';
-import { linkUpdateActions } from '../../store/links/link.action';
-import { LinkResponseInterface } from './../../store/types/linkResponse.interface';
+} from '../../../../store/links/link.selector';
+import { currentUserSelector } from '../../../../store/user/user.selector';
+import { CurrentUserInterface } from '../../../../store/types/currentUser.interface';
+import { linkAddClickAction } from '../../../../store/links/link.action';
+import { LinkUpdateRequestInterface } from '../../../../store/types/linkUpdateRequest.interface';
+import { linkUpdateActions } from '../../../../store/links/link.action';
+import { LinkResponseInterface } from '../../../../store/types/linkResponse.interface';
 import { switchMap, map } from 'rxjs/operators';
 import { Store, select } from '@ngrx/store';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Subscription, Observable, pipe } from 'rxjs';
+import { Subscription, Observable, pipe, of } from 'rxjs';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
@@ -22,7 +23,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
   styleUrls: ['./link-details-page.component.scss'],
 })
 export class LinkDetailsPageComponent implements OnInit, OnDestroy {
-  paramsSubscription: Subscription;
+  linksSubscription: Subscription;
   link: LinkResponseInterface;
   userIsLoading$: Observable<boolean>;
   linkIsLoading$: Observable<boolean>;
@@ -37,34 +38,34 @@ export class LinkDetailsPageComponent implements OnInit, OnDestroy {
     this.currentUser$ = this.store.pipe(select(currentUserSelector));
     this.userIsLoading$ = this.store.pipe(select(userIsLoadingSelector));
     this.linkIsLoading$ = this.store.pipe(select(linksIsLoadingSelector));
-    this.paramsSubscription = this.route.queryParams
+
+    this.linksSubscription = this.store
       .pipe(
-        switchMap((params: Params) => {
-          const linkId = Number(params['id']);
-          console.log(linkId);
-          return this.store.pipe(
-            select(linksSelector),
-            map((links: LinkResponseInterface[]) => {
-              return links.find((link) => link.id == linkId);
+        select(linksSelector),
+        switchMap((links) => {
+          return this.route.queryParams.pipe(
+            map((qParams: Params) => {
+              if (qParams['id']) {
+                const link = links.find((link) => link.id == qParams['id']);
+                if (link) return link;
+                return this.store.dispatch(
+                  getLinkByIdAction({ requestLinkId: Number(qParams['id']) })
+                );
+              }
             })
           );
         })
       )
-      .subscribe(
-        (link) => {
-          if (link) {
-            this.link = link;
-            this.initFrom();
-          }
-        },
-        (err) => {
-          console.log(err);
+      .subscribe((link) => {
+        if (link) {
+          this.link = link;
+          this.initFrom();
         }
-      );
+      });
   }
 
   ngOnDestroy(): void {
-    if (this.paramsSubscription) this.paramsSubscription.unsubscribe();
+    if (this.linksSubscription) this.linksSubscription.unsubscribe();
   }
 
   initFrom() {

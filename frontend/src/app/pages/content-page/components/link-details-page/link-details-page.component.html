@@ -93,7 +93,8 @@
                 mat-stroked-button
                 color="primary"
                 *ngFor="let tag of link.Tags"
-                routerLink="/tag/{{ tag.name }}"
+                routerLink="/content"
+                [queryParams]="{ tag: tag.name }"
               >
                 {{ tag.name }}
               </a>

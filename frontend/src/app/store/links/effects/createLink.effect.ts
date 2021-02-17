@@ -46,7 +46,9 @@ export class CreateLinkEffect {
       return this.actions$.pipe(
         ofType(createLinkSuccessAction),
         tap(({ createdLink }) => {
-          this.router.navigate(['link', 'details', createdLink.id]);
+          this.router.navigate(['content'], {
+            queryParams: { id: createdLink.id },
+          });
         })
       );
     },

@@ -17,9 +17,15 @@ export const linksIsLoadingSelector = createSelector(
   (linkState) => linkState.isLoading
 );
 
-export const linksSelector = createSelector(
+export const otherUserLinks = createSelector(
   linkFeatureSelector,
-  (linkState) => [...linkState.othersUsersLink, ...linkState.yourLinks]
+  (linkState) => linkState.othersUsersLink
+);
+
+export const linksSelector = createSelector(
+  yourLinksSelector,
+  otherUserLinks,
+  (yourLinks, otherUserLinks) => [...yourLinks, ...otherUserLinks]
 );
 
 export const tagSelector = createSelector(

@@ -1,8 +1,8 @@
 import { ContentPageComponent } from './pages/content-page/content-page.component';
 import { AuthPageComponent } from './pages/auth-page/auth-page.component';
-import { YourStatsPageComponent } from './pages/your-stats-page/your-stats-page.component';
-import { TagLinksComponent } from './pages/tag-links/tag-links.component';
-import { LinkDetailsPageComponent } from './pages/link-details-page/link-details-page.component';
+import { YourStatsPageComponent } from './pages/content-page/components/your-stats-page/your-stats-page.component';
+import { TagLinksComponent } from './pages/content-page/components/tag-links/tag-links.component';
+import { LinkDetailsPageComponent } from './pages/content-page/components/link-details-page/link-details-page.component';
 import { MyLinksPageComponent } from './pages/content-page/components/my-links-page/my-links-page.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.component';
@@ -19,27 +19,17 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: '/login', pathMatch: 'full' },
       { path: 'login', component: AuthPageComponent },
-      { path: 'register', component: AuthPageComponent },
     ],
   },
   {
     path: '',
     component: SiteLayoutComponent,
-    canActivate: [AuthGuard],
+
+    // canActivate: [AuthGuard],
+
     children: [
-      { path: 'mylinks', component: ContentPageComponent },
       { path: 'main', component: MainPageComponent },
       { path: 'content', component: ContentPageComponent },
-      { path: 'my-stats', component: YourStatsPageComponent },
-    ],
-  },
-
-  {
-    path: '',
-    component: SiteLayoutComponent,
-    children: [
-      { path: 'link/details/:id', component: LinkDetailsPageComponent },
-      { path: 'tag/:tag', component: TagLinksComponent },
     ],
   },
 ];

@@ -1,9 +1,12 @@
-import { statSelector, statIsLoading } from './../../store/stat/stat.selector';
-import { getStatisticAction } from './../../store/stat/stat.actions';
+import {
+  statSelector,
+  statIsLoading,
+} from '../../../../store/stat/stat.selector';
+import { getStatisticAction } from '../../../../store/stat/stat.actions';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { MaterializeServices } from './../../shared/materialize/materialize.services';
-import { LinksService } from './../../shared/services/links.service';
+import { MaterializeServices } from '../../../../shared/materialize/materialize.services';
+import { LinksService } from '../../../../shared/services/links.service';
 import { Component, OnInit } from '@angular/core';
 import { StatisticsResponseInterface } from 'src/app/store/types/statisticsRsponse.interface';
 
