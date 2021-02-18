@@ -55,18 +55,4 @@ export class GetCurrentUserEffect {
       })
     )
   );
-
-  // redirectAfterGetUser$ = createEffect(
-  //   () => {
-  //     return this.actions$.pipe(
-  //       ofType(getCurrentUserSuccessAction),
-  //       tap(() => {
-  //         console.log('in effect');
-
-  //         this.router.navigate(['main']);
-  //       })
-  //     );
-  //   },
-  //   { dispatch: false }
-  // );
 }

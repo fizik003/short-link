@@ -24,9 +24,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     private router: Router,
     private store: Store,
     private route: ActivatedRoute
-  ) {
-    console.log(this.route.snapshot.queryParams);
-  }
+  ) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -37,7 +35,6 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     | boolean
     | UrlTree {
     this.isCanGo = !!this.auth.getToken();
-    console.log(this.route.snapshot.queryParams);
 
     if (this.isCanGo) {
       return of(true);
