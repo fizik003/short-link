@@ -11,7 +11,6 @@ import {
   ActivatedRoute,
 } from '@angular/router';
 import { Observable, of, Subscription } from 'rxjs';
-import { Location } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',

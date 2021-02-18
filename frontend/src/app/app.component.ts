@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { errorSelector } from './store/user/error/error.selector';
+import { errorSelector } from './store/error/error.selector';
 import { MaterializeServices } from './services/materialize.services';
 import { Observable, Subscription } from 'rxjs';
 // import { getCurrnetUserAction } from './store/actions/getCurrentUser.action';
@@ -22,7 +22,6 @@ export class AppComponent implements OnInit, OnDestroy {
       .pipe(select(errorSelector))
       .subscribe((errors) => {
         errors.map((err) => {
-          console.log(1);
           if (err) {
             MaterializeServices.tooast(String(err));
             this.router.navigate(['/main']);
