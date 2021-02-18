@@ -19,6 +19,7 @@ import {
   linkUpdateSuccessAction,
   setUserLinkAction,
 } from './link.action';
+import { link } from 'fs';
 
 const initialState: LinkStateInterface = {
   isLoading: false,
@@ -60,15 +61,33 @@ const reducer = createReducer(
   on(linkAddClickAction, (state, action) => {
     const idLink = action.idClickLink;
     let arrYourLinks = [...state.yourLinks];
+    let arrOtherUserLinks = [...state.othersUsersLink];
     let currentLink = arrYourLinks.find((link) => link.id == idLink);
+    if (currentLink) {
+      currentLink = { ...currentLink };
+      currentLink.clicks += 1;
+      let indexCurrentLink = arrYourLinks.findIndex(
+        (link) => link.id === idLink
+      );
+      arrYourLinks.splice(indexCurrentLink, 1, currentLink);
+
+      return {
+        ...state,
+        yourLinks: arrYourLinks,
+      };
+    }
+
+    currentLink = arrOtherUserLinks.find((link) => link.id == idLink);
     currentLink = { ...currentLink };
     currentLink.clicks += 1;
-    let indexCurrentLink = arrYourLinks.findIndex((link) => link.id === idLink);
-    arrYourLinks.splice(indexCurrentLink, 1, currentLink);
+    let indexCurrentLink = arrOtherUserLinks.findIndex(
+      (link) => link.id === idLink
+    );
+    arrOtherUserLinks.splice(indexCurrentLink, 1, currentLink);
 
     return {
       ...state,
-      yourLinks: arrYourLinks,
+      othersUsersLink: arrOtherUserLinks,
     };
   }),
 
