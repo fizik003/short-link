@@ -8,8 +8,10 @@ import {
   RouterStateSnapshot,
   UrlTree,
   Router,
+  ActivatedRoute,
 } from '@angular/router';
 import { Observable, of, Subscription } from 'rxjs';
+import { Location } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
@@ -20,8 +22,11 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   constructor(
     private auth: AuthService,
     private router: Router,
-    private store: Store
-  ) {}
+    private store: Store,
+    private route: ActivatedRoute
+  ) {
+    console.log(this.route.snapshot.queryParams);
+  }
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -31,13 +36,8 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    // this.store
-    //   .pipe(select(isLoggedInSelector))
-    //   .subscribe((isLoggedIn) => {
-    //     this.isCanGo = isLoggedIn;
-    //   })
-    //   .unsubscribe();
     this.isCanGo = !!this.auth.getToken();
+    console.log(this.route.snapshot.queryParams);
 
     if (this.isCanGo) {
       return of(true);

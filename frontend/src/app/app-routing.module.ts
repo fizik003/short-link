@@ -20,13 +20,13 @@ const routes: Routes = [
   {
     path: '',
     component: SiteLayoutComponent,
-
-    // canActivate: [AuthGuard],
-
-    children: [
-      { path: 'main', component: MainPageComponent },
-      { path: 'content', component: ContentPageComponent },
-    ],
+    canActivate: [AuthGuard],
+    children: [{ path: 'main', component: MainPageComponent }],
+  },
+  {
+    path: '',
+    component: SiteLayoutComponent,
+    children: [{ path: 'content', component: ContentPageComponent }],
   },
 ];
 

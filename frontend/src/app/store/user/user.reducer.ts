@@ -13,7 +13,7 @@ import {
 const initialState: UserStateInterface = {
   currentUser: null,
   isLoadding: false,
-  isLoggedIn: false,
+  isLoggedIn: undefined,
   errors: null,
 };
 

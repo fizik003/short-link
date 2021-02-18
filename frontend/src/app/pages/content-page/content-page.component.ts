@@ -1,5 +1,9 @@
+import { switchMap, map } from 'rxjs/operators';
 import { linksIsLoadingSelector } from './../../store/links/link.selector';
-import { userIsLoadingSelector } from './../../store/user/user.selector';
+import {
+  userIsLoadingSelector,
+  isLoggedInSelector,
+} from './../../store/user/user.selector';
 import { Store, select } from '@ngrx/store';
 import { Subscription, Observable } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -24,12 +28,24 @@ export class ContentPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.userIsloading$ = this.store.pipe(select(userIsLoadingSelector));
-    this.routeSubscription = this.route.queryParams.subscribe(
-      (queryParams: Params) => {
+    this.routeSubscription = this.route.queryParams
+      .pipe(
+        switchMap((qParams: Params) => {
+          return this.store.pipe(
+            select(isLoggedInSelector),
+            map((isLoggedUser: boolean) => {
+              if (isLoggedUser || qParams['id'] || qParams['tag']) {
+                return qParams;
+              } else if (isLoggedUser === false) {
+                return this.router.navigate(['login']);
+              }
+            })
+          );
+        })
+      )
+      .subscribe((queryParams: Params) => {
         this.queryParams = queryParams;
-        console.log(queryParams);
-      }
-    );
+      });
   }
 
   ngOnDestroy(): void {

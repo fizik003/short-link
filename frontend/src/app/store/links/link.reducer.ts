@@ -19,7 +19,6 @@ import {
   linkUpdateSuccessAction,
   setUserLinkAction,
 } from './link.action';
-import { link } from 'fs';
 
 const initialState: LinkStateInterface = {
   isLoading: false,
