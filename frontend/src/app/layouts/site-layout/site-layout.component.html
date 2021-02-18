@@ -6,7 +6,7 @@
     <title>Document</title>
   </head>
   <body>
-    <header class="header">
+    <header class="header" *ngIf="isLoggedUser$ | async; else auth_layout">
       <mat-toolbar color="primary" class="header__navbar">
         <div class="container header__container">
           <div class="header__wrapper">
@@ -28,6 +28,9 @@
         </div>
       </mat-toolbar>
     </header>
+    <ng-template #auth_layout>
+      <app-auth-layout></app-auth-layout>
+    </ng-template>
     <main class="main">
       <div class="container main__container">
         <div class="main__wrapper">

@@ -19,7 +19,7 @@ import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
+import { AuthLayoutComponent } from './layouts/site-layout/components/auth-layout/auth-layout.component';
 import { SiteLayoutComponent } from './layouts/site-layout/site-layout.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { LinkCreatePageComponent } from './pages/content-page/components/link-create-component/link-create-page.component';
