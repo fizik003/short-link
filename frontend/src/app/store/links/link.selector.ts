@@ -32,3 +32,8 @@ export const tagSelector = createSelector(
   linkFeatureSelector,
   (linkState) => linkState.tags
 );
+
+export const linksErrorSelector = createSelector(
+  linkFeatureSelector,
+  (linkState) => linkState.errors
+);

@@ -1,4 +1,6 @@
-import { MaterializeServices } from './materialize/materialize.services';
+import { Router } from '@angular/router';
+import { errorSelector } from './store/user/error/error.selector';
+import { MaterializeServices } from './services/materialize.services';
 import { Observable, Subscription } from 'rxjs';
 // import { getCurrnetUserAction } from './store/actions/getCurrentUser.action';
 import { getCurrentUserAction } from './store/user/user.action';
@@ -14,7 +16,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 export class AppComponent implements OnInit, OnDestroy {
   isLoading$: Observable<boolean>;
   errorsSubscription: Subscription;
-  constructor(private auth: AuthService, private store: Store) {}
+  constructor(private router: Router, private store: Store) {}
   ngOnInit() {
     // const potentialToken = localStorage.getItem('auth-token');
     // if (potentialToken) {
@@ -28,6 +30,18 @@ export class AppComponent implements OnInit, OnDestroy {
     //       MaterializeServices.tooast(String(err));
     //     }
     //   });
+
+    this.errorsSubscription = this.store
+      .pipe(select(errorSelector))
+      .subscribe((errors) => {
+        errors.map((err) => {
+          console.log(1);
+          if (err) {
+            MaterializeServices.tooast(String(err));
+            this.router.navigate(['/main']);
+          }
+        });
+      });
 
     this.store.dispatch(getCurrentUserAction());
   }

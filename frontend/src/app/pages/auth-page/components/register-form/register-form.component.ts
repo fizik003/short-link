@@ -1,4 +1,4 @@
-import { MaterializeServices } from '../../../../materialize/materialize.services';
+import { MaterializeServices } from '../../../../services/materialize.services';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { Route } from '@angular/compiler/src/core';

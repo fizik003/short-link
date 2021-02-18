@@ -3,7 +3,7 @@ import { switchMap, map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 // import { getTagAction } from './../../store/actions/getTag.action';
 import { Store, select } from '@ngrx/store';
-import { MaterializeServices } from '../../../../materialize/materialize.services';
+import { MaterializeServices } from '../../../../services/materialize.services';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { getTagAction } from '../../../../store/links/link.action';
