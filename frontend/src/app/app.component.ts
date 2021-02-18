@@ -18,19 +18,6 @@ export class AppComponent implements OnInit, OnDestroy {
   errorsSubscription: Subscription;
   constructor(private router: Router, private store: Store) {}
   ngOnInit() {
-    // const potentialToken = localStorage.getItem('auth-token');
-    // if (potentialToken) {
-    //   this.auth.setToken(potentialToken);
-    // }
-
-    // this.errorsSubscription = this.store
-    //   .pipe(select(errorsSelector))
-    //   .subscribe((err) => {
-    //     if (err) {
-    //       MaterializeServices.tooast(String(err));
-    //     }
-    //   });
-
     this.errorsSubscription = this.store
       .pipe(select(errorSelector))
       .subscribe((errors) => {
