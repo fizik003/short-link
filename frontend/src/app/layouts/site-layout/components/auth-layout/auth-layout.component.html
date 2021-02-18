@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>short-link</title>
+  </head>
+  <body>
+    <header class="header">
+      <mat-toolbar color="primary" class="header__navbar">
+        <div class="header__logo">
+          <a class="header__logo-link" routerLink="/login"
+            ><span class="mat-h1">ShortLink</span>
+          </a>
+        </div>
+        <div class="header__nav">
+          <a routerLink="/login">Войти</a>
+          <a routerLink="/login" [queryParams]="{ register: true }"
+            >Регистрация</a
+          >
+        </div>
+      </mat-toolbar>
+    </header>
+    <div class="container">
+      <div class="row"><router-outlet></router-outlet></div>
+    </div>
+  </body>
+</html>

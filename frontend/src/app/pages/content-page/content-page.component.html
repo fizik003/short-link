@@ -1,0 +1,21 @@
+<ng-container *ngIf="!(userIsloading$ | async); else spinner">
+  <app-link-create-page
+    *ngIf="queryParams['create'] == 'true'"
+  ></app-link-create-page>
+
+  <app-my-links-page
+    *ngIf="queryParams['myLinks'] == 'true'"
+  ></app-my-links-page>
+
+  <app-link-details-page *ngIf="queryParams['id']"></app-link-details-page>
+
+  <app-your-stats-page
+    *ngIf="queryParams['stat'] == 'true'"
+  ></app-your-stats-page>
+
+  <app-tag-links *ngIf="queryParams['tag']"></app-tag-links>
+</ng-container>
+
+<ng-template #spinner>
+  <app-spiner></app-spiner>
+</ng-template>

@@ -11,19 +11,22 @@ export class MainPageComponent implements OnInit {
       title: 'Создать',
       desc:
         'Здесь вы можете сократить вашу ссылку, добавить к ней описаие, а затем поделиться ей с друзьями',
-      to: '/link/create',
+      to: '/content',
+      queryParam: { create: true },
     },
     {
       title: 'Мои ссылки',
       desc:
         'Здесь вы можете просмотреть все ваши ссылки, а так же удалить те, которые вам уже не нужны',
-      to: '/mylinks',
+      to: '/content',
+      queryParam: { myLinks: true },
     },
     {
       title: 'Моя статистика',
       desc:
         'Здесь вы найдете информацию о вашей статиске. Общее количетсво ваших ссылок, сколько раз по ним переходили, самые популярные ваши ссылки',
-      to: '/my-stats',
+      to: '/content',
+      queryParam: { stat: true },
     },
   ];
 
