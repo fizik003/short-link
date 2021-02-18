@@ -6,7 +6,7 @@ import {
   linkUpdateSuccessAction,
   linkUpdateFailureAction,
 } from '../link.action';
-import { LinksService } from '../../../shared/services/links.service';
+import { LinksService } from '../../../services/links.service';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';

@@ -1,8 +1,7 @@
-import { StatisticsResponseInterface } from './../../store/types/statisticsRsponse.interface';
-import { CreateLinkRequestInterface } from './../../store/types/createLink.interface';
-import { LinkResponseInterface } from './../../store/types/linkResponse.interface';
-import { LinkUpdateRequestInterface } from './../../store/types/linkUpdateRequest.interface';
-import { Link, LinkFromServer } from './../interfaces';
+import { StatisticsResponseInterface } from '../store/types/statisticsRsponse.interface';
+import { CreateLinkRequestInterface } from '../store/types/createLink.interface';
+import { LinkResponseInterface } from '../store/types/linkResponse.interface';
+import { LinkUpdateRequestInterface } from '../store/types/linkUpdateRequest.interface';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';

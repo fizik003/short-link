@@ -16,7 +16,7 @@ import {
   getCurrentUserSuccessAction,
   getCurrentUserFailureAction,
 } from '../user.action';
-import { AuthService } from '../../../shared/services/auth.service';
+import { AuthService } from '../../../services/auth.service';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';

@@ -15,7 +15,9 @@
         </div>
         <div class="header__nav">
           <a routerLink="/login">Войти</a>
-          <a routerLink="/register">Регистрация</a>
+          <a routerLink="/login" [queryParams]="{ register: true }"
+            >Регистрация</a
+          >
         </div>
       </mat-toolbar>
     </header>

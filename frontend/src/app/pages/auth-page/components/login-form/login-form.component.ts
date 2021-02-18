@@ -2,7 +2,7 @@ import { isLoggedInSelector } from './../../../../store/user/user.selector';
 import { LoginRequestInterface } from '../../../../store/types/loginRequest.interface';
 // import { loginAction } from '../../../../store/actions/login.action';
 import { loginAction } from '../../../../store/user/user.action';
-import { MaterializeServices } from '../../../../shared/materialize/materialize.services';
+import { MaterializeServices } from '../../../../materialize/materialize.services';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Subscription, Observable } from 'rxjs';

@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { switchMap, map, tap, catchError } from 'rxjs/operators';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LinksService } from '../../../shared/services/links.service';
+import { LinksService } from '../../../services/links.service';
 import { Injectable } from '@angular/core';
 import {
   deleteLinkAction,

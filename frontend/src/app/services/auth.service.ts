@@ -1,6 +1,6 @@
-import { CurrentUserInterface } from './../../store/types/currentUser.interface';
-import { LoginRequestInterface } from './../../store/types/loginRequest.interface';
-import { User, UserReg } from './../interfaces';
+import { registerRequestInterface } from './../store/types/registerRequest.interface';
+import { CurrentUserInterface } from '../store/types/currentUser.interface';
+import { LoginRequestInterface } from '../store/types/loginRequest.interface';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -21,7 +21,7 @@ export class AuthService {
     );
   }
 
-  register(user: UserReg): Observable<any> {
+  register(user: registerRequestInterface): Observable<any> {
     return this.http.post('/api/user', user);
   }
 

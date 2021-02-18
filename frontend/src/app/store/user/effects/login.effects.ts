@@ -12,7 +12,7 @@ import {
   loginSuccessAction,
 } from '../user.action';
 import { Router } from '@angular/router';
-import { AuthService } from '../../../shared/services/auth.service';
+import { AuthService } from '../../../services/auth.service';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, switchMap, catchError, tap } from 'rxjs/operators';
