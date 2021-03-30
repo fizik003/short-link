@@ -1,31 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-main-page',
-  templateUrl: './main-page.component.html',
-  styleUrls: ['./main-page.component.scss'],
+  selector: "app-main-page",
+  templateUrl: "./main-page.component.html",
+  styleUrls: ["./main-page.component.scss"],
 })
 export class MainPageComponent implements OnInit {
   mainCards = [
     {
-      title: 'Создать',
+      title: "Создать",
       desc:
-        'Здесь вы можете сократить вашу ссылку, добавить к ней описаие, а затем поделиться ей с друзьями',
-      to: '/content',
+        "Здесь вы можете сократить вашу ссылку, добавить к ней описаие, а затем поделиться ей с друзьями",
+      to: "/content",
       queryParam: { create: true },
     },
     {
-      title: 'Мои ссылки',
+      title: "Мои ссылки",
       desc:
-        'Здесь вы можете просмотреть все ваши ссылки, а так же удалить те, которые вам уже не нужны',
-      to: '/content',
-      queryParam: { myLinks: true },
+        "Здесь вы можете просмотреть все ваши ссылки, а так же удалить те, которые вам уже не нужны",
+      to: "/content",
+      queryParam: { myLinks: true, page: 1, count: 3 },
     },
     {
-      title: 'Моя статистика',
+      title: "Моя статистика",
       desc:
-        'Здесь вы найдете информацию о вашей статиске. Общее количетсво ваших ссылок, сколько раз по ним переходили, самые популярные ваши ссылки',
-      to: '/content',
+        "Здесь вы найдете информацию о вашей статиске. Общее количетсво ваших ссылок, сколько раз по ним переходили, самые популярные ваши ссылки",
+      to: "/content",
       queryParam: { stat: true },
     },
   ];

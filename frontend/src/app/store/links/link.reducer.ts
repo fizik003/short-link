@@ -1,5 +1,5 @@
-import { createReducer, on, Action } from '@ngrx/store';
-import { LinkStateInterface } from './types/linkState.interface';
+import { createReducer, on, Action } from "@ngrx/store";
+import { LinkStateInterface } from "./types/linkState.interface";
 import {
   createLinkAction,
   createLinkFailureAction,
@@ -10,6 +10,9 @@ import {
   getLinkByIdAction,
   getLinkByIdFailureAction,
   getLinkByIdSuccessAction,
+  getLinksByUserAction,
+  getLinksByUserSuccessAction,
+  getLinksByUserFailureAction,
   getTagAction,
   getTagFailureAction,
   getTagSucccessAction,
@@ -17,8 +20,8 @@ import {
   linkUpdateActions,
   linkUpdateFailureAction,
   linkUpdateSuccessAction,
-  setUserLinkAction,
-} from './link.action';
+  // setUserLinkAction,
+} from "./link.action";
 
 const initialState: LinkStateInterface = {
   isLoading: false,
@@ -39,9 +42,7 @@ const reducer = createReducer(
   on(linkUpdateSuccessAction, (state, action) => {
     const { updatedLink } = action;
     const newArrLinks = [...state.yourLinks];
-    const indexUpdatedLink = newArrLinks.findIndex(
-      (link) => link.id === updatedLink.id
-    );
+    const indexUpdatedLink = newArrLinks.findIndex((link) => link.id === updatedLink.id);
     newArrLinks.splice(indexUpdatedLink, 1, updatedLink);
     return {
       ...state,
@@ -65,9 +66,7 @@ const reducer = createReducer(
     if (currentLink) {
       currentLink = { ...currentLink };
       currentLink.clicks += 1;
-      let indexCurrentLink = arrYourLinks.findIndex(
-        (link) => link.id === idLink
-      );
+      let indexCurrentLink = arrYourLinks.findIndex((link) => link.id === idLink);
       arrYourLinks.splice(indexCurrentLink, 1, currentLink);
 
       return {
@@ -79,9 +78,7 @@ const reducer = createReducer(
     currentLink = arrOtherUserLinks.find((link) => link.id == idLink);
     currentLink = { ...currentLink };
     currentLink.clicks += 1;
-    let indexCurrentLink = arrOtherUserLinks.findIndex(
-      (link) => link.id === idLink
-    );
+    let indexCurrentLink = arrOtherUserLinks.findIndex((link) => link.id === idLink);
     arrOtherUserLinks.splice(indexCurrentLink, 1, currentLink);
 
     return {
@@ -102,7 +99,7 @@ const reducer = createReducer(
     return {
       ...state,
       isLoading: false,
-      yourLinks: [...state.yourLinks, createdLink],
+      yourLinks: [createdLink, ...state.yourLinks],
     };
   }),
 
@@ -122,9 +119,7 @@ const reducer = createReducer(
   on(deleteLinkSuccessAction, (state, action) => {
     const { idDeletedLink } = action;
     const arrLinks = [...state.yourLinks];
-    const indexDeletedLink = arrLinks.findIndex(
-      (link) => link.id == idDeletedLink
-    );
+    const indexDeletedLink = arrLinks.findIndex((link) => link.id == idDeletedLink);
     arrLinks.splice(indexDeletedLink, 1);
     return {
       ...state,
@@ -187,13 +182,41 @@ const reducer = createReducer(
       errors: action.error,
     };
   }),
-
-  on(setUserLinkAction, (state, action) => {
+  on(getLinksByUserAction, (state, action) => {
     return {
       ...state,
-      yourLinks: action.userLink,
+      isLoading: true,
+      errors: null,
     };
-  })
+  }),
+  on(getLinksByUserSuccessAction, (state, action) => {
+    if (action.links.length > 0) {
+      return {
+        ...state,
+        yourLinks: [...state.yourLinks, ...action.links],
+        isLoading: false,
+      };
+    }
+    return {
+      ...state,
+      yourLinks: [...state.yourLinks, ...action.links],
+      isLoading: false,
+    };
+  }),
+  on(getLinksByUserFailureAction, (state, action) => {
+    return {
+      ...state,
+      isLoading: false,
+      errors: action.error,
+    };
+  }),
+
+  // on(setUserLinkAction, (state, action) => {
+  //   return {
+  //     ...state,
+  //     yourLinks: action.userLink,
+  //   };
+  // })
 );
 
 export function LinkReducer(state: LinkStateInterface, action: Action) {

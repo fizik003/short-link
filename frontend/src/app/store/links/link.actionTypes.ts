@@ -21,5 +21,7 @@ export enum LinkActionTypes {
   GET_LINK_BY_ID_SUCCESS = '[Link] Get link by id success',
   GET_LINK_BY_ID_FAILURE = '[Link] Get link by id failure',
 
-  SET_USER_LINK = '[Link] Set user link',
+  GET_LINK_BY_USER = '[Link] Get link by user',
+  GET_LINK_BY_USER_SUCCESS = '[Link] Get link by user success',
+  GET_LINK_BY_USER_FAILURE = '[Link] Get link by user failure',
 }

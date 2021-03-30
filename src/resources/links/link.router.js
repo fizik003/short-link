@@ -9,7 +9,11 @@ const router = Router();
 router.get("/", checkToken, async (req, res) => {
   try {
     const userId = req.user.id;
-    const links = await linkService.getByUserId(userId);
+    const { page, count } = req.query;
+    console.log(page);
+    console.log(count);
+
+    const links = await linkService.getByUserId(userId, page, count);
     if (Object.keys(links).length === 0) {
       return res.status(StatusCodes.OK).json({ message: "ссылок нет" });
     }

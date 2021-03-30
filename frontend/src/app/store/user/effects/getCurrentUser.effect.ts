@@ -1,10 +1,12 @@
-import { setUserLinkAction } from '../../links/link.action';
-import { Store } from '@ngrx/store';
-import { Route } from '@angular/compiler/src/core';
-import { Router } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
-import { CurrentUserInterface } from '../../types/currentUser.interface';
-import { switchMap, map, catchError, tap } from 'rxjs/operators';
+import { getStatisticAction } from "./../../stat/stat.actions";
+import { getLinksByUserAction } from "./../../links/link.action";
+// import { setUserLinkAction } from '../../links/link.action';
+import { Store } from "@ngrx/store";
+import { Route } from "@angular/compiler/src/core";
+import { Router } from "@angular/router";
+import { HttpErrorResponse } from "@angular/common/http";
+import { CurrentUserInterface } from "../../types/currentUser.interface";
+import { switchMap, map, catchError, tap } from "rxjs/operators";
 // import {
 //   getCurrnetUserAction,
 //   getCurrentUserFailureAction,
@@ -15,11 +17,11 @@ import {
   getCurrentUserAction,
   getCurrentUserSuccessAction,
   getCurrentUserFailureAction,
-} from '../user.action';
-import { AuthService } from '../../../services/auth.service';
-import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
+} from "../user.action";
+import { AuthService } from "../../../services/auth.service";
+import { createEffect, Actions, ofType } from "@ngrx/effects";
+import { Injectable } from "@angular/core";
+import { of } from "rxjs";
 
 @Injectable()
 export class GetCurrentUserEffect {
@@ -27,7 +29,7 @@ export class GetCurrentUserEffect {
     private actions$: Actions,
     private authService: AuthService,
     private router: Router,
-    private store: Store
+    private store: Store,
   ) {}
 
   getCurrentUser$ = createEffect(() =>
@@ -38,21 +40,23 @@ export class GetCurrentUserEffect {
         if (!token) {
           return of(getCurrentUserFailureAction());
         }
+
         return this.authService.getCurrentUser().pipe(
           map((currentUser: CurrentUserInterface) => {
             const { email, id, token, links } = currentUser;
             const responseCurentUser = { email, id, token };
-            this.store.dispatch(setUserLinkAction({ userLink: links }));
+            this.store.dispatch(getStatisticAction());
+            this.store.dispatch(getLinksByUserAction({ count: 3, page: 1 }));
             return getCurrentUserSuccessAction({
               currentUser: responseCurentUser,
             });
           }),
           catchError((errorResponse: HttpErrorResponse) => {
-            this.router.navigate(['login']);
+            this.router.navigate(["login"]);
             return of(getCurrentUserFailureAction());
-          })
+          }),
         );
-      })
-    )
+      }),
+    ),
   );
 }

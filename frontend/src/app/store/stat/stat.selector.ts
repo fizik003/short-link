@@ -16,6 +16,11 @@ export const statSelector = createSelector(
   })
 );
 
+export const countLinksSelector = createSelector(
+  statFeatureSelector,
+  (statState) => statState.countLink
+);
+
 export const statIsLoading = createSelector(
   statFeatureSelector,
   (statState) => statState.isLoading
