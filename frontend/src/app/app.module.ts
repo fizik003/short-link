@@ -1,3 +1,4 @@
+import { GetLinkByUserEffect } from './store/links/effects/getLinkByUser.effect';
 import { GetLinkByIdEffect } from './store/links/effects/getLinkById.effect';
 import { GetTagEffect } from './store/links/effects/getTag.effect';
 import { GetStatisticsEffect } from './store/stat/effects/getStatistics.effect';
@@ -81,6 +82,7 @@ import { ContentPageComponent } from './pages/content-page/content-page.componen
       GetStatisticsEffect,
       GetTagEffect,
       GetLinkByIdEffect,
+      GetLinkByUserEffect,
     ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,

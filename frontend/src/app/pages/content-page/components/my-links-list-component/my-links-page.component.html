@@ -3,12 +3,17 @@
     <span class="mat-display-1">Ваши ссылки:</span>
   </div>
   <div class="my-links__cards-list">
-    <app-link-card
-      *ngFor="let link of links"
-      [linkData]="link"
-      (onDelete)="onDelete($event)"
-    >
+    <app-link-card *ngFor="let link of showLinks" [linkData]="link" (onDelete)="onDelete($event)">
     </app-link-card>
+  </div>
+  <div class="my-links__pagination">
+    <mat-paginator
+      [length]="countOfLinks$ | async"
+      [pageSize]="countLinkOnPage"
+      [pageIndex]="pageNumber - 1"
+      (page)="fff($event)"
+    >
+    </mat-paginator>
   </div>
 </div>
 

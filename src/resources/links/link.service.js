@@ -3,7 +3,7 @@ const shortId = require("shortid");
 
 const linkRepo = require("./link.DB.repository");
 
-const getByUserId = (userId) => linkRepo.getByUserId(userId);
+const getByUserId = (userId, page, countOnPage) => linkRepo.getByUserId(userId, page, countOnPage);
 
 const create = async (userId, linkData) => {
   const code = shortId.generate();
@@ -19,6 +19,7 @@ const update = (linkId, linkData) => linkRepo.update(linkId, linkData);
 const destroy = (userId, linkId) => linkRepo.destroy(userId, linkId);
 
 const getByUserOriginLink = (userId, originLink) =>
+  // eslint-disable-next-line implicit-arrow-linebreak
   linkRepo.getByUserOriginLink(userId, originLink);
 
 const getStatsByUser = (userId) => linkRepo.getStatsByUser(userId);

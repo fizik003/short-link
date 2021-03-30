@@ -1,3 +1,4 @@
+import { GetLinkByUserEffect } from './../store/links/effects/getLinkByUser.effect';
 import { StatisticsResponseInterface } from '../store/types/statisticsRsponse.interface';
 import { CreateLinkRequestInterface } from '../store/types/createLink.interface';
 import { LinkResponseInterface } from '../store/types/linkResponse.interface';
@@ -36,5 +37,11 @@ export class LinksService {
 
   getStats(): Observable<StatisticsResponseInterface> {
     return this.http.get<StatisticsResponseInterface>('/api/link/stats');
+  }
+
+  getByUser(page: number, count: number): Observable<LinkResponseInterface[]> {
+    return this.http.get<LinkResponseInterface[]>(
+      `/api/link?page=${page}&count=${count}`
+    );
   }
 }

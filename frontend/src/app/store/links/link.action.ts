@@ -86,7 +86,17 @@ export const linkUpdateFailureAction = createAction(
   props<{ error: BackendErrorsInterface }>()
 );
 
-export const setUserLinkAction = createAction(
-  LinkActionTypes.SET_USER_LINK,
-  props<{ userLink: LinkResponseInterface[] }>()
+export const getLinksByUserAction = createAction(
+  LinkActionTypes.GET_LINK_BY_USER,
+  props<{ page: number; count: number }>()
+);
+
+export const getLinksByUserSuccessAction = createAction(
+  LinkActionTypes.GET_LINK_BY_USER_SUCCESS,
+  props<{ links: LinkResponseInterface[] }>()
+);
+
+export const getLinksByUserFailureAction = createAction(
+  LinkActionTypes.GET_LINK_BY_USER_FAILURE,
+  props<{ error: BackendErrorsInterface }>()
 );

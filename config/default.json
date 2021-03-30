@@ -14,5 +14,5 @@
     }
   },
   "secret": "secret",
-  "baseUrl": "http://localhost:5000"
+  "baseUrl": "http://35.228.8.194:5000"
 }

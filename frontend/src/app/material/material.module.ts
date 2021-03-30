@@ -7,6 +7,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 const material = [
   MatButtonModule,
@@ -17,6 +18,7 @@ const material = [
   MatIconModule,
   MatCardModule,
   MatProgressSpinnerModule,
+  MatPaginatorModule,
 ];
 
 @NgModule({

@@ -2,9 +2,15 @@ const { Link } = require("./link.model");
 const { Tag } = require("../tags/tag.model");
 const strToArray = require("../../utils/strToArray");
 
-const getByUserId = async (userId) => {
+const getByUserId = async (userId, page, countOnPage) => {
+  const from = (page - 1) * countOnPage;
+
+  console.log(page, countOnPage, from);
   const links = await Link.findAll({
     where: { UserId: userId },
+    limit: countOnPage,
+    offset: from,
+    order: [["id", "DESC"]],
   });
   return links;
 };
@@ -38,7 +44,7 @@ const create = async (userId, linkData) => {
       arrTags.map(async (tag) => {
         const [tagIns] = await Tag.findOrCreate({ where: { name: tag } });
         await newLink.addTag(tagIns);
-      })
+      }),
     );
   }
   return getByLinkId(newLink.id);
@@ -61,7 +67,7 @@ const update = async (linkId, data) => {
       arrTags.map(async (tag) => {
         const [tagInstance] = await Tag.findOrCreate({ where: { name: tag } });
         return tagInstance;
-      })
+      }),
     );
     await updateLink[1][0].setTags(arrTagInstance);
   }
